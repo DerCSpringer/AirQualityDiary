@@ -8,11 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		0B4B5D231EF45BD200914880 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4B5D221EF45BD200914880 /* AppDelegate.swift */; };
-		0B4B5D251EF45BD200914880 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4B5D241EF45BD200914880 /* ViewController.swift */; };
 		0B4B5D281EF45BD200914880 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B4B5D261EF45BD200914880 /* Main.storyboard */; };
 		0B4B5D2A1EF45BD200914880 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B4B5D291EF45BD200914880 /* Assets.xcassets */; };
 		0B4B5D2D1EF45BD200914880 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B4B5D2B1EF45BD200914880 /* LaunchScreen.storyboard */; };
 		0B4B5D381EF45BD300914880 /* AirQualityDiaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4B5D371EF45BD300914880 /* AirQualityDiaryTests.swift */; };
+		0B4B5D431EF45E5B00914880 /* DiaryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4B5D421EF45E5A00914880 /* DiaryEntry.swift */; };
+		EA82003BB1F00D248F4D7240 /* Pods_AirQualityDiary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 946E8E3C3EE15D0D1C973697 /* Pods_AirQualityDiary.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,7 +29,6 @@
 /* Begin PBXFileReference section */
 		0B4B5D1F1EF45BD200914880 /* AirQualityDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AirQualityDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B4B5D221EF45BD200914880 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0B4B5D241EF45BD200914880 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0B4B5D271EF45BD200914880 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0B4B5D291EF45BD200914880 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0B4B5D2C1EF45BD200914880 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -36,6 +36,10 @@
 		0B4B5D331EF45BD300914880 /* AirQualityDiaryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AirQualityDiaryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B4B5D371EF45BD300914880 /* AirQualityDiaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirQualityDiaryTests.swift; sourceTree = "<group>"; };
 		0B4B5D391EF45BD300914880 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0B4B5D421EF45E5A00914880 /* DiaryEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiaryEntry.swift; path = Model/DiaryEntry.swift; sourceTree = SOURCE_ROOT; };
+		3DBB33EDE1CB47E98EC4458C /* Pods-AirQualityDiary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AirQualityDiary.release.xcconfig"; path = "Pods/Target Support Files/Pods-AirQualityDiary/Pods-AirQualityDiary.release.xcconfig"; sourceTree = "<group>"; };
+		46AF1142F07FCAF906C2FFD3 /* Pods-AirQualityDiary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AirQualityDiary.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AirQualityDiary/Pods-AirQualityDiary.debug.xcconfig"; sourceTree = "<group>"; };
+		946E8E3C3EE15D0D1C973697 /* Pods_AirQualityDiary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AirQualityDiary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA82003BB1F00D248F4D7240 /* Pods_AirQualityDiary.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +67,8 @@
 				0B4B5D211EF45BD200914880 /* AirQualityDiary */,
 				0B4B5D361EF45BD300914880 /* AirQualityDiaryTests */,
 				0B4B5D201EF45BD200914880 /* Products */,
+				7256E90E549D1CF337898694 /* Pods */,
+				E3D05D89385BA113902D0845 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -78,7 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				0B4B5D221EF45BD200914880 /* AppDelegate.swift */,
-				0B4B5D241EF45BD200914880 /* ViewController.swift */,
+				0B4B5D421EF45E5A00914880 /* DiaryEntry.swift */,
 				0B4B5D261EF45BD200914880 /* Main.storyboard */,
 				0B4B5D291EF45BD200914880 /* Assets.xcassets */,
 				0B4B5D2B1EF45BD200914880 /* LaunchScreen.storyboard */,
@@ -96,6 +103,23 @@
 			path = AirQualityDiaryTests;
 			sourceTree = "<group>";
 		};
+		7256E90E549D1CF337898694 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				46AF1142F07FCAF906C2FFD3 /* Pods-AirQualityDiary.debug.xcconfig */,
+				3DBB33EDE1CB47E98EC4458C /* Pods-AirQualityDiary.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		E3D05D89385BA113902D0845 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				946E8E3C3EE15D0D1C973697 /* Pods_AirQualityDiary.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -103,9 +127,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0B4B5D3C1EF45BD300914880 /* Build configuration list for PBXNativeTarget "AirQualityDiary" */;
 			buildPhases = (
+				E2B0B6D90C0768735ADE074C /* [CP] Check Pods Manifest.lock */,
 				0B4B5D1B1EF45BD200914880 /* Sources */,
 				0B4B5D1C1EF45BD200914880 /* Frameworks */,
 				0B4B5D1D1EF45BD200914880 /* Resources */,
+				A2F6DEE3A46D5B67CD4B1C46 /* [CP] Embed Pods Frameworks */,
+				2BA90B8BBCFE49FBF1D19A1C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -196,12 +223,60 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2BA90B8BBCFE49FBF1D19A1C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AirQualityDiary/Pods-AirQualityDiary-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A2F6DEE3A46D5B67CD4B1C46 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AirQualityDiary/Pods-AirQualityDiary-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E2B0B6D90C0768735ADE074C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		0B4B5D1B1EF45BD200914880 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0B4B5D251EF45BD200914880 /* ViewController.swift in Sources */,
+				0B4B5D431EF45E5B00914880 /* DiaryEntry.swift in Sources */,
 				0B4B5D231EF45BD200914880 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -341,6 +416,7 @@
 		};
 		0B4B5D3D1EF45BD300914880 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 46AF1142F07FCAF906C2FFD3 /* Pods-AirQualityDiary.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 3K4ALTN6AF;
@@ -354,6 +430,7 @@
 		};
 		0B4B5D3E1EF45BD300914880 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3DBB33EDE1CB47E98EC4458C /* Pods-AirQualityDiary.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 3K4ALTN6AF;
@@ -414,6 +491,7 @@
 				0B4B5D3E1EF45BD300914880 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0B4B5D3F1EF45BD300914880 /* Build configuration list for PBXNativeTarget "AirQualityDiaryTests" */ = {
 			isa = XCConfigurationList;
@@ -422,6 +500,7 @@
 				0B4B5D411EF45BD300914880 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
