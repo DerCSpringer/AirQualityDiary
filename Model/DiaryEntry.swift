@@ -13,7 +13,6 @@ import RxDataSources
 class TaskItem: Object {
     dynamic var uid: Int = 0
     dynamic var title: String = ""
-    
     dynamic var added: Date = Date()
     dynamic var checked: Bool = false
     //dynamic var location:
@@ -24,7 +23,6 @@ class TaskItem: Object {
     dynamic var pm25: Float = 0.0
     dynamic var so2: Float = 0.0
     dynamic var notes: String = ""
-    
     
     override class func primaryKey() -> String? {
         return "uid"
