@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B3F5B8E1EF85CF5008B6BBB /* BreezoMeterAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3F5B8D1EF85CF5008B6BBB /* BreezoMeterAPI.swift */; };
 		0B4B5D231EF45BD200914880 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4B5D221EF45BD200914880 /* AppDelegate.swift */; };
 		0B4B5D281EF45BD200914880 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B4B5D261EF45BD200914880 /* Main.storyboard */; };
 		0B4B5D2A1EF45BD200914880 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B4B5D291EF45BD200914880 /* Assets.xcassets */; };
@@ -14,6 +15,7 @@
 		0B4B5D381EF45BD300914880 /* AirQualityDiaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4B5D371EF45BD300914880 /* AirQualityDiaryTests.swift */; };
 		0B4B5D431EF45E5B00914880 /* DiaryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4B5D421EF45E5A00914880 /* DiaryEntry.swift */; };
 		0B4B5D451EF4606300914880 /* BindableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4B5D441EF4606300914880 /* BindableType.swift */; };
+		0B4B5D4A1EF461A400914880 /* DiaryServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4B5D491EF461A400914880 /* DiaryServiceType.swift */; };
 		EA82003BB1F00D248F4D7240 /* Pods_AirQualityDiary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 946E8E3C3EE15D0D1C973697 /* Pods_AirQualityDiary.framework */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0B3F5B8D1EF85CF5008B6BBB /* BreezoMeterAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BreezoMeterAPI.swift; path = Model/BreezoMeterAPI.swift; sourceTree = SOURCE_ROOT; };
 		0B4B5D1F1EF45BD200914880 /* AirQualityDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AirQualityDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B4B5D221EF45BD200914880 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0B4B5D271EF45BD200914880 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -39,6 +42,7 @@
 		0B4B5D391EF45BD300914880 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0B4B5D421EF45E5A00914880 /* DiaryEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiaryEntry.swift; path = Model/DiaryEntry.swift; sourceTree = SOURCE_ROOT; };
 		0B4B5D441EF4606300914880 /* BindableType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BindableType.swift; path = Model/BindableType.swift; sourceTree = SOURCE_ROOT; };
+		0B4B5D491EF461A400914880 /* DiaryServiceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiaryServiceType.swift; path = Services/DiaryServiceType.swift; sourceTree = SOURCE_ROOT; };
 		3DBB33EDE1CB47E98EC4458C /* Pods-AirQualityDiary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AirQualityDiary.release.xcconfig"; path = "Pods/Target Support Files/Pods-AirQualityDiary/Pods-AirQualityDiary.release.xcconfig"; sourceTree = "<group>"; };
 		46AF1142F07FCAF906C2FFD3 /* Pods-AirQualityDiary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AirQualityDiary.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AirQualityDiary/Pods-AirQualityDiary.debug.xcconfig"; sourceTree = "<group>"; };
 		946E8E3C3EE15D0D1C973697 /* Pods_AirQualityDiary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AirQualityDiary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -92,6 +96,7 @@
 				0B4B5D291EF45BD200914880 /* Assets.xcassets */,
 				0B4B5D2B1EF45BD200914880 /* LaunchScreen.storyboard */,
 				0B4B5D2E1EF45BD200914880 /* Info.plist */,
+				0B4B5D4B1EF461A900914880 /* Services */,
 			);
 			path = AirQualityDiary;
 			sourceTree = "<group>";
@@ -109,9 +114,18 @@
 			isa = PBXGroup;
 			children = (
 				0B4B5D421EF45E5A00914880 /* DiaryEntry.swift */,
+				0B3F5B8D1EF85CF5008B6BBB /* BreezoMeterAPI.swift */,
 				0B4B5D441EF4606300914880 /* BindableType.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		0B4B5D4B1EF461A900914880 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				0B4B5D491EF461A400914880 /* DiaryServiceType.swift */,
+			);
+			name = Services;
 			sourceTree = "<group>";
 		};
 		7256E90E549D1CF337898694 /* Pods */ = {
@@ -288,7 +302,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B4B5D431EF45E5B00914880 /* DiaryEntry.swift in Sources */,
+				0B4B5D4A1EF461A400914880 /* DiaryServiceType.swift in Sources */,
 				0B4B5D451EF4606300914880 /* BindableType.swift in Sources */,
+				0B3F5B8E1EF85CF5008B6BBB /* BreezoMeterAPI.swift in Sources */,
 				0B4B5D231EF45BD200914880 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

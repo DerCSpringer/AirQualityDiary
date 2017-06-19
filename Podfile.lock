@@ -16,6 +16,7 @@ PODS:
     - RealmSwift (~> 2.5)
     - RxSwift (~> 3.2)
   - RxSwift (3.5.0)
+  - Unbox (2.4.0)
 
 DEPENDENCIES:
   - Action
@@ -24,6 +25,7 @@ DEPENDENCIES:
   - RxDataSources
   - RxRealm
   - RxSwift
+  - Unbox
 
 SPEC CHECKSUMS:
   Action: e224bd151fe2e057f4189b4a9df0dc5d21264a9e
@@ -33,7 +35,8 @@ SPEC CHECKSUMS:
   RxDataSources: a021a0e944ba5f7991259829d973afdbfa719c0b
   RxRealm: 323de579b50b5e0f4a3e087d5925021f976ffaf1
   RxSwift: 18ee9d78b45edb3b0b7e79916b47a116e6dbc842
+  Unbox: c8b2ab69d3337597b4a3f47a0538807dc12db670
 
-PODFILE CHECKSUM: 1ba1049bbdfb4b9a5da88b769d629cf4e9fecf10
+PODFILE CHECKSUM: 1a1c893b0822fbeead6b795dc9459a306172bb4d
 
 COCOAPODS: 1.1.1
