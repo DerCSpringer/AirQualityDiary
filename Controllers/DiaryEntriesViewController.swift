@@ -6,8 +6,12 @@
 //  Copyright © 2017 Daniel Springer. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import RxSwift
+import RxDataSources
+import Action
 
 class DiaryEntriesViewController: UIViewController, BindableType {
+    @IBOutlet weak var tableView: UITableView!
 
 }
