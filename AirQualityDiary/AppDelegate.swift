@@ -7,14 +7,30 @@
 //
 
 import UIKit
+import RxSwift
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    let bag = DisposeBag()
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        let a = BreezoMeterAPI.shared.searchAirQuality(latitude: 34.1278, longitude: -118.1108)
+            .map {
+                BreezoMeterAPI.shared.formatJSON(jsonArray: $0)
+        }
+            .map {
+                DiaryEntry(airQualityJSON: $0)
+        }
+        
+        a.subscribe(onNext : { data in
+            print(data)
+        })
+        .addDisposableTo(bag)
         // Override point for customization after application launch.
         return true
     }

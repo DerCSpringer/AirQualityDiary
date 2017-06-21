@@ -11,37 +11,77 @@ import RealmSwift
 import RxDataSources
 import Unbox
 
-class DiaryEntry: Object, Unboxable {
+typealias JSONObject = [String : Any]
+
+class DiaryEntry: Object {
     dynamic var uid: Int = 0
-    //dynamic var title: String = ""
     dynamic var added: Date = Date()
     dynamic var checked: Bool = false
-    //dynamic var location:
-    dynamic var no2: Float = 0.0
-    dynamic var o3: Float = 0.0
-    dynamic var dominateParticulate: String = ""
-    dynamic var pm25: Float = 0.0
-    dynamic var pm10: Float = 0.0
-    dynamic var so2: Float = 0.0
-    dynamic var co: Float = 0.0
+    dynamic var o3: Float = -1.0
+    dynamic var pm25: Float = -1.0
     dynamic var notes: String = ""
     
     // MARK: Init with Unboxer
-    convenience required init(unboxer: Unboxer) throws {
+//    convenience required init(unboxer: Unboxer) throws {
+//        self.init()
+//        let name : String
+//        name = try unboxer.unbox(key: "ParameterName")
+//        switch name {
+//        case "O3":
+//            o3 = try unboxer.unbox(key: "AQI")
+//        case "PM25":
+//            pm25 = try unboxer.unbox(key: "AQI")
+//        default:
+//            break
+//        }
+//        //o3 = try unboxer.unbox(keyPath: "pollutants.o3")
+//        //pm25 = try unboxer.unbox(keyPath: "pollutants.pm25")
+////        so2 = try unboxer.unbox(keyPath: "pollutants.so2")
+////        pm10 = try unboxer.unbox(keyPath: "pollutants.pm10")
+////        co = try unboxer.unbox(keyPath: "pollutants.co")
+////        dominateParticulate = try unboxer.unbox(key: "dominant_pollutant_canonical_name")
+//    }
+    
+    convenience required init(airQualityJSON: JSONObject) {
         self.init()
-        
-        no2 = try unboxer.unbox(keyPath: "pollutants.no2")
-        o3 = try unboxer.unbox(keyPath: "pollutants.o3")
-        pm25 = try unboxer.unbox(keyPath: "pollutants.pm25")
-        so2 = try unboxer.unbox(keyPath: "pollutants.so2")
-        pm10 = try unboxer.unbox(keyPath: "pollutants.pm10")
-        co = try unboxer.unbox(keyPath: "pollutants.co")
-        dominateParticulate = try unboxer.unbox(key: "dominant_pollutant_canonical_name")
+        o3 = airQualityJSON["O3"] as? Float ?? -1.0
+        pm25 = airQualityJSON["PM2.5"] as? Float ?? -1.0
     }
     
     override class func primaryKey() -> String? {
         return "uid"
     }
+    
+//    static func unboxMany(airQuality: [JSONObject]) -> DiaryEntry {
+//        for obj in airQuality {
+//            return (try? unbox(dictionary: obj) as DiaryEntry) ?? nil
+//        }
+//        //return (try? unbox(dictionaries: tweets, allowInvalidElements: true) as DiaryEntry) ?? []
+//        //return (try? unbox(dictionaries: tweets, allowInvalidElements: true) as DiaryEntry) ?? []
+//        //let a = try! Unbox.unbox(dictionary: airQuality) as DiaryEntry
+//        return (try! unbox(dictionary: airQuality) as DiaryEntry)
+//        //return (try? unbox(dictionaries: airQuality, allowInvalidElements: false) as JSONObject) ?? nil
+//    }
+//    static func unboxAll(airQuality: [JSONObject]) -> DiaryEntry {
+//        try Unboxer.performCustomUnboxing(array: airQuality) {array in
+//            for
+//        }
+        
+//        try Unboxer.performCustomUnboxing(array: airQuality, closure: { unboxer in
+//            
+//            var diaryEntry = DiaryEntry()
+//            let name = 
+//            diaryEntry.o3 =
+            //var model = Model(dependency: dependency)
+            //model.name = unboxer.unbox(key: "name")
+            //model.count = unboxer.unbox(key: "count")
+            
+            //return model
+//        })
+//    }
+    
+    
+
 }
 
 extension DiaryEntry: IdentifiableType {

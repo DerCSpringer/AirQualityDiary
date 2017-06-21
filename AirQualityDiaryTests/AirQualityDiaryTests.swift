@@ -8,11 +8,14 @@
 
 import XCTest
 @testable import AirQualityDiary
+//@testable import BreezoMeterAPI
+
 
 class AirQualityDiaryTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
+        let api = 
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     

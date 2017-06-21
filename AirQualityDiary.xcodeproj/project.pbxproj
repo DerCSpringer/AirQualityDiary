@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0B3F5B8E1EF85CF5008B6BBB /* BreezoMeterAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3F5B8D1EF85CF5008B6BBB /* BreezoMeterAPI.swift */; };
+		0B3F5B8F1EF86594008B6BBB /* BreezoMeterAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3F5B8D1EF85CF5008B6BBB /* BreezoMeterAPI.swift */; };
 		0B4B5D231EF45BD200914880 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4B5D221EF45BD200914880 /* AppDelegate.swift */; };
 		0B4B5D281EF45BD200914880 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B4B5D261EF45BD200914880 /* Main.storyboard */; };
 		0B4B5D2A1EF45BD200914880 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B4B5D291EF45BD200914880 /* Assets.xcassets */; };
@@ -314,6 +315,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B4B5D381EF45BD300914880 /* AirQualityDiaryTests.swift in Sources */,
+				0B3F5B8F1EF86594008B6BBB /* BreezoMeterAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
