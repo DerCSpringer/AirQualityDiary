@@ -11,6 +11,10 @@ import RxSwift
 import RxDataSources
 import Action
 
+typealias DiarySection = AnimatableSectionModel<String, DiaryEntry>
+
 struct DiaryEntriesViewModel {
+    
+
     
 }
