@@ -16,6 +16,7 @@
 		0B2589AE1EFB245D00E12FAA /* SceneTransitionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2589AD1EFB245D00E12FAA /* SceneTransitionType.swift */; };
 		0B2589B01EFB24DD00E12FAA /* AddDiaryEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2589AF1EFB24DD00E12FAA /* AddDiaryEntryViewController.swift */; };
 		0B2589B21EFB24F300E12FAA /* DiaryEntriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2589B11EFB24F300E12FAA /* DiaryEntriesViewController.swift */; };
+		0B2589B41EFB2B4700E12FAA /* DiaryEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2589B31EFB2B4700E12FAA /* DiaryEntryTableViewCell.swift */; };
 		0B3F5B8E1EF85CF5008B6BBB /* BreezoMeterAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3F5B8D1EF85CF5008B6BBB /* BreezoMeterAPI.swift */; };
 		0B3F5B8F1EF86594008B6BBB /* BreezoMeterAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3F5B8D1EF85CF5008B6BBB /* BreezoMeterAPI.swift */; };
 		0B4B5D231EF45BD200914880 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4B5D221EF45BD200914880 /* AppDelegate.swift */; };
@@ -49,6 +50,7 @@
 		0B2589AD1EFB245D00E12FAA /* SceneTransitionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SceneTransitionType.swift; path = Scenes/SceneTransitionType.swift; sourceTree = SOURCE_ROOT; };
 		0B2589AF1EFB24DD00E12FAA /* AddDiaryEntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddDiaryEntryViewController.swift; path = Controllers/AddDiaryEntryViewController.swift; sourceTree = SOURCE_ROOT; };
 		0B2589B11EFB24F300E12FAA /* DiaryEntriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiaryEntriesViewController.swift; path = Controllers/DiaryEntriesViewController.swift; sourceTree = SOURCE_ROOT; };
+		0B2589B31EFB2B4700E12FAA /* DiaryEntryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiaryEntryTableViewCell.swift; path = Cells/DiaryEntryTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		0B3F5B8D1EF85CF5008B6BBB /* BreezoMeterAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BreezoMeterAPI.swift; path = Model/BreezoMeterAPI.swift; sourceTree = SOURCE_ROOT; };
 		0B4B5D1F1EF45BD200914880 /* AirQualityDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AirQualityDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B4B5D221EF45BD200914880 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -109,6 +111,14 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
+		0B2589B51EFB2B4C00E12FAA /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				0B2589B31EFB2B4700E12FAA /* DiaryEntryTableViewCell.swift */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
 		0B4B5D161EF45BD200914880 = {
 			isa = PBXGroup;
 			children = (
@@ -132,6 +142,7 @@
 		0B4B5D211EF45BD200914880 /* AirQualityDiary */ = {
 			isa = PBXGroup;
 			children = (
+				0B2589B51EFB2B4C00E12FAA /* Cells */,
 				0B2589A51EFB228D00E12FAA /* Controllers */,
 				0B2589A01EFB220700E12FAA /* Scenes */,
 				0B4B5D221EF45BD200914880 /* AppDelegate.swift */,
@@ -358,6 +369,7 @@
 				0B3F5B8E1EF85CF5008B6BBB /* BreezoMeterAPI.swift in Sources */,
 				0B4B5D231EF45BD200914880 /* AppDelegate.swift in Sources */,
 				0B2589A41EFB228500E12FAA /* AddDiaryEntryViewModel.swift in Sources */,
+				0B2589B41EFB2B4700E12FAA /* DiaryEntryTableViewCell.swift in Sources */,
 				0B2589AE1EFB245D00E12FAA /* SceneTransitionType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
