@@ -42,7 +42,7 @@ class DiaryEntry: Object {
 ////        dominateParticulate = try unboxer.unbox(key: "dominant_pollutant_canonical_name")
 //    }
     
-    convenience required init(airQualityJSON: JSONObject) {
+    convenience required init(airQualityJSON: JSONObject) { //sub classes must provide this init
         self.init()
         o3 = airQualityJSON["O3"] as? Float ?? -1.0
         pm25 = airQualityJSON["PM2.5"] as? Float ?? -1.0
