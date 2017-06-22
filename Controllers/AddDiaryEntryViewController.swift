@@ -7,7 +7,14 @@
 //
 
 import Foundation
+import UIKit
 
 class AddDiaryEntryViewController: UIViewController, BindableType {
     
+    var viewModel: AddDiaryEntryViewModel!
+    
+    func bindViewModel() {
+        
+    }
+
 }

@@ -12,5 +12,8 @@ import RxSwift
 
 class DiaryEntryTableViewCell: UITableViewCell {
     
+    func configure(with: DiaryEntry, action: CocoaAction) {
+        
+    }
     
 }

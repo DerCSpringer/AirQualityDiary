@@ -246,7 +246,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Model/DiaryEntry.swift"
@@ -259,14 +259,14 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "AirQualityDiary.DiaryEntry.init (airQualityJSON : Swift.Dictionary&lt;Swift.String, Any&gt;) -&gt; AirQualityDiary.DiaryEntry"
                   moduleName = "AirQualityDiary"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dcs/Developer/Swift/AirQualityDiary/Model/DiaryEntry.swift"
-                  timestampString = "519769722.651952"
+                  timestampString = "519847949.289389"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "47"
@@ -274,14 +274,14 @@
                   offsetFromSymbolStart = "94">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "AirQualityDiary.DiaryEntry.(init (airQualityJSON : Swift.Dictionary&lt;Swift.String, Any&gt;) -&gt; AirQualityDiary.DiaryEntry).(implicit closure #1)"
                   moduleName = "AirQualityDiary"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dcs/Developer/Swift/AirQualityDiary/Model/DiaryEntry.swift"
-                  timestampString = "519769722.653688"
+                  timestampString = "519847949.291965"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "47"

@@ -49,7 +49,7 @@ class DiaryEntriesViewController: UIViewController, BindableType {
                 //Here we connect an Action with a cell, but we know nothing about the action nor do we set it up
                 //All of that is done in the VM
                 //The cell is teh one which will execute the action which notifies the VM to do appropriate action(s)
-                cell.configure(with: item, action: strongSelf.viewModel.onToggle(task: item))
+                //cell.configure(with: item, action: strongSelf.viewModel.onToggle(task: item))
             }
             return cell
         }

@@ -34,6 +34,7 @@ class SceneCoordinator: SceneCoordinatorType {
         let subject = PublishSubject<Void>() //Subject is an observable of type void
         let viewController = scene.viewController() //Get our VC wether its a edit VC or todoVC
         switch type { //Switch on the type of transition we want
+            
         case .root:
             currentViewController = SceneCoordinator.actualViewController(for: viewController) //before transition
             window.rootViewController = viewController
