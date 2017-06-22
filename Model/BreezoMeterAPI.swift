@@ -1,5 +1,5 @@
 //
-//  BreezoMeterAPI.swift
+//  AirNowAPI.swift
 //  AirQualityDiary
 //
 //  Created by Daniel Springer on 6/19/17.
@@ -9,9 +9,9 @@
 import Foundation
 import RxSwift
 
-class BreezoMeterAPI {
+class AirNowAPI {
     
-    static let shared = BreezoMeterAPI()
+    static let shared = AirNowAPI()
     typealias  JSONObject = [String:Any]
     
     private let apiKey = "2758A15B-FD00-4191-AD80-11D2F8C73509"
@@ -65,7 +65,7 @@ class BreezoMeterAPI {
 }
 }
 
-extension BreezoMeterAPI { //Garbage will fix once I figure out how to unbox array of items into single Model object
+extension AirNowAPI { //Garbage will fix once I figure out how to unbox array of items into single Model object
     func formatJSON(jsonArray: [JSONObject]) -> JSONObject {
         var o3 : Float?
         var pm25 : Float?

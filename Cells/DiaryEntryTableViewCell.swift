@@ -18,12 +18,18 @@ class DiaryEntryTableViewCell: UITableViewCell {
     @IBOutlet weak var o3AQI: UILabel!
     @IBOutlet weak var PM25AQI: UILabel!
     
-    func configure(with item: DiaryEntry, action: CocoaAction) {
+    func configure(with entry: DiaryEntry, action: CocoaAction) {
         button.rx.action = action
         //Every time item is updated our tableview Will be too, but this usually won't be necessary in the current incantation of the app
-        item.rx.observe(String.self, "o3")
+        entry.rx.observe(String.self, "o3")
             .subscribe(onNext: { [weak self] o3 in
                 self?.o3AQI.text = o3
+            })
+            .disposed(by: disposeBag)
+        
+        entry.rx.observe(String.self, "pm25")
+            .subscribe(onNext: { [weak self] pm25 in
+                self?.PM25AQI.text = pm25
             })
             .disposed(by: disposeBag)
     }

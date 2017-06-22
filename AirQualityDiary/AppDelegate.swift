@@ -19,9 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        let a = BreezoMeterAPI.shared.searchAirQuality(latitude: 34.1278, longitude: -118.1108)
+        let a = AirNowAPI.shared.searchAirQuality(latitude: 34.1278, longitude: -118.1108)
             .map {
-                BreezoMeterAPI.shared.formatJSON(jsonArray: $0)
+                AirNowAPI.shared.formatJSON(jsonArray: $0)
         }
             .map {
                 DiaryEntry(airQualityJSON: $0)
