@@ -60,6 +60,11 @@
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="PM25AQI" destination="mrg-ms-BjE" id="XTu-0P-pDy"/>
+                                            <outlet property="button" destination="Va9-s3-v0a" id="N0o-Bg-9HW"/>
+                                            <outlet property="o3AQI" destination="f6O-MC-f3D" id="Nn3-vC-q3w"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -179,7 +184,7 @@
         <!--Navigation Controller-->
         <scene sceneID="IyQ-6u-IRd">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oDs-FS-nQ4" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="AddDiaryEntry" automaticallyAdjustsScrollViewInsets="NO" id="oDs-FS-nQ4" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="c6X-Jv-tIc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>

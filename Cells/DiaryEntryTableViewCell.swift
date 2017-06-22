@@ -12,8 +12,28 @@ import RxSwift
 
 class DiaryEntryTableViewCell: UITableViewCell {
     
-    func configure(with: DiaryEntry, action: CocoaAction) {
-        
+    var disposeBag = DisposeBag()
+    @IBOutlet weak var button: UIButton!
+    
+    @IBOutlet weak var o3AQI: UILabel!
+    @IBOutlet weak var PM25AQI: UILabel!
+    
+    func configure(with item: DiaryEntry, action: CocoaAction) {
+        button.rx.action = action
+        //Every time item is updated our tableview Will be too, but this usually won't be necessary in the current incantation of the app
+        item.rx.observe(String.self, "o3")
+            .subscribe(onNext: { [weak self] o3 in
+                self?.o3AQI.text = o3
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    //TODO: setup what the button will do
+    
+    override func prepareForReuse() {
+        button.rx.action = nil
+        disposeBag = DisposeBag()
+        super.prepareForReuse()
     }
     
 }
