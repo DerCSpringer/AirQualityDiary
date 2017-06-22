@@ -35,6 +35,4 @@ struct DiaryEntriesViewModel {
             return self.diaryService.delete(entry: entry)
         }
     }
-
-    
 }

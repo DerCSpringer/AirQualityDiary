@@ -20,13 +20,13 @@ enum DiaryServiceError: Error {
 
 protocol DiaryServiceType {
     @discardableResult
-    func createEntry(title: String) -> Observable<DiaryEntry>
+    func createEntry(note: String) -> Observable<DiaryEntry>
     
     @discardableResult
     func delete(entry: DiaryEntry) -> Observable<Void>
     
     @discardableResult
-    func update(entry: DiaryEntry, title: String) -> Observable<DiaryEntry>
+    func update(entry: DiaryEntry, note: String) -> Observable<DiaryEntry>
     
     @discardableResult
     func toggle(entry: DiaryEntry) -> Observable<DiaryEntry>

@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Diary Entries View Controller-->
+        <!--Air Quality Diary-->
         <scene sceneID="gAM-pv-mr6">
             <objects>
                 <viewController id="MET-Kk-j8z" customClass="DiaryEntriesViewController" customModule="AirQualityDiary" customModuleProvider="target" sceneMemberID="viewController">
@@ -72,7 +72,9 @@
                             <constraint firstItem="Qw1-oV-XVS" firstAttribute="leading" secondItem="9fv-dl-iZo" secondAttribute="leading" id="kMY-ZG-gP9"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="JSm-7w-Xrp"/>
+                    <navigationItem key="navigationItem" title="Air Quality Diary" id="JSm-7w-Xrp">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="8qc-NC-iMl"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="Qw1-oV-XVS" id="kZd-0i-W9y"/>
                     </connections>
@@ -80,6 +82,63 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rUs-oE-3la" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="911.20000000000005" y="214.54272863568218"/>
+        </scene>
+        <!--Add-->
+        <scene sceneID="qGN-5q-4js">
+            <objects>
+                <viewController id="Rk2-mL-cUz" customClass="AddDiaryEntryViewController" customModule="AirQualityDiary" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fbI-6N-dY9"/>
+                        <viewControllerLayoutGuide type="bottom" id="Fge-Eg-Q7w"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="uQk-Rc-Rnr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Ozone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lAt-MN-xuH">
+                                <rect key="frame" x="46" y="127" width="63" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PM 2.5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l7W-FU-Jfs">
+                                <rect key="frame" x="236" y="127" width="58" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Note" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xhB-hm-07M">
+                                <rect key="frame" x="16" y="237" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="s2k-vW-Ooa">
+                                <rect key="frame" x="0.0" y="266" width="375" height="217"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="f58-S2-tar">
+                                <rect key="frame" x="177" y="72" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Add" id="H4J-jw-a0f">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="4bK-KF-MsX"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="UWH-P1-27W"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KAo-42-cEg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2373.5999999999999" y="214.54272863568218"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="kXp-QS-LyT">
@@ -116,6 +175,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sca-v7-bh2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="222" y="215"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="IyQ-6u-IRd">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oDs-FS-nQ4" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="c6X-Jv-tIc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Rk2-mL-cUz" kind="relationship" relationship="rootViewController" id="nR2-F1-DvL"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a9w-iX-PpF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1644" y="215"/>
         </scene>
     </scenes>
 </document>
