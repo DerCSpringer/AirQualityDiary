@@ -15,17 +15,23 @@ struct AddDiaryEntryViewModel {
     let entryTitle: String
     let onUpdate: Action<String, Void>
     let onCancel: CocoaAction!
-    let disposeBag = DisposeBag()
-    let fetcher = AirNowAPI()
+    let bag = DisposeBag()
+    let weatherQuality = Variable<DiaryEntry?>(nil)
+
     
-    init(entry: DiaryEntry, coordinator: SceneCoordinatorType, updateAction: Action<String, Void>, cancelAction: CocoaAction? = nil) {
+    init(entry: DiaryEntry,
+         coordinator: SceneCoordinatorType,
+         updateAction: Action<String, Void>,
+         cancelAction: CocoaAction? = nil) {
         entryTitle = String(describing: entry.added)
         onUpdate = updateAction
+
         onCancel = CocoaAction {
             if let cancelAction = cancelAction {
                 cancelAction.execute()
             }
             return coordinator.pop()
+            
         }
         
         onUpdate.executionObservables
@@ -33,6 +39,22 @@ struct AddDiaryEntryViewModel {
             .subscribe(onNext: { _ in
                 coordinator.pop() //all we do if we update is to pop VC rest is done in DiaryEntriesViewModel
             })
-            .disposed(by: disposeBag)
+            .disposed(by: bag)
+        
+            bindOutput()
+    }
+    
+    func bindOutput() { //input will be lat/lon or zipcode when implemented later  output is obs
+            let fetcher = AirNowAPI.shared
+        fetcher.searchAirQuality(latitude: 34.1278, longitude: -118.1108)
+            .map {
+                AirNowAPI.shared.formatJSON(jsonArray: $0)
+            }
+            .map {
+                DiaryEntry(airQualityJSON: $0)
+        }
+        .bind(to: weatherQuality)
+        .disposed(by: bag)
+
     }
 }
