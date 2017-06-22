@@ -17,6 +17,7 @@
 		0B2589B01EFB24DD00E12FAA /* AddDiaryEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2589AF1EFB24DD00E12FAA /* AddDiaryEntryViewController.swift */; };
 		0B2589B21EFB24F300E12FAA /* DiaryEntriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2589B11EFB24F300E12FAA /* DiaryEntriesViewController.swift */; };
 		0B2589B41EFB2B4700E12FAA /* DiaryEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2589B31EFB2B4700E12FAA /* DiaryEntryTableViewCell.swift */; };
+		0B2EBF801EFC7BEE00A3D244 /* DiaryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2EBF7F1EFC7BEE00A3D244 /* DiaryService.swift */; };
 		0B3F5B8E1EF85CF5008B6BBB /* AirNowAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3F5B8D1EF85CF5008B6BBB /* AirNowAPI.swift */; };
 		0B3F5B8F1EF86594008B6BBB /* AirNowAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3F5B8D1EF85CF5008B6BBB /* AirNowAPI.swift */; };
 		0B4B5D231EF45BD200914880 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4B5D221EF45BD200914880 /* AppDelegate.swift */; };
@@ -51,6 +52,7 @@
 		0B2589AF1EFB24DD00E12FAA /* AddDiaryEntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddDiaryEntryViewController.swift; path = Controllers/AddDiaryEntryViewController.swift; sourceTree = SOURCE_ROOT; };
 		0B2589B11EFB24F300E12FAA /* DiaryEntriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiaryEntriesViewController.swift; path = Controllers/DiaryEntriesViewController.swift; sourceTree = SOURCE_ROOT; };
 		0B2589B31EFB2B4700E12FAA /* DiaryEntryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiaryEntryTableViewCell.swift; path = Cells/DiaryEntryTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		0B2EBF7F1EFC7BEE00A3D244 /* DiaryService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiaryService.swift; path = Services/DiaryService.swift; sourceTree = SOURCE_ROOT; };
 		0B3F5B8D1EF85CF5008B6BBB /* AirNowAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AirNowAPI.swift; path = Model/AirNowAPI.swift; sourceTree = SOURCE_ROOT; };
 		0B4B5D1F1EF45BD200914880 /* AirQualityDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AirQualityDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B4B5D221EF45BD200914880 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 		0B4B5D4B1EF461A900914880 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				0B2EBF7F1EFC7BEE00A3D244 /* DiaryService.swift */,
 				0B4B5D491EF461A400914880 /* DiaryServiceType.swift */,
 			);
 			name = Services;
@@ -363,6 +366,7 @@
 				0B2589B21EFB24F300E12FAA /* DiaryEntriesViewController.swift in Sources */,
 				0B4B5D4A1EF461A400914880 /* DiaryServiceType.swift in Sources */,
 				0B25899F1EFB218F00E12FAA /* Scene.swift in Sources */,
+				0B2EBF801EFC7BEE00A3D244 /* DiaryService.swift in Sources */,
 				0B4B5D451EF4606300914880 /* BindableType.swift in Sources */,
 				0B2589AC1EFB241500E12FAA /* Scene+ViewController.swift in Sources */,
 				0B2589B01EFB24DD00E12FAA /* AddDiaryEntryViewController.swift in Sources */,

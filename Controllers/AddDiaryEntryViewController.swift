@@ -20,21 +20,19 @@ class AddDiaryEntryViewController: UIViewController, BindableType {
     func bindViewModel() {
         viewModel.weatherQuality.asDriver()
             .drive(onNext: { [weak self] weather in
-                self?.pm25.text = String(describing: weather?.pm25)
+                if let pm = weather?.pm25 {
+                self?.pm25.text = String(pm)
+                }
             })
             .disposed(by: bag)
         
         viewModel.weatherQuality.asDriver()
             .drive(onNext: { [weak self] weather in
-                self?.ozone.text = String(describing: weather?.o3)
+                if let o3 = weather?.o3 {
+                    self?.ozone.text = String(o3)
+                }
             })
             .disposed(by: bag)
-//        viewModel.weatherQuality.asDriver()
-//            .drive(onNext: { [weak self] weather in
-//                self?.ozone.text = String(describing: weather?.o3)
-//        }
-//                .disposed(by: bag)
-        
     }
 
 }

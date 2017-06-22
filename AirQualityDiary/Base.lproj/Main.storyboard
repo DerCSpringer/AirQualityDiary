@@ -81,6 +81,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="8qc-NC-iMl"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="addDiaryEntry" destination="8qc-NC-iMl" id="rcO-fn-TZU"/>
                         <outlet property="tableView" destination="Qw1-oV-XVS" id="kZd-0i-W9y"/>
                     </connections>
                 </viewController>

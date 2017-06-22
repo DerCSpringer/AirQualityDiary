@@ -14,6 +14,7 @@ import Action
 class DiaryEntriesViewController: UIViewController, BindableType {
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var addDiaryEntry: UIBarButtonItem!
     var viewModel: DiaryEntriesViewModel!
     
     let dataSource = RxTableViewSectionedAnimatedDataSource<DiarySection>()
@@ -30,7 +31,7 @@ class DiaryEntriesViewController: UIViewController, BindableType {
     }
     
     func bindViewModel() {
-        
+        addDiaryEntry.rx.action = viewModel.onCreateEntry()
     }
     
     fileprivate func configureDataSource() {

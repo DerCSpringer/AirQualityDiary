@@ -19,18 +19,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        let a = AirNowAPI.shared.searchAirQuality(latitude: 34.1278, longitude: -118.1108)
-            .map {
-                AirNowAPI.shared.formatJSON(jsonArray: $0)
-        }
-            .map {
-                DiaryEntry(airQualityJSON: $0)
-        }
+//        let a = AirNowAPI.shared.searchAirQuality(latitude: 34.1278, longitude: -118.1108)
+//            .map {
+//                AirNowAPI.shared.formatJSON(jsonArray: $0)
+//        }
+//            .map {
+//                DiaryEntry(airQualityJSON: $0)
+//        }
+//        
+//        a.subscribe(onNext : { data in
+//            print(data)
+//        })
+//        .addDisposableTo(bag)
         
-        a.subscribe(onNext : { data in
-            print(data)
-        })
-        .addDisposableTo(bag)
+        let service = DiaryService()
+        //coordinator allows transtions between scenes
+        let sceneCoordinator = SceneCoordinator(window: window!)
+        //Next instantiate the fisrt view model and instruct the coordinator to set it as its root
+        let diaryEntriesViewModel = DiaryEntriesViewModel(diaryService: service, coordinator: sceneCoordinator)
+        //our first scene will display the diary entries
+        let firstScene = Scene.diaryEntries(diaryEntriesViewModel)
+        //Now that every part in the model, view model and view is setup we must push this to the scene coordinator
+        //To display on the screen
+        //Then we must transistion to that scene
+        sceneCoordinator.transition(to: firstScene, type: .root)
         // Override point for customization after application launch.
         return true
     }
