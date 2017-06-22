@@ -18,7 +18,8 @@ struct AddDiaryEntryViewModel {
     let bag = DisposeBag()
     let weatherQuality = Variable<DiaryEntry?>(nil)
 
-    
+
+    //We need to do another action for save.  That would simply add teh data to the database
     init(entry: DiaryEntry,
          coordinator: SceneCoordinatorType,
          updateAction: Action<String, Void>,
