@@ -25,7 +25,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="pR7-6N-1Rl" customClass="DiaryEntryTableViewCell" customModule="AirQualityDiary" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DiaryEntryCell" id="pR7-6N-1Rl" customClass="DiaryEntryTableViewCell" customModule="AirQualityDiary" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pR7-6N-1Rl" id="8s3-U9-izD">
@@ -122,11 +122,10 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="s2k-vW-Ooa">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="testing" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="s2k-vW-Ooa">
                                 <rect key="frame" x="0.0" y="266" width="375" height="217"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -156,6 +155,9 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="UWH-P1-27W"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="addEntry" destination="UWH-P1-27W" id="Z7Q-f3-kFx"/>
+                        <outlet property="canel" destination="4bK-KF-MsX" id="fKS-Fd-TsB"/>
+                        <outlet property="note" destination="s2k-vW-Ooa" id="JIE-S1-09T"/>
                         <outlet property="ozone" destination="bUN-aD-QJa" id="AVb-XN-ckf"/>
                         <outlet property="pm25" destination="cGd-w2-zpz" id="xgL-NF-fhi"/>
                     </connections>

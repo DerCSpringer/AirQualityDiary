@@ -13,11 +13,14 @@ import RxSwift
 class AddDiaryEntryViewController: UIViewController, BindableType {
     @IBOutlet weak var ozone: UILabel!
     @IBOutlet weak var pm25: UILabel!
-    
+    @IBOutlet weak var canel: UIBarButtonItem!
+    @IBOutlet weak var addEntry: UIBarButtonItem!
+    @IBOutlet weak var note: UITextView!
     var viewModel: AddDiaryEntryViewModel!
     private let bag = DisposeBag()
     
     func bindViewModel() {
+        //hmm I might just want to expose the data in the view model instead of going through weatherQuality(a semi-model object)
         viewModel.weatherQuality.asDriver()
             .drive(onNext: { [weak self] weather in
                 if let pm = weather?.pm25 {
@@ -32,6 +35,11 @@ class AddDiaryEntryViewController: UIViewController, BindableType {
                     self?.ozone.text = String(o3)
                 }
             })
+            .disposed(by: bag)
+        
+        addEntry.rx.tap
+        .withLatestFrom(note.rx.text.orEmpty)
+        .subscribe(viewModel.save.inputs)
             .disposed(by: bag)
     }
 

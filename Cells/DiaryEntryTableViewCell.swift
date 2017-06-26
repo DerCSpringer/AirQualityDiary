@@ -21,15 +21,15 @@ class DiaryEntryTableViewCell: UITableViewCell {
     func configure(with entry: DiaryEntry, action: CocoaAction) {
         button.rx.action = action
         //Every time item is updated our tableview Will be too, but this usually won't be necessary in the current incantation of the app
-        entry.rx.observe(String.self, "o3")
+        entry.rx.observe(Float.self, "o3")
             .subscribe(onNext: { [weak self] o3 in
-                self?.o3AQI.text = o3
+                self?.o3AQI.text = String(o3!)
             })
             .disposed(by: disposeBag)
         
-        entry.rx.observe(String.self, "pm25")
+        entry.rx.observe(Float.self, "pm25")
             .subscribe(onNext: { [weak self] pm25 in
-                self?.PM25AQI.text = pm25
+                self?.PM25AQI.text = String(pm25!)
             })
             .disposed(by: disposeBag)
     }

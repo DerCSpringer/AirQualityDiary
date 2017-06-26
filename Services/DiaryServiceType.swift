@@ -10,6 +10,7 @@ import Foundation
 import RxSwift
 import RealmSwift
 
+typealias DiaryType = (pm25:Float, o3:Float, note: String)
 
 enum DiaryServiceError: Error {
     case creationFailed
@@ -20,17 +21,17 @@ enum DiaryServiceError: Error {
 
 protocol DiaryServiceType {
     @discardableResult
-    func createEntry(note: String) -> Observable<DiaryEntry>
+    func createEntry(entry: DiaryType) -> Observable<DiaryEntry>
     
     @discardableResult
     func delete(entry: DiaryEntry) -> Observable<Void>
     
     @discardableResult
-    func update(entry: DiaryEntry, note: String) -> Observable<DiaryEntry>
+    func update(entry: DiaryEntry, diary: DiaryType) -> Observable<DiaryEntry>
     
     @discardableResult
     func toggle(entry: DiaryEntry) -> Observable<DiaryEntry>
     
-    func entrys() -> Observable<Results<DiaryEntry>>
+    func entries() -> Observable<Results<DiaryEntry>>
 
 }

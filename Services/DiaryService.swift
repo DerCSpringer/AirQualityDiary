@@ -13,12 +13,12 @@ import RxRealm
 
 struct DiaryService: DiaryServiceType {
     
-    init() {
-        do {
-            _ = try Realm()
-        } catch _ {
-        }
-    }
+//    init() {
+//        do {
+//            _ = try Realm()
+//        } catch _ {
+//        }
+//    }
     
     fileprivate func withRealm<T>(_ operation: String, action: (Realm) throws -> T) -> T? {
         do {
@@ -31,10 +31,12 @@ struct DiaryService: DiaryServiceType {
     }
     
     @discardableResult
-    func createEntry(note: String) -> Observable<DiaryEntry> {
+    func createEntry(entry inputEntry: DiaryType) -> Observable<DiaryEntry> {
         let result = withRealm("creating") { realm -> Observable<DiaryEntry> in
             let entry = DiaryEntry()
-            entry.notes = note
+            entry.notes = inputEntry.note
+            entry.o3 = inputEntry.o3
+            entry.pm25 = inputEntry.pm25
             try realm.write {
                 entry.uid = (realm.objects(DiaryEntry.self).max(ofProperty: "uid") ?? 0) + 1
                 realm.add(entry)
@@ -56,10 +58,12 @@ struct DiaryService: DiaryServiceType {
     }
     
     @discardableResult
-    func update(entry: DiaryEntry, note: String) -> Observable<DiaryEntry> {
+    func update(entry: DiaryEntry, diary: DiaryType) -> Observable<DiaryEntry> {
         let result = withRealm("updating note") { realm -> Observable<DiaryEntry> in
             try realm.write {
-                entry.notes = note
+                entry.notes = diary.note
+                entry.o3 = diary.o3
+                entry.pm25 = diary.pm25
             }
             return .just(entry)
         }
@@ -81,7 +85,7 @@ struct DiaryService: DiaryServiceType {
         return result ?? .error(DiaryServiceError.toggleFailed(entry))
     }
     
-    func entrys() -> Observable<Results<DiaryEntry>> {
+    func entries() -> Observable<Results<DiaryEntry>> {
         let result = withRealm("getting entries") { realm -> Observable<Results<DiaryEntry>> in
             let realm = try Realm()
             let entries = realm.objects(DiaryEntry.self)

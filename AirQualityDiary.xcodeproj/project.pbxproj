@@ -144,10 +144,10 @@
 		0B4B5D211EF45BD200914880 /* AirQualityDiary */ = {
 			isa = PBXGroup;
 			children = (
+				0B4B5D221EF45BD200914880 /* AppDelegate.swift */,
 				0B2589B51EFB2B4C00E12FAA /* Cells */,
 				0B2589A51EFB228D00E12FAA /* Controllers */,
 				0B2589A01EFB220700E12FAA /* Scenes */,
-				0B4B5D221EF45BD200914880 /* AppDelegate.swift */,
 				0B4B5D461EF460B100914880 /* Model */,
 				0B4B5D261EF45BD200914880 /* Main.storyboard */,
 				0B4B5D291EF45BD200914880 /* Assets.xcassets */,

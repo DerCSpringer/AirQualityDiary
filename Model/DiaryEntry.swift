@@ -48,6 +48,13 @@ class DiaryEntry: Object {
         pm25 = airQualityJSON["PM2.5"] as? Float ?? -1.0
     }
     
+//    convenience init(note: String, particulateMatter25: Float, ozone: Float) {
+//        self.init()
+//        o3 = ozone
+//        pm25 = particulateMatter25
+//        notes = note
+//    }
+    
     override class func primaryKey() -> String? {
         return "uid"
     }

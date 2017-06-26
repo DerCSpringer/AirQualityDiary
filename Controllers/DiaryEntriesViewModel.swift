@@ -35,29 +35,51 @@ struct DiaryEntriesViewModel {
             return self.diaryService.delete(entry: entry)
         }
     }
-    func onUpdateTitle(entry: DiaryEntry) -> Action<String, Void> {
-        return Action { newTitle in
-            return self.diaryService.update(entry: entry, note: newTitle).map { _ in }
+    func onUpdateEntry(entry: DiaryEntry) -> Action<DiaryType, Void> {
+        return Action { diary in
+            print("Diary entry in onUpdateEntry in VM: \(diary)")
+            return self.diaryService.update(entry: entry, diary: diary).map { _ in }
         }
     }
+    
+    var sectionedItems: Observable<[DiarySection]> { //TaskSection is a type which we use in our dataSource
+        //Below is an Observable
+        return self.diaryService.entries()
+            .map { results in
+//                let dueTasks = results
+//                    .filter("checked == nil")
+//                    .sorted(byKeyPath: "added", ascending: false)
+//                
+//                let doneTasks = results
+//                    .filter("checked != nil")
+//                    .sorted(byKeyPath: "checked", ascending: false)
+                
+                return [ //our two sections, which we'll show differently in our VC(due/done tasks)
+                    DiarySection(model: "Entires", items: results.toArray()),
+                    //TaskSection(model: "Done Tasks", items: doneTasks.toArray())
+                ]
+        }
+    }
+
     
     func onCreateEntry() -> CocoaAction { //action sent to add VC to do  the right thing
         //We create a new diary item
         //If it is created then we instantiate a new AddDiaryEntryViewModel.
-        //We pass along an updateCation which updates the anything in the new Diary item, and a cancel action which deletes the diary item
+        //We pass along an updateCation which updates the anything in the new Diary item, and a cancel action which deletes the task item
         //This returns an Observable sequence.  We're integrating the whole create-edit procss into a single sequence
         //this completes once teh Add Diary entry Scene closese
         return CocoaAction { _ in
             return self.diaryService
-                .createEntry(note: "")
+                .createEntry(entry: (-1.0, -1.0, "")) //when add is pressed an entry is always created with garbage
+                //This must be updated when everytime save is pressed
                 .flatMap { entry -> Observable<Void> in
                     //Here we setup what happens when each action is executed.
-                    //the execution first happen sin the Edit VC
-                    //The edit VC then sends the action to it's VM where it was inited
+                    //the execution first happens in the Add VC
+                    //The Add VC then sends the action to it's VM where it was inited
                     //The view model then sends the action back here where it will be executed with the correct func
                     let addDiaryEntryViewModel = AddDiaryEntryViewModel(entry: entry,
                                                           coordinator: self.sceneCoordinator,
-                                                          updateAction: self.onUpdateTitle(entry: entry),
+                                                          updateAction: self.onUpdateEntry(entry: entry),
                                                           cancelAction: self.onDelete(entry: entry))
                     return self.sceneCoordinator.transition(to: Scene.addEntry(addDiaryEntryViewModel), type: .modal)
             }
