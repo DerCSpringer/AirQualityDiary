@@ -16,6 +16,7 @@ class AddDiaryEntryViewController: UIViewController, BindableType {
     @IBOutlet weak var canel: UIBarButtonItem!
     @IBOutlet weak var addEntry: UIBarButtonItem!
     @IBOutlet weak var note: UITextView!
+    
     var viewModel: AddDiaryEntryViewModel!
     private let bag = DisposeBag()
     

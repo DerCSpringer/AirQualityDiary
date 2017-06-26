@@ -11,16 +11,11 @@ import RxSwift
 import Action
 
 struct AddDiaryEntryViewModel {
-    
-    
-
     let onCancel: CocoaAction!
     let save : Action<String, DiaryType>
     let bag = DisposeBag()
     let weatherQuality = Variable<DiaryEntry?>(nil)
 
-    //We need to do another action for save.  That would simply add teh data to the database
-    //Probably want another item in here to indicate whether note is updated or I create a new entry
     init(entry: DiaryEntry,
          coordinator: SceneCoordinatorType,
          updateAction: Action<DiaryType, Void>,
@@ -48,22 +43,6 @@ struct AddDiaryEntryViewModel {
             let diary = DiaryType(pm25: pm25, o3: o3, note:note)
             return .just(diary)
         }
-        
-        //Ok working it seems, but I need the diaryEntriesViewModel to get notice of a DiaryType
-        //currently this returns a DiaryType, but instead I would like it to have a DiaryType as inputer and void as output
-
-
-        
-//        garbage.executionObservables
-//        .take(1)
-//            .subscribe(onNext: {entry in
-//                onUpdate.execute(entry)
-//                coordinator.pop()
-//            })
-//            .disposed(by: bag)
-        
-//        .bind(to:onUpdate.inputs)
-//        .disposed(by: bag)
         
         onUpdate = updateAction
         
@@ -98,15 +77,6 @@ struct AddDiaryEntryViewModel {
     //TODO:  How can I pass the updated DiaryEntry.  I just created a tuple which stores all the data as a DiaryEntryType
     //I don't think this is good becuase it's a little bit confusing to put it all together in a tuple.
     //Currently this viewmodel creates the data object, which is loaded from the tableviewModel
-    //I have access to this through the viewmodel property
-    //Maybe I should just send this whole DiaryEntry to the DiaryEntriesVM through the action and send it to the service to update the
-    //Diary Entry
-    
-//    lazy var update: Action<String, Void> = { this in
-//        return Action { task in
-//            
-//        }
-//    }(self)
     
     func bindOutput() { //input will be lat/lon or zipcode when implemented later  output is obs
         //I'm sharing fetcher, so anyone can use it, but it's local so that doesn't help much.
