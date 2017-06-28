@@ -13,7 +13,7 @@ import RxSwift
 class AddDiaryEntryViewController: UIViewController, BindableType {
     @IBOutlet weak var ozone: UILabel!
     @IBOutlet weak var pm25: UILabel!
-    @IBOutlet weak var canel: UIBarButtonItem!
+    @IBOutlet weak var cancel: UIBarButtonItem!
     @IBOutlet weak var addEntry: UIBarButtonItem!
     @IBOutlet weak var note: UITextView!
     
@@ -55,6 +55,10 @@ class AddDiaryEntryViewController: UIViewController, BindableType {
         .withLatestFrom(note.rx.text.orEmpty)
         .subscribe(viewModel.save.inputs)
             .disposed(by: bag)
+        
+        cancel.rx.action = viewModel.onCancel
+        
+        
     }
 
 }

@@ -160,7 +160,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="addEntry" destination="UWH-P1-27W" id="Z7Q-f3-kFx"/>
-                        <outlet property="canel" destination="4bK-KF-MsX" id="fKS-Fd-TsB"/>
+                        <outlet property="cancel" destination="4bK-KF-MsX" id="M5K-SH-Cf3"/>
                         <outlet property="note" destination="s2k-vW-Ooa" id="JIE-S1-09T"/>
                         <outlet property="ozone" destination="bUN-aD-QJa" id="AVb-XN-ckf"/>
                         <outlet property="pm25" destination="cGd-w2-zpz" id="xgL-NF-fhi"/>
