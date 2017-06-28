@@ -15,6 +15,9 @@ struct AddDiaryEntryViewModel {
     let save : Action<String, DiaryType>
     let bag = DisposeBag()
     let weatherQuality = Variable<DiaryEntry?>(nil)
+    let o3Text = Variable<Float>(-1.0)
+    let pm25Text = Variable<Float>(-1.0)
+
 
     init(entry: DiaryEntry,
          coordinator: SceneCoordinatorType,
@@ -26,15 +29,15 @@ struct AddDiaryEntryViewModel {
         var pm25 = Float(-1.0)
         var o3 = Float(-1.0)
 
-        weatherQuality.asObservable()
-            .subscribe(onNext: { entry in
-                pm25 = entry?.pm25 ?? -1.0
+        pm25Text.asObservable()
+            .subscribe(onNext: { pm25Text in
+                pm25 = pm25Text
             })
         .disposed(by: bag)
         
-        weatherQuality.asObservable()
-            .subscribe(onNext: { entry in
-                o3 = entry?.o3 ?? -1.0
+        o3Text.asObservable()
+            .subscribe(onNext: { o3Text in
+                o3 = o3Text
             })
             .disposed(by: bag)
         
@@ -82,8 +85,7 @@ struct AddDiaryEntryViewModel {
         //I'm sharing fetcher, so anyone can use it, but it's local so that doesn't help much.
         
         //I can either make it public or I can somehow create a new observable and make that shareable
-            let fetcher = AirNowAPI.shared
-        fetcher.searchAirQuality(latitude: 34.1278, longitude: -118.1108)
+            let fetcher = AirNowAPI.shared.searchAirQuality(latitude: 34.1278, longitude: -118.1108)
             .map {
                 AirNowAPI.shared.formatJSON(jsonArray: $0)
             }
@@ -91,7 +93,18 @@ struct AddDiaryEntryViewModel {
                 DiaryEntry(airQualityJSON: $0)
         }
         .shareReplay(1)
-        .bind(to: weatherQuality)
+        
+        fetcher.map { entry in
+            return entry.o3
+        }
+        .bind(to: o3Text)
         .disposed(by: bag)
+        
+        fetcher.map { entry in
+            return entry.pm25
+            }
+            .bind(to: pm25Text)
+            .disposed(by: bag)        //.bind(to: weatherQuality)
+        //.disposed(by: bag)
     }
 }

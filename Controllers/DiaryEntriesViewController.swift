@@ -38,6 +38,7 @@ class DiaryEntriesViewController: UIViewController, BindableType {
             .disposed(by: bag)
         
         addDiaryEntry.rx.action = viewModel.onCreateEntry()
+
     }
     
     fileprivate func configureDataSource() {

@@ -42,22 +42,11 @@ struct DiaryEntriesViewModel {
         }
     }
     
-    var sectionedItems: Observable<[DiarySection]> { //TaskSection is a type which we use in our dataSource
+    var sectionedItems: Observable<[DiarySection]> {
         //Below is an Observable
         return self.diaryService.entries()
             .map { results in
-//                let dueTasks = results
-//                    .filter("checked == nil")
-//                    .sorted(byKeyPath: "added", ascending: false)
-//                
-//                let doneTasks = results
-//                    .filter("checked != nil")
-//                    .sorted(byKeyPath: "checked", ascending: false)
-                
-                return [ //our two sections, which we'll show differently in our VC(due/done tasks)
-                    DiarySection(model: "Entires", items: results.toArray()),
-                    //TaskSection(model: "Done Tasks", items: doneTasks.toArray())
-                ]
+                return [DiarySection(model: "Entires", items: results.toArray())]
         }
     }
 
