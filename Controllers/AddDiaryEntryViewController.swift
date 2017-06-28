@@ -16,6 +16,7 @@ class AddDiaryEntryViewController: UIViewController, BindableType {
     @IBOutlet weak var cancel: UIBarButtonItem!
     @IBOutlet weak var addEntry: UIBarButtonItem!
     @IBOutlet weak var note: UITextView!
+    @IBOutlet weak var fetchingIndicator: UIActivityIndicatorView!
     
     var viewModel: AddDiaryEntryViewModel!
     private let bag = DisposeBag()
@@ -39,6 +40,16 @@ class AddDiaryEntryViewController: UIViewController, BindableType {
         .withLatestFrom(note.rx.text.orEmpty)
         .subscribe(viewModel.save.inputs)
             .disposed(by: bag)
+        
+        viewModel.isFetching.asDriver()
+            .drive(fetchingIndicator.rx.isAnimating)
+            .addDisposableTo(bag)
+        
+        viewModel.isFetching.asDriver()
+            .skip(1)
+            .map{ _ in true }
+            .drive(fetchingIndicator.rx.isHidden)
+            .addDisposableTo(bag)
         
         cancel.rx.action = viewModel.onCancel
     }

@@ -17,6 +17,7 @@ struct AddDiaryEntryViewModel {
     let weatherQuality = Variable<DiaryEntry?>(nil)
     let o3Text = Variable<Float>(-1.0)
     let pm25Text = Variable<Float>(-1.0)
+    let isFetching = Variable<Bool>(true)
 
     init(entry: DiaryEntry,
          coordinator: SceneCoordinatorType,
@@ -103,7 +104,10 @@ struct AddDiaryEntryViewModel {
             return entry.pm25
             }
             .bind(to: pm25Text)
-            .disposed(by: bag)        //.bind(to: weatherQuality)
-        //.disposed(by: bag)
+            .disposed(by: bag)
+        
+        fetcher.map { _ in false }
+        .bind(to: isFetching)
+        .disposed(by: bag)
     }
 }
