@@ -22,21 +22,6 @@ class AddDiaryEntryViewController: UIViewController, BindableType {
     
     func bindViewModel() {
         //hmm I might just want to expose the data in the view model instead of going through weatherQuality(a semi-model object)
-//        viewModel.weatherQuality.asDriver()
-//            .drive(onNext: { [weak self] weather in
-//                if let pm = weather?.pm25 {
-//                self?.pm25.text = String(pm)
-//                }
-//            })
-//            .disposed(by: bag)
-//
-//        viewModel.weatherQuality.asDriver()
-//            .drive(onNext: { [weak self] weather in
-//                if let o3 = weather?.o3 {
-//                    self?.ozone.text = String(o3)
-//                }
-//            })
-//            .disposed(by: bag)
         
         viewModel.pm25Text.asDriver()
             .drive(onNext: { [weak self] pm25 in
@@ -50,15 +35,11 @@ class AddDiaryEntryViewController: UIViewController, BindableType {
             })
             .disposed(by: bag)
         
-        
         addEntry.rx.tap
         .withLatestFrom(note.rx.text.orEmpty)
         .subscribe(viewModel.save.inputs)
             .disposed(by: bag)
         
         cancel.rx.action = viewModel.onCancel
-        
-        
     }
-
 }

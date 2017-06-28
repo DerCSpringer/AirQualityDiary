@@ -18,7 +18,6 @@ struct AddDiaryEntryViewModel {
     let o3Text = Variable<Float>(-1.0)
     let pm25Text = Variable<Float>(-1.0)
 
-
     init(entry: DiaryEntry,
          coordinator: SceneCoordinatorType,
          updateAction: Action<DiaryType, Void>,
