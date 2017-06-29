@@ -38,18 +38,11 @@ class DiaryEntriesViewController: UIViewController, BindableType, UITableViewDel
             self.headerView?.updateConstraintsIfNeeded()
         })
         .addDisposableTo(bag)
-        
-        
-        
-        
+
         configureDataSource() //This must be done before we bind observables
         //It probably starts observing only elements at time X.  If we wait until later it maybe not see stuff already in teh database
     }
     
-//    override func updateViewConstraints() {
-//        self.headerView?.updateConstraintsIfNeeded()
-//        super.updateViewConstraints()
-//    }
     
     func bindViewModel() {
         
@@ -62,12 +55,8 @@ class DiaryEntriesViewController: UIViewController, BindableType, UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-//        view.tintColor = UIColor.purple
-//        let header:UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView
-//        header.textLabel?.textColor = UIColor.white
         
         let headerView = tableView.dequeueReusableCell(withIdentifier: "DiaryEntryCell") as! DiaryEntryTableViewCell
-        //no good need to update autolayout on rotation
         headerView.o3AQI.text = "O3"
         headerView.PM25AQI.text = "PM 2.5"
         headerView.date.text = "Date of Observation"
@@ -78,8 +67,7 @@ class DiaryEntriesViewController: UIViewController, BindableType, UITableViewDel
                 subview.frame = view.frame
             }
         })
-            .addDisposableTo(bag)
-       //self.headerView = &view
+            .addDisposableTo(bag)//TODO: This is being called in the other controller.  What gives?
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
