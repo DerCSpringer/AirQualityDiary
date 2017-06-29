@@ -66,7 +66,7 @@ struct DiaryService: DiaryServiceType {
     @discardableResult
     func toggle(entry: DiaryEntry) -> Observable<DiaryEntry> {
         let result = withRealm("toggling") { realm -> Observable<DiaryEntry> in
-            try realm.write { //MARK: Double check this
+            try realm.write { 
                 if entry.checked == false {
                     entry.checked = true
                 } else {

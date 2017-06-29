@@ -26,13 +26,21 @@ class DiaryEntryTableViewCell: UITableViewCell {
         //Every time item is updated our tableview Will be too, but this usually won't be necessary in the current incantation of the app
         entry.rx.observe(Int.self, "o3")
             .subscribe(onNext: { [weak self] o3 in
+                if o3 == -1 {
+                    self?.o3AQI.text = "Unv"
+                } else {
                 self?.o3AQI.text = String(o3!)
+                }
             })
             .disposed(by: disposeBag)
         
         entry.rx.observe(Int.self, "pm25")
             .subscribe(onNext: { [weak self] pm25 in
+                if pm25 == -1 {
+                    self?.PM25AQI.text = "Unv"
+                } else {
                 self?.PM25AQI.text = String(pm25!)
+                }
             })
             .disposed(by: disposeBag)
         
@@ -42,9 +50,20 @@ class DiaryEntryTableViewCell: UITableViewCell {
                 self?.date.text = String(formattedDate)
             })
             .disposed(by: disposeBag)
+        
+        entry.rx.observe(Bool.self, "checked")
+            .subscribe(onNext: { [weak self] checked in
+                if checked! {
+                    self?.button.setTitle("C", for: .normal)
+                }
+                else {
+                    self?.button.setTitle("UC", for: .normal)
+                }
+            })
+        .disposed(by: disposeBag)
     }
     
-    //TODO: setup what the button will do
+    //TODO: setup button graphics
     
     override func prepareForReuse() {
         button.rx.action = nil

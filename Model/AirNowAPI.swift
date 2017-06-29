@@ -62,7 +62,7 @@ class AirNowAPI {
 //                return [:]
 //            }
 //    }
-}
+    }
 }
 
 extension AirNowAPI { //Garbage will fix once I figure out how to unbox array of items into single Model object

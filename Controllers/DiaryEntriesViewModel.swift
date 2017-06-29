@@ -50,7 +50,6 @@ struct DiaryEntriesViewModel {
         }
     }
 
-    
     func onCreateEntry() -> CocoaAction { //action sent to add VC to do  the right thing
         //We create a new diary item
         //If it is created then we instantiate a new AddDiaryEntryViewModel.

@@ -15,12 +15,9 @@ class DiaryEntriesViewController: UIViewController, BindableType, UITableViewDel
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addDiaryEntry: UIBarButtonItem!
     
-    var headerView: UIView?
+    //var headerView: UIView?
     var viewModel: DiaryEntriesViewModel!
     let notifications = NotificationCenter.default.rx.notification(Notification.Name.UIDeviceOrientationDidChange)
-    
-    
-    
     let dataSource = RxTableViewSectionedAnimatedDataSource<DiarySection>()
     let bag = DisposeBag()
     
@@ -32,11 +29,6 @@ class DiaryEntriesViewController: UIViewController, BindableType, UITableViewDel
         tableView.estimatedRowHeight = 60
         
         tableView.rx.setDelegate(self)
-        .addDisposableTo(bag)
-        
-        notifications.subscribe(onNext: { notification in
-            self.headerView?.updateConstraintsIfNeeded()
-        })
         .addDisposableTo(bag)
 
         configureDataSource() //This must be done before we bind observables
@@ -61,13 +53,14 @@ class DiaryEntriesViewController: UIViewController, BindableType, UITableViewDel
         headerView.PM25AQI.text = "PM 2.5"
         headerView.date.text = "Date of Observation"
         headerView.button.alpha = 0.0 //look for better solution
+        headerView.button.isUserInteractionEnabled = false
         view.addSubview(headerView)
-        notifications.subscribe(onNext: { _ in
+        notifications.subscribe(onNext: { _ in //TODO: This is being called in the other controller.  What gives?
             for subview in view.subviews {
                 subview.frame = view.frame
             }
         })
-            .addDisposableTo(bag)//TODO: This is being called in the other controller.  What gives?
+            .addDisposableTo(bag)
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -76,7 +69,7 @@ class DiaryEntriesViewController: UIViewController, BindableType, UITableViewDel
     
     fileprivate func configureDataSource() {
         
-        dataSource.canEditRowAtIndexPath = {_ in
+        dataSource.canEditRowAtIndexPath = { _ in
             true
         }
         dataSource.titleForHeaderInSection = { dataSource, index in
@@ -97,5 +90,4 @@ class DiaryEntriesViewController: UIViewController, BindableType, UITableViewDel
             return cell
         }
     }
-
 }

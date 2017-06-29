@@ -26,13 +26,21 @@ class AddDiaryEntryViewController: UIViewController, BindableType {
         
         viewModel.pm25Text.asDriver()
             .drive(onNext: { [weak self] pm25 in
+                if pm25 == -1 {
+                    self?.pm25.text = "Unavailable"
+                } else {
                 self?.pm25.text = String(pm25)
+                }
             })
             .disposed(by: bag)
         
         viewModel.o3Text.asDriver()
             .drive(onNext: { [weak self] o3 in
+                if o3 == -1 {
+                    self?.ozone.text = "Unavailable"
+                } else {
                 self?.ozone.text = String(o3)
+                }
             })
             .disposed(by: bag)
         
