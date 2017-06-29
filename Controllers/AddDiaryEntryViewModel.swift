@@ -18,6 +18,11 @@ class AddDiaryEntryViewModel {
     private let onUpdate: Action<DiaryType, Void>
     let onCancel: CocoaAction!
     
+    //TODO: ask user for location and search for that.  Also offer a zip code input
+    //We could use another action for for zip code
+    //Need an image for our cell
+    //Sort data by ozone
+    
     init(entry: DiaryEntry,
          coordinator: SceneCoordinatorType,
          updateAction: Action<DiaryType, Void>,
