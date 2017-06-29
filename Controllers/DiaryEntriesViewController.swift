@@ -15,7 +15,11 @@ class DiaryEntriesViewController: UIViewController, BindableType, UITableViewDel
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addDiaryEntry: UIBarButtonItem!
     
+    var headerView: UIView?
     var viewModel: DiaryEntriesViewModel!
+    let notifications = NotificationCenter.default.rx.notification(Notification.Name.UIDeviceOrientationDidChange)
+    
+    
     
     let dataSource = RxTableViewSectionedAnimatedDataSource<DiarySection>()
     let bag = DisposeBag()
@@ -30,10 +34,22 @@ class DiaryEntriesViewController: UIViewController, BindableType, UITableViewDel
         tableView.rx.setDelegate(self)
         .addDisposableTo(bag)
         
+        notifications.subscribe(onNext: { notification in
+            self.headerView?.updateConstraintsIfNeeded()
+        })
+        .addDisposableTo(bag)
+        
+        
+        
         
         configureDataSource() //This must be done before we bind observables
         //It probably starts observing only elements at time X.  If we wait until later it maybe not see stuff already in teh database
     }
+    
+//    override func updateViewConstraints() {
+//        self.headerView?.updateConstraintsIfNeeded()
+//        super.updateViewConstraints()
+//    }
     
     func bindViewModel() {
         
@@ -57,6 +73,13 @@ class DiaryEntriesViewController: UIViewController, BindableType, UITableViewDel
         headerView.date.text = "Date of Observation"
         headerView.button.alpha = 0.0 //look for better solution
         view.addSubview(headerView)
+        notifications.subscribe(onNext: { _ in
+            for subview in view.subviews {
+                subview.frame = view.frame
+            }
+        })
+            .addDisposableTo(bag)
+       //self.headerView = &view
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

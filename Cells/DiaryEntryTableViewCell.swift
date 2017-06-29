@@ -14,7 +14,6 @@ class DiaryEntryTableViewCell: UITableViewCell {
     
     var disposeBag = DisposeBag()
     @IBOutlet weak var button: UIButton!
-    
     @IBOutlet weak var o3AQI: UILabel!
     @IBOutlet weak var PM25AQI: UILabel!
     @IBOutlet weak var date: UILabel!
@@ -23,8 +22,6 @@ class DiaryEntryTableViewCell: UITableViewCell {
         button.rx.action = action
         let format = DateFormatter()
         format.dateFormat = "MM/dd/yyyy 'at' HH:mm"
-        
-
 
         //Every time item is updated our tableview Will be too, but this usually won't be necessary in the current incantation of the app
         entry.rx.observe(Float.self, "o3")

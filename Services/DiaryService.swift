@@ -13,13 +13,6 @@ import RxRealm
 
 struct DiaryService: DiaryServiceType {
     
-//    init() {
-//        do {
-//            _ = try Realm()
-//        } catch _ {
-//        }
-//    }
-    
     fileprivate func withRealm<T>(_ operation: String, action: (Realm) throws -> T) -> T? {
         do {
             let realm = try Realm()
