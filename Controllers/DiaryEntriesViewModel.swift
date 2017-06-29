@@ -59,7 +59,7 @@ struct DiaryEntriesViewModel {
         //this completes once teh Add Diary entry Scene closese
         return CocoaAction { _ in
             return self.diaryService
-                .createEntry(entry: (-1.0, -1.0, "")) //when add is pressed an entry is always created with garbage
+                .createEntry(entry: (-1, -1, "")) //when add is pressed an entry is always created with garbage
                 //This must be updated when everytime save is pressed
                 .flatMap { entry -> Observable<Void> in
                     //Here we setup what happens when each action is executed.

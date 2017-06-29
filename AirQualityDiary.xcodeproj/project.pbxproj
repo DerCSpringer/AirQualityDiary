@@ -43,7 +43,7 @@
 
 /* Begin PBXFileReference section */
 		0B25899E1EFB218F00E12FAA /* Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Scene.swift; path = Scenes/Scene.swift; sourceTree = SOURCE_ROOT; };
-		0B2589A11EFB224600E12FAA /* DiaryEntriesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiaryEntriesViewModel.swift; path = Controllers/DiaryEntriesViewModel.swift; sourceTree = SOURCE_ROOT; };
+		0B2589A11EFB224600E12FAA /* DiaryEntriesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = DiaryEntriesViewModel.swift; path = Controllers/DiaryEntriesViewModel.swift; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		0B2589A31EFB228500E12FAA /* AddDiaryEntryViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = AddDiaryEntryViewModel.swift; path = Controllers/AddDiaryEntryViewModel.swift; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		0B2589A71EFB238C00E12FAA /* SceneCoordinatorType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SceneCoordinatorType.swift; path = Scenes/SceneCoordinatorType.swift; sourceTree = SOURCE_ROOT; };
 		0B2589A91EFB23CA00E12FAA /* SceneCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SceneCoordinator.swift; path = Scenes/SceneCoordinator.swift; sourceTree = SOURCE_ROOT; };

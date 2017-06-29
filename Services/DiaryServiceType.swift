@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 import RealmSwift
 
-typealias DiaryType = (pm25:Float, o3:Float, note: String)
+typealias DiaryType = (pm25:Int, o3:Int, note: String)
 
 enum DiaryServiceError: Error {
     case creationFailed

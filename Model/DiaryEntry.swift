@@ -17,8 +17,8 @@ class DiaryEntry: Object {
     dynamic var uid: Int = 0
     dynamic var added: Date = Date()
     dynamic var checked: Bool = false
-    dynamic var o3: Float = -1.0
-    dynamic var pm25: Float = -1.0
+    dynamic var o3: Int = -1
+    dynamic var pm25: Int = -1
     dynamic var notes: String = ""
     
     // MARK: Init with Unboxer
@@ -44,11 +44,11 @@ class DiaryEntry: Object {
     
     convenience required init(airQualityJSON: JSONObject) { //sub classes must provide this init
         self.init()
-        o3 = airQualityJSON["O3"] as? Float ?? -1.0
-        pm25 = airQualityJSON["PM2.5"] as? Float ?? -1.0
+        o3 = airQualityJSON["O3"] as? Int ?? -1
+        pm25 = airQualityJSON["PM2.5"] as? Int ?? -1
     }
     
-//    convenience init(note: String, particulateMatter25: Float, ozone: Float) {
+//    convenience init(note: String, particulateMatter25: Int, ozone: Int) {
 //        self.init()
 //        o3 = ozone
 //        pm25 = particulateMatter25

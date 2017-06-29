@@ -12,8 +12,8 @@ import Action
 
 class AddDiaryEntryViewModel {
     private let bag = DisposeBag()
-    let o3Text = Variable<Float>(-1.0)
-    let pm25Text = Variable<Float>(-1.0)
+    let o3Text = Variable<Int>(-1)
+    let pm25Text = Variable<Int>(-1)
     let isFetching = Variable<Bool>(true)
     private let onUpdate: Action<DiaryType, Void>
     let onCancel: CocoaAction!
@@ -89,8 +89,8 @@ class AddDiaryEntryViewModel {
 //    //var save : Action<String, DiaryType>
 //    let bag = DisposeBag()
 //    let weatherQuality = Variable<DiaryEntry?>(nil)
-//    let o3Text = Variable<Float>(-1.0)
-//    let pm25Text = Variable<Float>(-1.0)
+//    let o3Text = Variable<Int>(-1)
+//    let pm25Text = Variable<Int>(-1)
 //    let isFetching = Variable<Bool>(true)
 //    
 //    var save: Action<String, DiaryType> { note in
@@ -105,8 +105,8 @@ class AddDiaryEntryViewModel {
 //
 //        let onUpdate: Action<DiaryType, Void>
 //        
-//        var pm25 = Float(-1.0)
-//        var o3 = Float(-1.0)
+//        var pm25 = Int(-1)
+//        var o3 = Int(-1)
 //
 //        pm25Text.asObservable()
 //            .subscribe(onNext: { pm25Text in
