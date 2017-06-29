@@ -38,7 +38,7 @@ class AddDiaryEntryViewController: UIViewController, BindableType {
         
         addEntry.rx.tap
         .withLatestFrom(note.rx.text.orEmpty)
-        .subscribe(viewModel.save.inputs)
+        .subscribe(viewModel.onSave.inputs)
             .disposed(by: bag)
         
         viewModel.isFetching.asDriver()

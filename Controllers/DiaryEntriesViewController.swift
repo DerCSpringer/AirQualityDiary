@@ -11,7 +11,7 @@ import RxSwift
 import RxDataSources
 import Action
 
-class DiaryEntriesViewController: UIViewController, BindableType {
+class DiaryEntriesViewController: UIViewController, BindableType, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addDiaryEntry: UIBarButtonItem!
     
@@ -27,6 +27,10 @@ class DiaryEntriesViewController: UIViewController, BindableType {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 60
         
+        tableView.rx.setDelegate(self)
+        .addDisposableTo(bag)
+        
+        
         configureDataSource() //This must be done before we bind observables
         //It probably starts observing only elements at time X.  If we wait until later it maybe not see stuff already in teh database
     }
@@ -41,14 +45,33 @@ class DiaryEntriesViewController: UIViewController, BindableType {
 
     }
     
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+//        view.tintColor = UIColor.purple
+//        let header:UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView
+//        header.textLabel?.textColor = UIColor.white
+        
+        let headerView = tableView.dequeueReusableCell(withIdentifier: "DiaryEntryCell") as! DiaryEntryTableViewCell
+        //no good need to update autolayout on rotation
+        headerView.o3AQI.text = "O3"
+        headerView.PM25AQI.text = "PM 2.5"
+        headerView.date.text = "Date of Observation"
+        headerView.button.alpha = 0.0 //look for better solution
+        view.addSubview(headerView)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 44
+    }
+    
     fileprivate func configureDataSource() {
         
         dataSource.canEditRowAtIndexPath = {_ in
             true
         }
         dataSource.titleForHeaderInSection = { dataSource, index in
-            dataSource.sectionModels[index].model
+            return ""
         }
+        
         
         dataSource.configureCell = {
             [weak self] dataSource, tableView, indexPath, entry in
