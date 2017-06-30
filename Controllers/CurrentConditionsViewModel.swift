@@ -7,7 +7,15 @@
 //
 
 import Foundation
+import RxSwift
 
 struct CurrentConditionsViewModel {
+    let tomorrowO3 = Variable<String>("Unavailable")
+    let tomorrowPM = Variable<String>("Unavailable")
+    let currentForcastPM = Variable<String>("Unavailable")
+    let currentForcastO3 = Variable<String>("Unavailable")
+    let currentO3 = Variable<String>("Unavailable")
+    let currentPM = Variable<String>("Unavailable")
+
     
 }

@@ -20,6 +20,7 @@ class DiaryEntryTableViewCell: UITableViewCell {
     
     func configure(with entry: DiaryEntry, action: CocoaAction) {
         button.rx.action = action
+        self.backgroundColor = UIColor.black
         let format = DateFormatter()
         format.dateFormat = "MM/dd/yyyy 'at' HH:mm"
 

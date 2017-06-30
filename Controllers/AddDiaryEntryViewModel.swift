@@ -23,8 +23,7 @@ class AddDiaryEntryViewModel {
     
 
     
-    //TODO: Offer a zip code input
-    //We could use another action for for zip code
+    //TODO: Add delete and Edit for cells
     //Need an image for our cell
     //Sort data by ozone
     //errors for unable to fetch
@@ -44,7 +43,7 @@ class AddDiaryEntryViewModel {
         
         currentLocation = locationManager.rx.didUpdateLocations
             .map() { locations in
-                print(locations)
+                //print(locations)
                 return locations[0]
             }
             .filter() { location in
