@@ -28,6 +28,7 @@
 		0B4B5D431EF45E5B00914880 /* DiaryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4B5D421EF45E5A00914880 /* DiaryEntry.swift */; };
 		0B4B5D451EF4606300914880 /* BindableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4B5D441EF4606300914880 /* BindableType.swift */; };
 		0B4B5D4A1EF461A400914880 /* DiaryServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4B5D491EF461A400914880 /* DiaryServiceType.swift */; };
+		0B63C50B1F06D0FD00C77080 /* CLLocationManager+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B63C50A1F06D0FD00C77080 /* CLLocationManager+Rx.swift */; };
 		EA82003BB1F00D248F4D7240 /* Pods_AirQualityDiary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 946E8E3C3EE15D0D1C973697 /* Pods_AirQualityDiary.framework */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +67,7 @@
 		0B4B5D421EF45E5A00914880 /* DiaryEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = DiaryEntry.swift; path = Model/DiaryEntry.swift; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		0B4B5D441EF4606300914880 /* BindableType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BindableType.swift; path = Model/BindableType.swift; sourceTree = SOURCE_ROOT; };
 		0B4B5D491EF461A400914880 /* DiaryServiceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = DiaryServiceType.swift; path = Services/DiaryServiceType.swift; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		0B63C50A1F06D0FD00C77080 /* CLLocationManager+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CLLocationManager+Rx.swift"; path = "Extensions/CLLocationManager+Rx.swift"; sourceTree = SOURCE_ROOT; };
 		3DBB33EDE1CB47E98EC4458C /* Pods-AirQualityDiary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AirQualityDiary.release.xcconfig"; path = "Pods/Target Support Files/Pods-AirQualityDiary/Pods-AirQualityDiary.release.xcconfig"; sourceTree = "<group>"; };
 		46AF1142F07FCAF906C2FFD3 /* Pods-AirQualityDiary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AirQualityDiary.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AirQualityDiary/Pods-AirQualityDiary.debug.xcconfig"; sourceTree = "<group>"; };
 		946E8E3C3EE15D0D1C973697 /* Pods_AirQualityDiary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AirQualityDiary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -144,6 +146,7 @@
 		0B4B5D211EF45BD200914880 /* AirQualityDiary */ = {
 			isa = PBXGroup;
 			children = (
+				0B63C50A1F06D0FD00C77080 /* CLLocationManager+Rx.swift */,
 				0B4B5D221EF45BD200914880 /* AppDelegate.swift */,
 				0B2589B51EFB2B4C00E12FAA /* Cells */,
 				0B2589A51EFB228D00E12FAA /* Controllers */,
@@ -359,6 +362,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B63C50B1F06D0FD00C77080 /* CLLocationManager+Rx.swift in Sources */,
 				0B4B5D431EF45E5B00914880 /* DiaryEntry.swift in Sources */,
 				0B2589AA1EFB23CA00E12FAA /* SceneCoordinator.swift in Sources */,
 				0B2589A21EFB224600E12FAA /* DiaryEntriesViewModel.swift in Sources */,

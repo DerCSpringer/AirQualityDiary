@@ -28,6 +28,8 @@ class AddDiaryEntryViewModel {
          updateAction: Action<DiaryType, Void>,
          cancelAction: CocoaAction? = nil) {
         
+
+        
         onUpdate = updateAction
         onUpdate.executionObservables //This needs to take one of the diaryType not the note
             .take(1)  //This takes the note, but we also need the weather quality
