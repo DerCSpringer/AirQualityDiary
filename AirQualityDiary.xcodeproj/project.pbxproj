@@ -29,6 +29,8 @@
 		0B4B5D451EF4606300914880 /* BindableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4B5D441EF4606300914880 /* BindableType.swift */; };
 		0B4B5D4A1EF461A400914880 /* DiaryServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4B5D491EF461A400914880 /* DiaryServiceType.swift */; };
 		0B63C50B1F06D0FD00C77080 /* CLLocationManager+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B63C50A1F06D0FD00C77080 /* CLLocationManager+Rx.swift */; };
+		0B63C50E1F06E8B300C77080 /* CurrentConditionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B63C50D1F06E8B300C77080 /* CurrentConditionsViewController.swift */; };
+		0B63C5101F06E8C600C77080 /* CurrentConditionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B63C50F1F06E8C600C77080 /* CurrentConditionsViewModel.swift */; };
 		EA82003BB1F00D248F4D7240 /* Pods_AirQualityDiary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 946E8E3C3EE15D0D1C973697 /* Pods_AirQualityDiary.framework */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +70,8 @@
 		0B4B5D441EF4606300914880 /* BindableType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BindableType.swift; path = Model/BindableType.swift; sourceTree = SOURCE_ROOT; };
 		0B4B5D491EF461A400914880 /* DiaryServiceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = DiaryServiceType.swift; path = Services/DiaryServiceType.swift; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		0B63C50A1F06D0FD00C77080 /* CLLocationManager+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CLLocationManager+Rx.swift"; path = "Extensions/CLLocationManager+Rx.swift"; sourceTree = SOURCE_ROOT; };
+		0B63C50D1F06E8B300C77080 /* CurrentConditionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CurrentConditionsViewController.swift; path = Controllers/CurrentConditionsViewController.swift; sourceTree = SOURCE_ROOT; };
+		0B63C50F1F06E8C600C77080 /* CurrentConditionsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CurrentConditionsViewModel.swift; path = Controllers/CurrentConditionsViewModel.swift; sourceTree = SOURCE_ROOT; };
 		3DBB33EDE1CB47E98EC4458C /* Pods-AirQualityDiary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AirQualityDiary.release.xcconfig"; path = "Pods/Target Support Files/Pods-AirQualityDiary/Pods-AirQualityDiary.release.xcconfig"; sourceTree = "<group>"; };
 		46AF1142F07FCAF906C2FFD3 /* Pods-AirQualityDiary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AirQualityDiary.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AirQualityDiary/Pods-AirQualityDiary.debug.xcconfig"; sourceTree = "<group>"; };
 		946E8E3C3EE15D0D1C973697 /* Pods_AirQualityDiary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AirQualityDiary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -107,6 +111,8 @@
 		0B2589A51EFB228D00E12FAA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				0B63C50D1F06E8B300C77080 /* CurrentConditionsViewController.swift */,
+				0B63C50F1F06E8C600C77080 /* CurrentConditionsViewModel.swift */,
 				0B2589AF1EFB24DD00E12FAA /* AddDiaryEntryViewController.swift */,
 				0B2589B11EFB24F300E12FAA /* DiaryEntriesViewController.swift */,
 				0B2589A11EFB224600E12FAA /* DiaryEntriesViewModel.swift */,
@@ -146,8 +152,8 @@
 		0B4B5D211EF45BD200914880 /* AirQualityDiary */ = {
 			isa = PBXGroup;
 			children = (
-				0B63C50A1F06D0FD00C77080 /* CLLocationManager+Rx.swift */,
 				0B4B5D221EF45BD200914880 /* AppDelegate.swift */,
+				0B63C50C1F06E47D00C77080 /* Extensions */,
 				0B2589B51EFB2B4C00E12FAA /* Cells */,
 				0B2589A51EFB228D00E12FAA /* Controllers */,
 				0B2589A01EFB220700E12FAA /* Scenes */,
@@ -187,6 +193,14 @@
 				0B4B5D491EF461A400914880 /* DiaryServiceType.swift */,
 			);
 			name = Services;
+			sourceTree = "<group>";
+		};
+		0B63C50C1F06E47D00C77080 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0B63C50A1F06D0FD00C77080 /* CLLocationManager+Rx.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		7256E90E549D1CF337898694 /* Pods */ = {
@@ -368,8 +382,10 @@
 				0B2589A21EFB224600E12FAA /* DiaryEntriesViewModel.swift in Sources */,
 				0B2589A81EFB238C00E12FAA /* SceneCoordinatorType.swift in Sources */,
 				0B2589B21EFB24F300E12FAA /* DiaryEntriesViewController.swift in Sources */,
+				0B63C50E1F06E8B300C77080 /* CurrentConditionsViewController.swift in Sources */,
 				0B4B5D4A1EF461A400914880 /* DiaryServiceType.swift in Sources */,
 				0B25899F1EFB218F00E12FAA /* Scene.swift in Sources */,
+				0B63C5101F06E8C600C77080 /* CurrentConditionsViewModel.swift in Sources */,
 				0B2EBF801EFC7BEE00A3D244 /* DiaryService.swift in Sources */,
 				0B4B5D451EF4606300914880 /* BindableType.swift in Sources */,
 				0B2589AC1EFB241500E12FAA /* Scene+ViewController.swift in Sources */,

@@ -27,16 +27,24 @@ class AddDiaryEntryViewModel {
     //We could use another action for for zip code
     //Need an image for our cell
     //Sort data by ozone
+    //errors for unable to fetch
+    //better note section and AddEntryVC
+    //Add later
+    //We could add something at the bottom of the DiaryEntriesTV to display the minium amount that bothers someone.
+    //this could be displayed on the forcast and so forth
+    //opening display could have black background
+    //Forground text is different color depending on how bad teh forcast for the next day is for you
+    
     
     init(entry: DiaryEntry,
          coordinator: SceneCoordinatorType,
          updateAction: Action<DiaryType, Void>,
          cancelAction: CocoaAction? = nil) {
         
-
         
         currentLocation = locationManager.rx.didUpdateLocations
             .map() { locations in
+                print(locations)
                 return locations[0]
             }
             .filter() { location in

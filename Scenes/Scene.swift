@@ -11,4 +11,5 @@ import Foundation
 enum Scene {
     case diaryEntries(DiaryEntriesViewModel)
     case addEntry(AddDiaryEntryViewModel)
+    case currentConditions(CurrentConditionsViewModel)
 }
