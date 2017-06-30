@@ -7,7 +7,16 @@
 //
 
 import Foundation
+import UIKit
+import RxSwift
+import RxCocoa
 
-class CurrentConditionsViewController {
+class CurrentConditionsViewController: UIViewController, BindableType {
+    
+    var viewModel: CurrentConditionsViewModel!
+    
+    func bindViewModel() {
+    
+    }
     
 }

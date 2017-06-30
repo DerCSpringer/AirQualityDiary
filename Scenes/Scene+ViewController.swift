@@ -24,6 +24,12 @@ extension Scene {
             var vc = nc.viewControllers.first as! AddDiaryEntryViewController
             vc.bindViewModel(to: viewModel)
             return nc
+            
+        case .currentConditions(let viewModel):
+            let nc = storyboard.instantiateViewController(withIdentifier: "CurrentConditions") as! UINavigationController
+            var vc = nc.viewControllers.first as! CurrentConditionsViewController
+            vc.bindViewModel(to: viewModel)
+            return nc
         }
     }
 }
