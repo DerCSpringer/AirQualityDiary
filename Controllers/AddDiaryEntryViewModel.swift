@@ -9,6 +9,7 @@
 import Foundation
 import RxSwift
 import Action
+import CoreLocation
 
 class AddDiaryEntryViewModel {
     private let bag = DisposeBag()
@@ -17,8 +18,12 @@ class AddDiaryEntryViewModel {
     let isFetching = Variable<Bool>(true)
     private let onUpdate: Action<DiaryType, Void>
     let onCancel: CocoaAction!
+    private let locationManager = CLLocationManager()
+    private let currentLocation : Observable<CLLocation>
     
-    //TODO: ask user for location and search for that.  Also offer a zip code input
+
+    
+    //TODO: Offer a zip code input
     //We could use another action for for zip code
     //Need an image for our cell
     //Sort data by ozone
@@ -29,6 +34,17 @@ class AddDiaryEntryViewModel {
          cancelAction: CocoaAction? = nil) {
         
 
+        
+        currentLocation = locationManager.rx.didUpdateLocations
+            .map() { locations in
+                return locations[0]
+            }
+            .filter() { location in
+                return location.horizontalAccuracy <= kCLLocationAccuracyKilometer
+        }
+        
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
         
         onUpdate = updateAction
         onUpdate.executionObservables //This needs to take one of the diaryType not the note
@@ -65,7 +81,14 @@ class AddDiaryEntryViewModel {
     func bindOutput() { //input will be lat/lon or zipcode when implemented later  output is obs
         //I'm sharing fetcher, so anyone can use it, but it's local so that doesn't help much.
         //I can either make it public or I can somehow create a new observable and make that shareable
-        let fetcher = AirNowAPI.shared.searchAirQuality(latitude: 34.1278, longitude: -118.1108)
+        
+        let fetcher = currentLocation.take(1).flatMap() { location -> Observable<[AirNowAPI.JSONObject]> in
+            print(location)
+            return AirNowAPI.shared.searchAirQuality(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+        }
+        
+        //let fetcher = AirNowAPI.shared.searchAirQuality(latitude: 34.1278, longitude: -118.1108)
+            //fetcher
             .map {
                 AirNowAPI.shared.formatJSON(jsonArray: $0)
             }
