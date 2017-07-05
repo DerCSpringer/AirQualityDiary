@@ -15,8 +15,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    let bag = DisposeBag()
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 //        let a = AirNowAPI.shared.searchAirQuality(latitude: 34.1278, longitude: -118.1108)
         
@@ -31,7 +29,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //To display on the screen
         //Then we must transistion to that scene
         sceneCoordinator.transition(to: firstScene, type: .root)
-        // Override point for customization after application launch.
         return true
     }
 }

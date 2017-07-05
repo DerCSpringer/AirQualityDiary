@@ -93,9 +93,7 @@ class AddDiaryEntryViewModel {
             print(location)
             return AirNowAPI.shared.searchAirQuality(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
         }
-        
-        //let fetcher = AirNowAPI.shared.searchAirQuality(latitude: 34.1278, longitude: -118.1108)
-            //fetcher
+
             .map {
                 AirNowAPI.shared.formatJSON(jsonArray: $0)
             }
@@ -104,15 +102,11 @@ class AddDiaryEntryViewModel {
             }
             .shareReplay(1)
         
-        fetcher.map { entry in
-            return entry.o3
-            }
+        fetcher.map { $0.o3 }
             .bind(to: o3Text)
             .disposed(by: bag)
         
-        fetcher.map { entry in
-            return entry.pm25
-            }
+        fetcher.map { $0.pm25 }
             .bind(to: pm25Text)
             .disposed(by: bag)
         

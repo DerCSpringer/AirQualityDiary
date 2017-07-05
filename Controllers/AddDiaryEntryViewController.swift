@@ -22,7 +22,6 @@ class AddDiaryEntryViewController: UIViewController, BindableType {
     private let bag = DisposeBag()
     
     func bindViewModel() {
-        //hmm I might just want to expose the data in the view model instead of going through weatherQuality(a semi-model object)
         
         viewModel.pm25Text.asDriver()
             .drive(onNext: { [weak self] pm25 in

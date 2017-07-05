@@ -91,6 +91,10 @@ class DiaryEntry: Object {
 
 }
 
+struct PolutionTypes {
+    var polutionEntries : [JSONObject]
+}
+
 extension DiaryEntry: IdentifiableType {
     var identity: Int {
         return self.isInvalidated ? 0 : uid

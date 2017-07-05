@@ -22,7 +22,6 @@ class AirNowAPI {
 
         let url = URL(string: "https://www.airnowapi.org/aq/observation/latLong/current/")!
         var request = URLRequest(url: url)
-        //?format=application/
         let format = URLQueryItem(name: "format", value: "application/json")
         let keyQueryItem = URLQueryItem(name: "API_KEY", value: apiKey)
         let distQueryItem = URLQueryItem(name: "distance", value: String(25))
@@ -35,7 +34,7 @@ class AirNowAPI {
         request.url = urlComponents.url!
         request.httpMethod = "GET"
         
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        //request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         return URLSession.shared.rx.json(request: request).map { json in
             if let a = json as? [Any], let b = a as? [[String : Any]] {
@@ -62,6 +61,38 @@ class AirNowAPI {
 //                return [:]
 //            }
 //    }
+    }
+    
+    //http://www.airnowapi.org/aq/forecast/latLong/?format=text/csv&latitude=33.9681&longitude=-118.3444&date=2017-07-04&distance=25&API_KEY=2758A15B-FD00-4191-AD80-11D2F8C73509
+    func searchForcastedAirQuality(latitude: Double, longitude: Double) -> Observable<[JSONObject]> {
+        
+        let lat = String(latitude)
+        let lon = String(longitude)
+        let dateFormat = DateFormatter()
+        dateFormat.dateFormat = "yyyy-MM-dd"
+        
+        
+        let url = URL(string: "https://www.airnowapi.org/aq/forcast/latLong/")!
+        var request = URLRequest(url: url)
+        let format = URLQueryItem(name: "format", value: "application/json")
+        let date = URLQueryItem(name: "date", value: "\(dateFormat.string(from: Date()))")
+        let keyQueryItem = URLQueryItem(name: "API_KEY", value: apiKey)
+        let distQueryItem = URLQueryItem(name: "distance", value: String(25))
+        let latQueryItem = URLQueryItem(name: "latitude", value: lat)
+        let lonQueryItem = URLQueryItem(name: "longitude", value: lon)
+        let urlComponents = NSURLComponents(url: url, resolvingAgainstBaseURL: true)!
+        
+        urlComponents.queryItems = [format, latQueryItem, lonQueryItem, date, distQueryItem, keyQueryItem]
+        
+        request.url = urlComponents.url!
+        request.httpMethod = "GET"
+        
+        return URLSession.shared.rx.json(request: request).map { json in
+            if let a = json as? [Any], let b = a as? [[String : Any]] {
+                return b
+            }
+            return []
+        }
     }
 }
 

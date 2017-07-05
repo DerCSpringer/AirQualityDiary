@@ -71,5 +71,4 @@ class DiaryEntryTableViewCell: UITableViewCell {
         disposeBag = DisposeBag()
         super.prepareForReuse()
     }
-    
 }

@@ -53,8 +53,9 @@ class DiaryEntriesViewController: UIViewController, BindableType, UITableViewDel
         headerView.o3AQI.text = "O3"
         headerView.PM25AQI.text = "PM 2.5"
         headerView.date.text = "Date of Observation"
-        headerView.button.alpha = 0.0 //look for better solution
+        headerView.button.setTitle("Bad?", for: .normal)
         headerView.button.isUserInteractionEnabled = false
+        headerView.frame = view.frame
         view.addSubview(headerView)
         notifications.subscribe(onNext: { _ in //TODO: This is being called in the other controller.  What gives?
             for subview in view.subviews {
