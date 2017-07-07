@@ -13,6 +13,8 @@ import Unbox
 
 typealias JSONObject = [String : Any]
 
+
+
 class DiaryEntry: Object {
     dynamic var uid: Int = 0
     dynamic var added: Date = Date()
@@ -34,6 +36,7 @@ class DiaryEntry: Object {
 //        default:
 //            break
 //        }
+//    }
 //        //o3 = try unboxer.unbox(keyPath: "pollutants.o3")
 //        //pm25 = try unboxer.unbox(keyPath: "pollutants.pm25")
 ////        so2 = try unboxer.unbox(keyPath: "pollutants.so2")
@@ -42,7 +45,7 @@ class DiaryEntry: Object {
 ////        dominateParticulate = try unboxer.unbox(key: "dominant_pollutant_canonical_name")
 //    }
     
-    convenience required init(airQualityJSON: JSONObject) { //sub classes must provide this init
+    convenience init(airQualityJSON: JSONObject) { //sub classes must provide this init//assumes fake data from formatted json in airnowapi
         self.init()
         o3 = airQualityJSON["O3"] as? Int ?? -1
         pm25 = airQualityJSON["PM2.5"] as? Int ?? -1
@@ -90,6 +93,22 @@ class DiaryEntry: Object {
     
 
 }
+
+//extension DiaryEntry: Unboxable {
+//    convenience required init(unboxer: Unboxer) throws {
+//        let name : String
+//        name = try unboxer.unbox(key: "ParameterName")
+//        switch name {
+//        case "O3":
+//            o3 = try unboxer.unbox(key: "AQI")
+//        case "PM25":
+//            pm25 = try unboxer.unbox(key: "AQI")
+//        default:
+//            break
+//        }
+//
+//    }
+//}
 
 struct PolutionTypes {
     var polutionEntries : [JSONObject]

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0B1347E51F0EBD6100A262B7 /* UINavigationController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1347E41F0EBD6100A262B7 /* UINavigationController+Rx.swift */; };
+		0B1CC5D91F10495900661355 /* PolutionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1CC5D81F10495900661355 /* PolutionItem.swift */; };
 		0B25899F1EFB218F00E12FAA /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B25899E1EFB218F00E12FAA /* Scene.swift */; };
 		0B2589A21EFB224600E12FAA /* DiaryEntriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2589A11EFB224600E12FAA /* DiaryEntriesViewModel.swift */; };
 		0B2589A41EFB228500E12FAA /* AddDiaryEntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2589A31EFB228500E12FAA /* AddDiaryEntryViewModel.swift */; };
@@ -47,6 +48,7 @@
 
 /* Begin PBXFileReference section */
 		0B1347E41F0EBD6100A262B7 /* UINavigationController+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UINavigationController+Rx.swift"; path = "Extensions/UINavigationController+Rx.swift"; sourceTree = SOURCE_ROOT; };
+		0B1CC5D81F10495900661355 /* PolutionItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PolutionItem.swift; path = Model/PolutionItem.swift; sourceTree = SOURCE_ROOT; };
 		0B25899E1EFB218F00E12FAA /* Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Scene.swift; path = Scenes/Scene.swift; sourceTree = SOURCE_ROOT; };
 		0B2589A11EFB224600E12FAA /* DiaryEntriesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = DiaryEntriesViewModel.swift; path = Controllers/DiaryEntriesViewModel.swift; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		0B2589A31EFB228500E12FAA /* AddDiaryEntryViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = AddDiaryEntryViewModel.swift; path = Controllers/AddDiaryEntryViewModel.swift; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -181,6 +183,7 @@
 		0B4B5D461EF460B100914880 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0B1CC5D81F10495900661355 /* PolutionItem.swift */,
 				0B4B5D421EF45E5A00914880 /* DiaryEntry.swift */,
 				0B3F5B8D1EF85CF5008B6BBB /* AirNowAPI.swift */,
 				0B4B5D441EF4606300914880 /* BindableType.swift */,
@@ -396,6 +399,7 @@
 				0B2589B01EFB24DD00E12FAA /* AddDiaryEntryViewController.swift in Sources */,
 				0B3F5B8E1EF85CF5008B6BBB /* AirNowAPI.swift in Sources */,
 				0B4B5D231EF45BD200914880 /* AppDelegate.swift in Sources */,
+				0B1CC5D91F10495900661355 /* PolutionItem.swift in Sources */,
 				0B2589A41EFB228500E12FAA /* AddDiaryEntryViewModel.swift in Sources */,
 				0B2589B41EFB2B4700E12FAA /* DiaryEntryTableViewCell.swift in Sources */,
 				0B2589AE1EFB245D00E12FAA /* SceneTransitionType.swift in Sources */,

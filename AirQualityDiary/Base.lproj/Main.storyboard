@@ -152,7 +152,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="161" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Hg-wj-5uN">
                                 <rect key="frame" x="75" y="72" width="170" height="342.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Forecast" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ktb-MQ-Cvk">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today's Forecast" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ktb-MQ-Cvk">
                                         <rect key="frame" x="0.0" y="0.0" width="170" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>

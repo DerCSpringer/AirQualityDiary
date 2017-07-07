@@ -10,6 +10,7 @@ import Foundation
 import RxSwift
 import CoreLocation
 import Action
+import Unbox
 
 class CurrentConditionsViewModel {
     let tomorrowO3 = Variable<String>("Unavailable")
@@ -54,20 +55,9 @@ class CurrentConditionsViewModel {
 
         fetchOnEmit = Observable.combineLatest(currentLocation, hourTimer)
         { ($0,$1) }
-
-
+        //NEED to add a geo service later
         
-        
-        //below methods are only called on init.  They must be called on each time we load the controller or maybe every x amount of time.
-        //We don't update our current location unless we've changed and we're 5 kilometers away from our recorded location
-        //I think I'll make a class which is our location class.  
-        //the class will check our current location and if we're greater than 5 kilos it emits our new location
-        //this calls for an update(maybe only if we're the front app though or this screen is showing
-        //another class will be our fetching class
-        //It will check the plist and call a fetch or use cahced data
-        //It should have a running variable to say it's running
-        //it should recieve and enum indicating if it wants the full forcast or just current conditions
-        //don't need to worry about fetching all the time in adddiaryentry which would prevent a fetch in the forecast
+
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         bindOutput()
@@ -82,61 +72,108 @@ class CurrentConditionsViewModel {
     
     func bindOutput() {
         
-        let forecastFetcher = fetchOnEmit.flatMap() { location, _ -> Observable<JSONObject> in
+        //Issue here is that I'm using JSON where I should use model objects
+        //JSON should be all decoded earlier
+        //I'm thinking use one object for searchAirQuality and another for searchForactedAirQuality
+        //They both share o3 and pm25, but forcasted has two pm25s and two o3s each with different values
+        //searchairqualyt is abl to decode to a diaryEntry, which is useful but it's not really a diary entry
+//        
+//        let forecastFetcher = fetchOnEmit.flatMap() { location, _ -> Observable<JSONObject> in
+//            print(location)
+//            return AirNowAPI.shared.searchForcastedAirQuality(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+//            }
+//            .shareReplay(1)
+        
+        let forecastFetcher = fetchOnEmit.flatMap() { location, _ -> Observable<[JSONObject]> in
             print(location)
-            return AirNowAPI.shared.searchForcastedAirQuality(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+            return AirNowAPI.shared.searchForcastedAirQuality2(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+            }
+            .flatMap { jsonArray -> Observable<[PolutionItem]> in
+                let polutionItems : [PolutionItem] = try unbox(dictionaries: jsonArray)
+                print("polution items: \(polutionItems)")
+                //return polutionItems.map(Observable.just)
+                return Observable.of(polutionItems)
+            }
+            .flatMap { polutionItems -> Observable<PolutionItem> in
+                return Observable.from(polutionItems)
             }
             .shareReplay(1)
         
-        
-        let todayForecast = forecastFetcher.filter { [weak self] dict in
-            let date = dict["DateForecast"] as! String
-            return date == self!.dateFormat.string(from: Date())
-        }
-        
-        let tomorrowForecast = forecastFetcher.filter { [weak self] dict in
-            let date = dict["DateForecast"] as! String
-            return date != self!.dateFormat.string(from: Date())
-        }
-        
-        //fix casting
-        tomorrowForecast.filter { dict in
-            return dict["ParameterName"] as! String == "O3"
+        let currentFetcher = fetchOnEmit.flatMap { location, _ -> Observable<[JSONObject]> in
+            return AirNowAPI.shared.searchAirQuality(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
             }
-            .map { dict in
-                return String(describing: dict["AQI"]!)
+                .map {
+                    AirNowAPI.shared.formatJSON(jsonArray: $0)
+                }
+            .map {
+                DiaryEntry(airQualityJSON: $0)
+            }
+                .shareReplay(1)
+        
+        
+        currentFetcher.map { String($0.o3) }
+            .bind(to: currentO3)
+            .disposed(by: bag)
+        
+        currentFetcher.map { String($0.pm25) }
+            .bind(to: currentPM)
+            .disposed(by: bag)
+        
+        //these filter for which forcast day using json
+//        let todayForecast = forecastFetcher.filter { [weak self] dict in //should be done in airnowapi
+//            let date = dict["DateForecast"] as! String
+//            return date == self!.dateFormat.string(from: Date())
+//        }
+        
+        let todayForecast = forecastFetcher.filter { polutionItem in
+            return polutionItem.forecastFor == .today
+        }
+        let tomorrowForecast = forecastFetcher.filter { polutionItem in
+            return polutionItem.forecastFor == .tomorrow
+        }
+
+//
+//        let tomorrowForecast = forecastFetcher.filter { [weak self] dict in
+//            let date = dict["DateForecast"] as! String
+//            return date != self!.dateFormat.string(from: Date())
+//        }
+        
+        
+    
+        tomorrowForecast.filter { polutionItem in
+            polutionItem.polututeName == .ozone
+            }
+            .map { polutionItem in
+                return String(describing: polutionItem.AQI)
             }
             .bind(to: tomorrowO3)
             .disposed(by: bag)
         
-        tomorrowForecast.filter { dict in
-            return dict["ParameterName"] as! String == "PM2.5"
+        tomorrowForecast.filter { polutionItem in
+            polutionItem.polututeName == .PM2_5
             }
-            .map { dict in
-                return String(describing: dict["AQI"]!)
+            .map { polutionItem in
+                return String(describing: polutionItem.AQI)
             }
             .bind(to: tomorrowPM)
             .disposed(by: bag)
         
-        todayForecast.filter { dict in
-            return dict["ParameterName"] as! String == "O3"
+        todayForecast.filter { polutionItem in
+            polutionItem.polututeName == .ozone
             }
-            .map { dict in
-                return String(describing: dict["AQI"]!)
+            .map { polutionItem in
+                return String(describing: polutionItem.AQI)
             }
             .bind(to: currentForcastO3)
             .disposed(by: bag)
         
-        todayForecast.filter { dict in
-            return dict["ParameterName"] as! String == "PM2.5"
+        todayForecast.filter { polutionItem in
+            polutionItem.polututeName == .PM2_5
             }
-            .map { dict in
-                return String(describing: dict["AQI"]!)
+            .map { polutionItem in
+                return String(describing: polutionItem.AQI)
             }
             .bind(to: currentForcastPM)
             .disposed(by: bag)
     }
 }
-
-
-

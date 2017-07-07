@@ -9,6 +9,15 @@
 import Foundation
 import RxSwift
 
+//diary item has 2 entries, pm25 and o3
+//If each item is stored as a polution item how can I convert it to a diary item
+//If I kept this an array then I could filter for a string
+
+//1. get json from web as array
+//2. convert json as array ot polution objects in array
+//3. Our polution objects could have different dates but same names
+        //Only in forecast
+
 class AirNowAPI {
     
     static let shared = AirNowAPI()
@@ -17,7 +26,7 @@ class AirNowAPI {
     private let apiKey = "2758A15B-FD00-4191-AD80-11D2F8C73509"
     
     func searchAirQuality(latitude: Double, longitude: Double) -> Observable<[JSONObject]> {
-        print("Calling API")
+        print("Calling current API")
 
         let lat = String(latitude)
         let lon = String(longitude)
@@ -68,7 +77,7 @@ class AirNowAPI {
     //http://www.airnowapi.org/aq/forecast/latLong/?format=text/csv&latitude=33.9681&longitude=-118.3444&date=2017-07-04&distance=25&API_KEY=2758A15B-FD00-4191-AD80-11D2F8C73509
     func searchForcastedAirQuality(latitude: Double, longitude: Double) -> Observable<JSONObject> {
         
-        print("Calling API")
+        print("Calling forecast API")
         let lat = String(latitude)
         let lon = String(longitude)
         let dateFormat = DateFormatter()
@@ -90,7 +99,6 @@ class AirNowAPI {
         request.url = urlComponents.url!
         request.httpMethod = "GET"
         
-        
         return URLSession.shared.rx.json(request: request)
             .flatMap { response -> Observable<JSONObject> in
                 guard let response = response as? Array<JSONObject> else {
@@ -99,9 +107,51 @@ class AirNowAPI {
                 return Observable.from(response.map { $0 })
         }
     }
+    
+    func searchForcastedAirQuality2(latitude: Double, longitude: Double) -> Observable<[JSONObject]> {
+        
+        print("Calling forecast API")
+        let lat = String(latitude)
+        let lon = String(longitude)
+        let dateFormat = DateFormatter()
+        dateFormat.dateFormat = "yyyy-MM-dd"
+        
+        
+        let url = URL(string: "https://www.airnowapi.org/aq/forecast/latLong/")!
+        var request = URLRequest(url: url)
+        let format = URLQueryItem(name: "format", value: "application/json")
+        let date = URLQueryItem(name: "date", value: "\(dateFormat.string(from: Date()))")
+        let keyQueryItem = URLQueryItem(name: "API_KEY", value: apiKey)
+        let distQueryItem = URLQueryItem(name: "distance", value: String(25))
+        let latQueryItem = URLQueryItem(name: "latitude", value: lat)
+        let lonQueryItem = URLQueryItem(name: "longitude", value: lon)
+        let urlComponents = NSURLComponents(url: url, resolvingAgainstBaseURL: true)!
+        
+        urlComponents.queryItems = [format, latQueryItem, lonQueryItem, date, distQueryItem, keyQueryItem]
+        
+        request.url = urlComponents.url!
+        request.httpMethod = "GET"
+        
+        return URLSession.shared.rx.json(request: request)
+            .map {  json in
+                if let a = json as? [Any], let b = a as? [JSONObject] {
+                    return b
+                }
+                return []
+        }
+    }
 }
 
+//make a new function to get today's and tomorrows forcast.  Each with different functions
+
 extension AirNowAPI { //Garbage will fix once I figure out how to unbox array of items into single Model object
+    
+    var dateFormat: DateFormatter {
+        let format = DateFormatter()
+        format.dateFormat = "yyyy-MM-dd "
+        return format
+    }
+    
     func formatJSON(jsonArray: [JSONObject]) -> JSONObject {
         var o3 : Int?
         var pm25 : Int?
@@ -114,4 +164,12 @@ extension AirNowAPI { //Garbage will fix once I figure out how to unbox array of
         output["O3"] = o3
         return output
     }
+    
+//    func todaysForecast(json:JSONObject) -> JSONObject {
+//        let date = json["DateForecast"] as! String
+//        if date == dateFormat.string(from: Date()) {
+//            return json
+//        }
+//    }
+    
 }
