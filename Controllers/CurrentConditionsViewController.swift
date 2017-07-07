@@ -39,14 +39,6 @@ class CurrentConditionsViewController: UIViewController, BindableType {
         
         diaryEntries.rx.action = viewModel.onEntryButtonPress()
         
-        //We need two api requests to get all the data we need
-        //One for current forcast and tomorrow's forcast
-        //We need another one for current conditions
-        //This should be limited to only one fetch per hour
-        //If it's less than an hour then use current data
-        //We must create a cache
-        
-        
         viewModel.currentForcastO3.asDriver()
         .drive(currentForcastO3.rx.text)
         .addDisposableTo(bag)

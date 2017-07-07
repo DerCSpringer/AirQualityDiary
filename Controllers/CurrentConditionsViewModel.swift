@@ -71,12 +71,7 @@ class CurrentConditionsViewModel {
         }
     
     func bindOutput() {
-        
-        //Issue here is that I'm using JSON where I should use model objects
-        //JSON should be all decoded earlier
-        //I'm thinking use one object for searchAirQuality and another for searchForactedAirQuality
-        //They both share o3 and pm25, but forcasted has two pm25s and two o3s each with different values
-        //searchairqualyt is abl to decode to a diaryEntry, which is useful but it's not really a diary entry
+
 //        
 //        let forecastFetcher = fetchOnEmit.flatMap() { location, _ -> Observable<JSONObject> in
 //            print(location)
@@ -90,8 +85,6 @@ class CurrentConditionsViewModel {
             }
             .flatMap { jsonArray -> Observable<[PolutionItem]> in
                 let polutionItems : [PolutionItem] = try unbox(dictionaries: jsonArray)
-                print("polution items: \(polutionItems)")
-                //return polutionItems.map(Observable.just)
                 return Observable.of(polutionItems)
             }
             .flatMap { polutionItems -> Observable<PolutionItem> in
@@ -99,6 +92,10 @@ class CurrentConditionsViewModel {
             }
             .shareReplay(1)
         
+        //update current fetcher to use polution items
+        //update variables in here to use polution items too
+        //Maybe make polution items do something about unavailable
+        //add activity indicator to VC
         let currentFetcher = fetchOnEmit.flatMap { location, _ -> Observable<[JSONObject]> in
             return AirNowAPI.shared.searchAirQuality(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
             }
@@ -119,11 +116,6 @@ class CurrentConditionsViewModel {
             .bind(to: currentPM)
             .disposed(by: bag)
         
-        //these filter for which forcast day using json
-//        let todayForecast = forecastFetcher.filter { [weak self] dict in //should be done in airnowapi
-//            let date = dict["DateForecast"] as! String
-//            return date == self!.dateFormat.string(from: Date())
-//        }
         
         let todayForecast = forecastFetcher.filter { polutionItem in
             return polutionItem.forecastFor == .today
@@ -132,14 +124,6 @@ class CurrentConditionsViewModel {
             return polutionItem.forecastFor == .tomorrow
         }
 
-//
-//        let tomorrowForecast = forecastFetcher.filter { [weak self] dict in
-//            let date = dict["DateForecast"] as! String
-//            return date != self!.dateFormat.string(from: Date())
-//        }
-        
-        
-    
         tomorrowForecast.filter { polutionItem in
             polutionItem.polututeName == .ozone
             }
