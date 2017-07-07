@@ -73,4 +73,10 @@ struct DiaryEntriesViewModel {
             }
         }
     }
+    
+    func onCurrentPress() -> CocoaAction {
+        return CocoaAction { _ in
+            return self.sceneCoordinator.pop()
+        }
+    }
 }

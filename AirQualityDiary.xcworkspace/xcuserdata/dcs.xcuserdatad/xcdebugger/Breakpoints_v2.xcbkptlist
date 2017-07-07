@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AirQualityDiary/AppDelegate.swift"
-            timestampString = "519761341.76479"
+            timestampString = "521064201.996396"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
             landmarkName = "application(_:didFinishLaunchingWithOptions:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -266,11 +266,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/DiaryEntriesViewController.swift"
-            timestampString = "520975855.987409"
+            timestampString = "521064201.996396"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "104"
-            endingLineNumber = "104">
+            startingLineNumber = "103"
+            endingLineNumber = "103">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -312,11 +312,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/DiaryEntriesViewController.swift"
-            timestampString = "520975855.987409"
+            timestampString = "521064201.996396"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105">
+            startingLineNumber = "104"
+            endingLineNumber = "104">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -326,11 +326,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/DiaryEntriesViewController.swift"
-            timestampString = "520975855.987409"
+            timestampString = "521064201.996396"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107">
+            startingLineNumber = "106"
+            endingLineNumber = "106">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -372,7 +372,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/DiaryEntriesViewModel.swift"
-            timestampString = "520195920.621727"
+            timestampString = "521063855.462398"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "73"
@@ -500,7 +500,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/DiaryEntriesViewModel.swift"
-            timestampString = "520197261.446939"
+            timestampString = "521063855.462398"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "40"
@@ -532,11 +532,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/DiaryEntriesViewController.swift"
-            timestampString = "520975855.987409"
+            timestampString = "521064201.996396"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
             landmarkName = "tableView(_:willDisplayHeaderView:forSection:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -548,7 +548,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/DiaryEntriesViewModel.swift"
-            timestampString = "520463222.974031"
+            timestampString = "521063855.462398"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "28"
@@ -651,6 +651,150 @@
             endingLineNumber = "21"
             landmarkName = "AddDiaryEntryViewModel"
             landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Controllers/CurrentConditionsViewModel.swift"
+            timestampString = "521148761.37718"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "init(diaryService:coordinator:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Model/AirNowAPI.swift"
+            timestampString = "521075612.598007"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "searchForcastedAirQuality(latitude:longitude:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/RxCocoa/RxCocoa/Foundation/URLSession+Rx.swift"
+            timestampString = "520981128.057976"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "215"
+            endingLineNumber = "215"
+            landmarkName = "json(request:options:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(extension in RxCocoa):RxSwift.Reactive&lt;A where A: __ObjC.URLSession&gt;.json (request : Foundation.URLRequest, options : __ObjC.JSONSerialization.ReadingOptions) -&gt; RxSwift.Observable&lt;Any&gt;"
+                  moduleName = "RxCocoa"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dcs/Developer/Swift/AirQualityDiary/Pods/RxCocoa/RxCocoa/Foundation/URLSession+Rx.swift"
+                  timestampString = "520981137.546394"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "215"
+                  endingLineNumber = "215"
+                  offsetFromSymbolStart = "27">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(extension in RxCocoa):RxSwift.Reactive&lt;A where A: __ObjC.URLSession&gt;.(json (request : Foundation.URLRequest, options : __ObjC.JSONSerialization.ReadingOptions) -&gt; RxSwift.Observable&lt;Any&gt;).(closure #1)"
+                  moduleName = "RxCocoa"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dcs/Developer/Swift/AirQualityDiary/Pods/RxCocoa/RxCocoa/Foundation/URLSession+Rx.swift"
+                  timestampString = "520981137.549418"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "217"
+                  endingLineNumber = "217"
+                  offsetFromSymbolStart = "26">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/RxCocoa/RxCocoa/Foundation/URLSession+Rx.swift"
+            timestampString = "520981166.599999"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "216"
+            endingLineNumber = "216"
+            landmarkName = "json(request:options:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/RxCocoa/RxCocoa/Foundation/URLSession+Rx.swift"
+            timestampString = "520981224.211992"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "157"
+            endingLineNumber = "157"
+            landmarkName = "response(request:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/RxCocoa/RxCocoa/Foundation/URLSession+Rx.swift"
+            timestampString = "520981226.53982"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "156"
+            endingLineNumber = "156"
+            landmarkName = "response(request:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/RxCocoa/RxCocoa/Foundation/URLSession+Rx.swift"
+            timestampString = "520981253.899103"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
+            landmarkName = "response(request:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

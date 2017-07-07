@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B1347E51F0EBD6100A262B7 /* UINavigationController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1347E41F0EBD6100A262B7 /* UINavigationController+Rx.swift */; };
 		0B25899F1EFB218F00E12FAA /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B25899E1EFB218F00E12FAA /* Scene.swift */; };
 		0B2589A21EFB224600E12FAA /* DiaryEntriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2589A11EFB224600E12FAA /* DiaryEntriesViewModel.swift */; };
 		0B2589A41EFB228500E12FAA /* AddDiaryEntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2589A31EFB228500E12FAA /* AddDiaryEntryViewModel.swift */; };
@@ -45,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0B1347E41F0EBD6100A262B7 /* UINavigationController+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UINavigationController+Rx.swift"; path = "Extensions/UINavigationController+Rx.swift"; sourceTree = SOURCE_ROOT; };
 		0B25899E1EFB218F00E12FAA /* Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Scene.swift; path = Scenes/Scene.swift; sourceTree = SOURCE_ROOT; };
 		0B2589A11EFB224600E12FAA /* DiaryEntriesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = DiaryEntriesViewModel.swift; path = Controllers/DiaryEntriesViewModel.swift; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		0B2589A31EFB228500E12FAA /* AddDiaryEntryViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = AddDiaryEntryViewModel.swift; path = Controllers/AddDiaryEntryViewModel.swift; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -198,6 +200,7 @@
 		0B63C50C1F06E47D00C77080 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				0B1347E41F0EBD6100A262B7 /* UINavigationController+Rx.swift */,
 				0B63C50A1F06D0FD00C77080 /* CLLocationManager+Rx.swift */,
 			);
 			name = Extensions;
@@ -377,6 +380,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B63C50B1F06D0FD00C77080 /* CLLocationManager+Rx.swift in Sources */,
+				0B1347E51F0EBD6100A262B7 /* UINavigationController+Rx.swift in Sources */,
 				0B4B5D431EF45E5B00914880 /* DiaryEntry.swift in Sources */,
 				0B2589AA1EFB23CA00E12FAA /* SceneCoordinator.swift in Sources */,
 				0B2589A21EFB224600E12FAA /* DiaryEntriesViewModel.swift in Sources */,

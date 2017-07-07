@@ -12,6 +12,8 @@ import RxSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    let bag = DisposeBag()
 
     var window: UIWindow?
     
@@ -22,14 +24,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //coordinator allows transtions between scenes
         let sceneCoordinator = SceneCoordinator(window: window!)
         //Next instantiate the fisrt view model and instruct the coordinator to set it as its root
-        let diaryEntriesViewModel = DiaryEntriesViewModel(diaryService: service, coordinator: sceneCoordinator)
+        //let diaryEntriesViewModel = DiaryEntriesViewModel(diaryService: service, coordinator: sceneCoordinator)
+        let currentConditionsViewModel = CurrentConditionsViewModel(diaryService: service, coordinator: sceneCoordinator)
         //our first scene will display the diary entries
-        let firstScene = Scene.diaryEntries(diaryEntriesViewModel)
+        //let firstScene = Scene.diaryEntries(diaryEntriesViewModel)
+        let firstScene = Scene.currentConditions(currentConditionsViewModel)
         //Now that every part in the model, view model and view is setup we must push this to the scene coordinator
         //To display on the screen
         //Then we must transistion to that scene
         sceneCoordinator.transition(to: firstScene, type: .root)
+        
+        //will also implement a geo service
+        
         return true
+    }
+    
+    func applicationWillEnterForeground(_ application: UIApplication) {
     }
 }
 

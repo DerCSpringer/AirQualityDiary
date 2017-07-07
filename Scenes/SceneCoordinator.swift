@@ -31,8 +31,8 @@ class SceneCoordinator: SceneCoordinatorType {
     
     @discardableResult
     func transition(to scene: Scene, type: SceneTransitionType) -> Observable<Void> {
-        let subject = PublishSubject<Void>() //Subject is an observable of type void
-        let viewController = scene.viewController() //Get our VC wether its a edit VC or todoVC
+        let subject = PublishSubject<Void>() //Subject is an observable of type void.  This is returned and only a completed() event is emitted
+        let viewController = scene.viewController() //Get our VC whatever its type
         switch type { //Switch on the type of transition we want
             
         case .root:

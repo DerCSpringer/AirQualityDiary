@@ -24,7 +24,7 @@ class DiaryEntryTableViewCell: UITableViewCell {
         let format = DateFormatter()
         format.dateFormat = "MM/dd/yyyy 'at' HH:mm"
 
-        //Every time item is updated our tableview Will be too, but this usually won't be necessary in the current incantation of the app
+        //Every time entry is updated our tableview Will be too, but this usually won't be necessary in the current incantation of the app
         entry.rx.observe(Int.self, "o3")
             .subscribe(onNext: { [weak self] o3 in
                 if o3 == -1 {
@@ -70,5 +70,15 @@ class DiaryEntryTableViewCell: UITableViewCell {
         button.rx.action = nil
         disposeBag = DisposeBag()
         super.prepareForReuse()
+    }
+}
+
+extension DiaryEntryTableViewCell {
+    func initWithHeaderView() {
+        self.o3AQI.text = "O3"
+        self.PM25AQI.text = "PM 2.5"
+        self.date.text = "Date of Observation"
+        self.button.setTitle("Bad?", for: .normal)
+        self.button.isUserInteractionEnabled = false
     }
 }

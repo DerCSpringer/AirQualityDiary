@@ -12,6 +12,9 @@ import RxSwift
 import RxCocoa
 
 class RxCLLocationManagerDelegateProxy : DelegateProxy, CLLocationManagerDelegate, DelegateProxyType {
+    
+    internal lazy var didUpdateLocationsSubject = PublishSubject<[CLLocation]>()
+    
     class func currentDelegateFor(_ object: AnyObject) -> AnyObject? {
         let locationManager: CLLocationManager = object as! CLLocationManager
         return locationManager.delegate
@@ -19,21 +22,26 @@ class RxCLLocationManagerDelegateProxy : DelegateProxy, CLLocationManagerDelegat
     
     class func setCurrentDelegate(_ delegate: AnyObject?, toObject object: AnyObject) {
         let locationManager: CLLocationManager = object as! CLLocationManager
-        locationManager.delegate = delegate as? CLLocationManagerDelegate
+        if let delegate = delegate {
+            locationManager.delegate = (delegate as! CLLocationManagerDelegate)
+        } else {
+            locationManager.delegate = nil
+        }
+    }
+    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        _forwardToDelegate?.locationManager(manager, didUpdateLocations: locations)
+        didUpdateLocationsSubject.onNext(locations)
     }
 }
 
 extension Reactive where Base: CLLocationManager {
-    
+
     var delegate: DelegateProxy {
         return RxCLLocationManagerDelegateProxy.proxyForObject(base)
     }
     
-    var didUpdateLocations: Observable<[CLLocation]> {
-        return delegate.methodInvoked(#selector(CLLocationManagerDelegate.locationManager(_:didUpdateLocations:)))
-            .map { a in
-                return a[1] as! [CLLocation]
-        }
+    public var didUpdateLocations: Observable<[CLLocation]> {
+        return (delegate as! RxCLLocationManagerDelegateProxy).didUpdateLocationsSubject.asObservable()
     }
-    
+
 }

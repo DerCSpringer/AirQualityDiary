@@ -14,16 +14,16 @@ import Action
 class DiaryEntriesViewController: UIViewController, BindableType, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addDiaryEntry: UIBarButtonItem!
+    @IBOutlet weak var currentConditions: UIBarButtonItem!
     
-    //var headerView: UIView?
     var viewModel: DiaryEntriesViewModel!
-    let notifications = NotificationCenter.default.rx.notification(Notification.Name.UIDeviceOrientationDidChange)
+    //let notifications = NotificationCenter.default.rx.notification(Notification.Name.UIDeviceOrientationDidChange)
     let dataSource = RxTableViewSectionedAnimatedDataSource<DiarySection>()
     let bag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+                
         setEditing(true, animated: false)
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 60
@@ -44,25 +44,24 @@ class DiaryEntriesViewController: UIViewController, BindableType, UITableViewDel
             .disposed(by: bag)
         
         addDiaryEntry.rx.action = viewModel.onCreateEntry()
+        currentConditions.rx.action = viewModel.onCurrentPress()
 
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         
+        //set up somewhere else.  Maybe extension on the Cell
         let headerView = tableView.dequeueReusableCell(withIdentifier: "DiaryEntryCell") as! DiaryEntryTableViewCell
-        headerView.o3AQI.text = "O3"
-        headerView.PM25AQI.text = "PM 2.5"
-        headerView.date.text = "Date of Observation"
-        headerView.button.setTitle("Bad?", for: .normal)
-        headerView.button.isUserInteractionEnabled = false
+        headerView.initWithHeaderView()
         headerView.frame = view.frame
         view.addSubview(headerView)
-        notifications.subscribe(onNext: { _ in //TODO: This is being called in the other controller.  What gives?
-            for subview in view.subviews {
-                subview.frame = view.frame
-            }
-        })
-            .addDisposableTo(bag)
+//        notifications.subscribe(onNext: { _ in //TODO: This is being called in the other controller.  What gives?
+//            print("Is this still beging called?")
+//            for subview in view.subviews {
+//                subview.frame = view.frame
+//            }
+//        })
+//            .addDisposableTo(bag)
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

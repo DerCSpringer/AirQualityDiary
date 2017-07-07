@@ -20,7 +20,6 @@ class AddDiaryEntryViewModel {
     let onCancel: CocoaAction!
     private let locationManager = CLLocationManager()
     private let currentLocation : Observable<CLLocation>
-    
 
     
     //TODO: Add delete and Edit for cells
@@ -40,14 +39,9 @@ class AddDiaryEntryViewModel {
          updateAction: Action<DiaryType, Void>,
          cancelAction: CocoaAction? = nil) {
         
-        
         currentLocation = locationManager.rx.didUpdateLocations
-            .map() { locations in
-                //print(locations)
-                return locations[0]
-            }
-            .filter() { location in
-                return location.horizontalAccuracy <= kCLLocationAccuracyKilometer
+            .flatMap {
+                return $0.last.map(Observable.just) ?? Observable.empty()
         }
         
         locationManager.requestWhenInUseAuthorization()
@@ -114,6 +108,8 @@ class AddDiaryEntryViewModel {
             .bind(to: isFetching)
             .disposed(by: bag)
     }
+    
+
 }
 //
 //    let onCancel: CocoaAction!

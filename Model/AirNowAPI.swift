@@ -17,6 +17,8 @@ class AirNowAPI {
     private let apiKey = "2758A15B-FD00-4191-AD80-11D2F8C73509"
     
     func searchAirQuality(latitude: Double, longitude: Double) -> Observable<[JSONObject]> {
+        print("Calling API")
+
         let lat = String(latitude)
         let lon = String(longitude)
 
@@ -64,15 +66,16 @@ class AirNowAPI {
     }
     
     //http://www.airnowapi.org/aq/forecast/latLong/?format=text/csv&latitude=33.9681&longitude=-118.3444&date=2017-07-04&distance=25&API_KEY=2758A15B-FD00-4191-AD80-11D2F8C73509
-    func searchForcastedAirQuality(latitude: Double, longitude: Double) -> Observable<[JSONObject]> {
+    func searchForcastedAirQuality(latitude: Double, longitude: Double) -> Observable<JSONObject> {
         
+        print("Calling API")
         let lat = String(latitude)
         let lon = String(longitude)
         let dateFormat = DateFormatter()
         dateFormat.dateFormat = "yyyy-MM-dd"
         
         
-        let url = URL(string: "https://www.airnowapi.org/aq/forcast/latLong/")!
+        let url = URL(string: "https://www.airnowapi.org/aq/forecast/latLong/")!
         var request = URLRequest(url: url)
         let format = URLQueryItem(name: "format", value: "application/json")
         let date = URLQueryItem(name: "date", value: "\(dateFormat.string(from: Date()))")
@@ -87,11 +90,13 @@ class AirNowAPI {
         request.url = urlComponents.url!
         request.httpMethod = "GET"
         
-        return URLSession.shared.rx.json(request: request).map { json in
-            if let a = json as? [Any], let b = a as? [[String : Any]] {
-                return b
-            }
-            return []
+        
+        return URLSession.shared.rx.json(request: request)
+            .flatMap { response -> Observable<JSONObject> in
+                guard let response = response as? Array<JSONObject> else {
+                    return Observable.never()
+                }
+                return Observable.from(response.map { $0 })
         }
     }
 }

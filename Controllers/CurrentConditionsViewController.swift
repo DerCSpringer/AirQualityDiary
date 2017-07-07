@@ -21,13 +21,23 @@ class CurrentConditionsViewController: UIViewController, BindableType {
     @IBOutlet weak var currentO3: UILabel!
     @IBOutlet weak var tomorrowO3: UILabel!
     @IBOutlet weak var tomorrowPM: UILabel!
+    @IBOutlet weak var diaryEntries: UIBarButtonItem!
+    
+    //centering is odd
     
     let bag = DisposeBag()
     
     
     var viewModel: CurrentConditionsViewModel!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        //Only support vertical orientation for this VC
+    }
+    
     func bindViewModel() {
+        
+        diaryEntries.rx.action = viewModel.onEntryButtonPress()
         
         //We need two api requests to get all the data we need
         //One for current forcast and tomorrow's forcast
@@ -35,10 +45,6 @@ class CurrentConditionsViewController: UIViewController, BindableType {
         //This should be limited to only one fetch per hour
         //If it's less than an hour then use current data
         //We must create a cache
-
-        //This should be my first VC
-        //How can I set this up?
-        //Should I pass in a service which won't be used here?
         
         
         viewModel.currentForcastO3.asDriver()
