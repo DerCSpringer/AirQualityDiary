@@ -68,16 +68,14 @@ class CurrentConditionsViewModel {
         }
     
     func bindOutput() {
-        let forecastFetcher = fetchOnEmit.flatMap() { location, _ -> Observable<[JSONObject]> in
+        //Using an array for this right now
+        let forecastFetcher = fetchOnEmit.flatMap() { location, _ -> Observable<JSONObject> in
             print(location)
-            return AirNowAPI.shared.searchForcastedAirQuality2(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+            return AirNowAPI.shared.searchForcastedAirQuality(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
             }
-            .flatMap { jsonArray -> Observable<[PolutionItem]> in
-                let polutionItems : [PolutionItem] = try unbox(dictionaries: jsonArray)
+            .flatMap { jsonArray -> Observable<PolutionItem> in
+                let polutionItems : PolutionItem = try unbox(dictionary: jsonArray)
                 return Observable.of(polutionItems)
-            }
-            .flatMap { polutionItems -> Observable<PolutionItem> in
-                return Observable.from(polutionItems)
             }
             .shareReplay(1)
         
