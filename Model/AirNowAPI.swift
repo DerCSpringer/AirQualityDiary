@@ -142,7 +142,6 @@ class AirNowAPI {
     }
 }
 
-//make a new function to get today's and tomorrows forcast.  Each with different functions
 
 extension AirNowAPI { //Garbage will fix once I figure out how to unbox array of items into single Model object
     
@@ -164,12 +163,5 @@ extension AirNowAPI { //Garbage will fix once I figure out how to unbox array of
         output["O3"] = o3
         return output
     }
-    
-//    func todaysForecast(json:JSONObject) -> JSONObject {
-//        let date = json["DateForecast"] as! String
-//        if date == dateFormat.string(from: Date()) {
-//            return json
-//        }
-//    }
     
 }

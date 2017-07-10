@@ -19,7 +19,6 @@ class CurrentConditionsViewModel {
     let currentForcastO3 = Variable<String>("Unavailable")
     let currentO3 = Variable<String>("Unavailable")
     let currentPM = Variable<String>("Unavailable")
-    let dateFormat = DateFormatter()
     
     private let locationManager = CLLocationManager()
     private var fetchOnEmit : Observable<(CLLocation, Int)>
@@ -31,7 +30,6 @@ class CurrentConditionsViewModel {
     init(diaryService: DiaryServiceType, coordinator: SceneCoordinatorType) {
         self.diaryService = diaryService
         self.sceneCoordinator = coordinator
-        dateFormat.dateFormat = "yyyy-MM-dd "//space must be here b/c bad formatted JSON
         
         locationManager.distanceFilter = 5000
         locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
@@ -57,7 +55,6 @@ class CurrentConditionsViewModel {
         { ($0,$1) }
         //NEED to add a geo service later
         
-
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         bindOutput()
@@ -71,14 +68,6 @@ class CurrentConditionsViewModel {
         }
     
     func bindOutput() {
-
-//        
-//        let forecastFetcher = fetchOnEmit.flatMap() { location, _ -> Observable<JSONObject> in
-//            print(location)
-//            return AirNowAPI.shared.searchForcastedAirQuality(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-//            }
-//            .shareReplay(1)
-        
         let forecastFetcher = fetchOnEmit.flatMap() { location, _ -> Observable<[JSONObject]> in
             print(location)
             return AirNowAPI.shared.searchForcastedAirQuality2(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
@@ -92,30 +81,38 @@ class CurrentConditionsViewModel {
             }
             .shareReplay(1)
         
-        //update current fetcher to use polution items
-        //update variables in here to use polution items too
         //Maybe make polution items do something about unavailable
         //add activity indicator to VC
         let currentFetcher = fetchOnEmit.flatMap { location, _ -> Observable<[JSONObject]> in
             return AirNowAPI.shared.searchAirQuality(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
             }
-                .map {
-                    AirNowAPI.shared.formatJSON(jsonArray: $0)
-                }
-            .map {
-                DiaryEntry(airQualityJSON: $0)
+            .flatMap { jsonArray -> Observable<[PolutionItem]> in
+                let polutionItems : [PolutionItem] = try unbox(dictionaries: jsonArray)
+                return Observable.from(optional: polutionItems)
             }
-                .shareReplay(1)
+            .flatMap { polutionItems -> Observable<PolutionItem> in
+                return Observable.from(polutionItems)
+                
+            }
+            .shareReplay(1)
         
-        
-        currentFetcher.map { String($0.o3) }
+        currentFetcher.filter {
+            return $0.polututeName == .ozone
+            }
+            .map {
+                String($0.AQI)
+            }
             .bind(to: currentO3)
             .disposed(by: bag)
         
-        currentFetcher.map { String($0.pm25) }
+        currentFetcher.filter {
+            return $0.polututeName == .PM2_5
+            }
+            .map {
+                String($0.AQI)
+            }
             .bind(to: currentPM)
             .disposed(by: bag)
-        
         
         let todayForecast = forecastFetcher.filter { polutionItem in
             return polutionItem.forecastFor == .today

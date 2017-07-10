@@ -660,11 +660,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/CurrentConditionsViewModel.swift"
-            timestampString = "521162234.669893"
+            timestampString = "521405667.683344"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
             landmarkName = "init(diaryService:coordinator:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -818,11 +818,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/CurrentConditionsViewModel.swift"
-            timestampString = "521164693.069283"
+            timestampString = "521405667.683344"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
             landmarkName = "bindOutput()"
             landmarkType = "7">
          </BreakpointContent>

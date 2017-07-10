@@ -34,16 +34,6 @@ extension PolutionItem: Unboxable {
         dateFormat.dateFormat = "yyyy-MM-dd "
         self.AQI = try unboxer.unbox(key: "AQI")
         
-        let date : String = try unboxer.unbox(key: "DateForecast")
-        
-        if date != dateFormat.string(from: Date()) {
-            self.forecastFor = .tomorrow
-        } else if date == dateFormat.string(from: Date()){
-            self.forecastFor = .today
-        } else {
-            self.forecastFor = nil
-        }
-        
         let polututeName : String = try unboxer.unbox(key: "ParameterName")
         switch polututeName {
         case "CO":
@@ -59,5 +49,16 @@ extension PolutionItem: Unboxable {
         default:
             self.polututeName = .other
         }
+
+        let date : String? = try? unboxer.unbox(key: "DateForecast")
+
+        if date == nil {
+            self.forecastFor = nil
+        } else if date == dateFormat.string(from: Date()){
+            self.forecastFor = .today
+        } else {
+            self.forecastFor = .tomorrow
+        }
+        
     }
 }
