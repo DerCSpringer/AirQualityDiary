@@ -68,7 +68,7 @@ class CurrentConditionsViewModel {
         }
     
     func bindOutput() {
-        //Using an array for this right now
+        //Using an non-array for this right now
         let forecastFetcher = fetchOnEmit.flatMap() { location, _ -> Observable<JSONObject> in
             print(location)
             return AirNowAPI.shared.searchForcastedAirQuality(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
@@ -123,7 +123,7 @@ class CurrentConditionsViewModel {
             polutionItem.polututeName == .ozone
             }
             .map { polutionItem in
-                return String(describing: polutionItem.AQI)
+                return String(polutionItem.AQI)
             }
             .bind(to: tomorrowO3)
             .disposed(by: bag)
@@ -132,7 +132,7 @@ class CurrentConditionsViewModel {
             polutionItem.polututeName == .PM2_5
             }
             .map { polutionItem in
-                return String(describing: polutionItem.AQI)
+                return String(polutionItem.AQI)
             }
             .bind(to: tomorrowPM)
             .disposed(by: bag)
@@ -141,7 +141,7 @@ class CurrentConditionsViewModel {
             polutionItem.polututeName == .ozone
             }
             .map { polutionItem in
-                return String(describing: polutionItem.AQI)
+                return String(polutionItem.AQI)
             }
             .bind(to: currentForcastO3)
             .disposed(by: bag)
@@ -150,7 +150,7 @@ class CurrentConditionsViewModel {
             polutionItem.polututeName == .PM2_5
             }
             .map { polutionItem in
-                return String(describing: polutionItem.AQI)
+                return String(polutionItem.AQI)
             }
             .bind(to: currentForcastPM)
             .disposed(by: bag)

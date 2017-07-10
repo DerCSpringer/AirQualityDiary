@@ -818,11 +818,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/CurrentConditionsViewModel.swift"
-            timestampString = "521406414.099521"
+            timestampString = "521406996.501818"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
             landmarkName = "bindOutput()"
             landmarkType = "7">
          </BreakpointContent>
