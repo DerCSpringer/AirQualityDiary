@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
 import CoreLocation
 import Action
 import Unbox
@@ -20,32 +21,33 @@ class CurrentConditionsViewModel {
     let currentO3 = Variable<String>("Unavailable")
     let currentPM = Variable<String>("Unavailable")
     
-    private let locationManager = CLLocationManager()
-    private var fetchOnEmit : Observable<(CLLocation, Int)>
-    private let currentLocation : Observable<CLLocation>
+    //private let location = GeolocationService.instance.location
+    private var fetchOnEmit : Observable<(CLLocationCoordinate2D, Int)>
+    private let currentLocation : Observable<CLLocationCoordinate2D>
     private let diaryService : DiaryServiceType
+    
+    private let badConditionColor = #colorLiteral(red: 1, green: 0.3244201541, blue: 0, alpha: 1)
+    private let cautionConditionColor = #colorLiteral(red: 0.9828135371, green: 1, blue: 0, alpha: 1)
+    private let goodConditionColor = #colorLiteral(red: 0.1539898217, green: 1, blue: 0, alpha: 1)
+    
     let sceneCoordinator: SceneCoordinatorType
     let bag = DisposeBag()
     
     init(diaryService: DiaryServiceType, coordinator: SceneCoordinatorType) {
         self.diaryService = diaryService
         self.sceneCoordinator = coordinator
+
         
-        locationManager.distanceFilter = 5000
-        locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
-        
-        
+        currentLocation = GeolocationService.instance.location.asObservable()
         //Filters for accuracy and makes sure a new location value is selected
-        currentLocation = locationManager.rx.didUpdateLocations
-            .flatMap {
-                return $0.last.map(Observable.just) ?? Observable.empty()
-        }
-            .filter {
-                return $0.horizontalAccuracy <= kCLLocationAccuracyKilometer
-        }
-            .filter {
-                return ($0.timestamp.timeIntervalSinceNow < 300)
-        }
+//        currentLocation = location
+//            .flatMap {
+//                return $0.last.map(Observable.just) ?? Observable.empty()
+//        }
+//            .filter {
+//                return $0.horizontalAccuracy <= kCLLocationAccuracyKilometer
+//        }
+
         
     
         let hourTimer = Observable<Int>
@@ -55,8 +57,6 @@ class CurrentConditionsViewModel {
         { ($0,$1) }
         //NEED to add a geo service later
         
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
         bindOutput()
     }
 
@@ -71,7 +71,7 @@ class CurrentConditionsViewModel {
         //Using an non-array for this right now
         let forecastFetcher = fetchOnEmit.flatMap() { location, _ -> Observable<JSONObject> in
             print(location)
-            return AirNowAPI.shared.searchForcastedAirQuality(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+            return AirNowAPI.shared.searchForcastedAirQuality(latitude: location.latitude, longitude: location.longitude)
             }
             .flatMap { jsonArray -> Observable<PolutionItem> in
                 let polutionItems : PolutionItem = try unbox(dictionary: jsonArray)
@@ -82,7 +82,7 @@ class CurrentConditionsViewModel {
         //Maybe make polution items do something about unavailable
         //add activity indicator to VC
         let currentFetcher = fetchOnEmit.flatMap { location, _ -> Observable<[JSONObject]> in
-            return AirNowAPI.shared.searchAirQuality(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+            return AirNowAPI.shared.searchAirQuality(latitude: location.latitude, longitude: location.longitude)
             }
             .flatMap { jsonArray -> Observable<[PolutionItem]> in
                 let polutionItems : [PolutionItem] = try unbox(dictionaries: jsonArray)

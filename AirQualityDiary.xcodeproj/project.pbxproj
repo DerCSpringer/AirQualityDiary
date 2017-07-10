@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0B1347E51F0EBD6100A262B7 /* UINavigationController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1347E41F0EBD6100A262B7 /* UINavigationController+Rx.swift */; };
+		0B1684F01F1419A6009F5900 /* GeoLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1684EF1F1419A6009F5900 /* GeoLocationService.swift */; };
 		0B1CC5D91F10495900661355 /* PolutionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1CC5D81F10495900661355 /* PolutionItem.swift */; };
 		0B25899F1EFB218F00E12FAA /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B25899E1EFB218F00E12FAA /* Scene.swift */; };
 		0B2589A21EFB224600E12FAA /* DiaryEntriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2589A11EFB224600E12FAA /* DiaryEntriesViewModel.swift */; };
@@ -48,6 +49,7 @@
 
 /* Begin PBXFileReference section */
 		0B1347E41F0EBD6100A262B7 /* UINavigationController+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UINavigationController+Rx.swift"; path = "Extensions/UINavigationController+Rx.swift"; sourceTree = SOURCE_ROOT; };
+		0B1684EF1F1419A6009F5900 /* GeoLocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GeoLocationService.swift; path = Services/GeoLocationService.swift; sourceTree = SOURCE_ROOT; };
 		0B1CC5D81F10495900661355 /* PolutionItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PolutionItem.swift; path = Model/PolutionItem.swift; sourceTree = SOURCE_ROOT; };
 		0B25899E1EFB218F00E12FAA /* Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Scene.swift; path = Scenes/Scene.swift; sourceTree = SOURCE_ROOT; };
 		0B2589A11EFB224600E12FAA /* DiaryEntriesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = DiaryEntriesViewModel.swift; path = Controllers/DiaryEntriesViewModel.swift; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -194,6 +196,7 @@
 		0B4B5D4B1EF461A900914880 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				0B1684EF1F1419A6009F5900 /* GeoLocationService.swift */,
 				0B2EBF7F1EFC7BEE00A3D244 /* DiaryService.swift */,
 				0B4B5D491EF461A400914880 /* DiaryServiceType.swift */,
 			);
@@ -388,6 +391,7 @@
 				0B2589AA1EFB23CA00E12FAA /* SceneCoordinator.swift in Sources */,
 				0B2589A21EFB224600E12FAA /* DiaryEntriesViewModel.swift in Sources */,
 				0B2589A81EFB238C00E12FAA /* SceneCoordinatorType.swift in Sources */,
+				0B1684F01F1419A6009F5900 /* GeoLocationService.swift in Sources */,
 				0B2589B21EFB24F300E12FAA /* DiaryEntriesViewController.swift in Sources */,
 				0B63C50E1F06E8B300C77080 /* CurrentConditionsViewController.swift in Sources */,
 				0B4B5D4A1EF461A400914880 /* DiaryServiceType.swift in Sources */,

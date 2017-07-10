@@ -32,6 +32,8 @@ class RxCLLocationManagerDelegateProxy : DelegateProxy, CLLocationManagerDelegat
         _forwardToDelegate?.locationManager(manager, didUpdateLocations: locations)
         didUpdateLocationsSubject.onNext(locations)
     }
+    
+
 }
 
 extension Reactive where Base: CLLocationManager {
@@ -42,6 +44,14 @@ extension Reactive where Base: CLLocationManager {
     
     public var didUpdateLocations: Observable<[CLLocation]> {
         return (delegate as! RxCLLocationManagerDelegateProxy).didUpdateLocationsSubject.asObservable()
+    }
+    
+    public var didChangeAuthorizationStatus: Observable<CLAuthorizationStatus> {
+        return delegate.methodInvoked(#selector(CLLocationManagerDelegate.locationManager(_:didChangeAuthorization:)))
+            .map { a in
+                let number = a[1] as? NSNumber
+                return CLAuthorizationStatus(rawValue: Int32(number!.intValue)) ?? .notDetermined //recheck optional status
+        }
     }
 
 }

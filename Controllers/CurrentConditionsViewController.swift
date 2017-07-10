@@ -27,19 +27,14 @@ class CurrentConditionsViewController: UIViewController, BindableType {
     
     let bag = DisposeBag()
     
-    
     var viewModel: CurrentConditionsViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //let view = @IBInspectable
         //Only support vertical orientation for this VC
     }
     
     func bindViewModel() {
-        
-        style()
-        
         diaryEntries.rx.action = viewModel.onEntryButtonPress()
         
         viewModel.currentForcastO3.asDriver()
@@ -65,10 +60,5 @@ class CurrentConditionsViewController: UIViewController, BindableType {
         viewModel.tomorrowPM.asDriver()
             .drive(tomorrowPM.rx.text)
             .addDisposableTo(bag)
-    }
-    
-    func style() {
-        //return colorFromDecimalRGB(229, 231, 218)
-
     }
 }
