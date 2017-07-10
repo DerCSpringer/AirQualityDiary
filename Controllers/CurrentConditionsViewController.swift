@@ -22,16 +22,13 @@ class CurrentConditionsViewController: UIViewController, BindableType {
     @IBOutlet weak var tomorrowO3: UILabel!
     @IBOutlet weak var tomorrowPM: UILabel!
     @IBOutlet weak var diaryEntries: UIBarButtonItem!
-    
-    //centering is odd
-    
+        
     let bag = DisposeBag()
     
     var viewModel: CurrentConditionsViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //Only support vertical orientation for this VC
     }
     
     func bindViewModel() {

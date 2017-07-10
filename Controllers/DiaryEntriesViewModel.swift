@@ -14,7 +14,7 @@ import Action
 typealias DiarySection = AnimatableSectionModel<String, DiaryEntry>
 
 struct DiaryEntriesViewModel {
-    
+    //need to setup delete and edit
     let sceneCoordinator: SceneCoordinatorType
     let diaryService: DiaryServiceType
     
@@ -23,7 +23,7 @@ struct DiaryEntriesViewModel {
         self.sceneCoordinator = coordinator
     }
     
-    //This executes when the completed button is tapped
+    //This executes when the bad? button is tapped
     func onToggle(entry: DiaryEntry) -> CocoaAction {
         return CocoaAction {
             return self.diaryService.toggle(entry: entry).map { _ in }

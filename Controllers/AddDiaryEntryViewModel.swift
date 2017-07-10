@@ -18,8 +18,7 @@ class AddDiaryEntryViewModel {
     let isFetching = Variable<Bool>(true)
     private let onUpdate: Action<DiaryType, Void>
     let onCancel: CocoaAction!
-    private let locationManager = CLLocationManager()
-    private let currentLocation : Observable<CLLocation>
+    private let currentLocation : Observable<CLLocationCoordinate2D>
 
     
     //TODO: Add delete and Edit for cells
@@ -39,13 +38,8 @@ class AddDiaryEntryViewModel {
          updateAction: Action<DiaryType, Void>,
          cancelAction: CocoaAction? = nil) {
         
-        currentLocation = locationManager.rx.didUpdateLocations
-            .flatMap {
-                return $0.last.map(Observable.just) ?? Observable.empty()
-        }
-        
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
+        currentLocation = GeolocationService.instance.location.asObservable()
+
         
         onUpdate = updateAction
         onUpdate.executionObservables //This needs to take one of the diaryType not the note
@@ -85,7 +79,7 @@ class AddDiaryEntryViewModel {
         
         let fetcher = currentLocation.take(1).flatMap() { location -> Observable<[JSONObject]> in
             print(location)
-            return AirNowAPI.shared.searchAirQuality(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+            return AirNowAPI.shared.searchAirQuality(latitude: location.latitude, longitude: location.longitude)
         }
 
             .map {

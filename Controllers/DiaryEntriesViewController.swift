@@ -17,7 +17,6 @@ class DiaryEntriesViewController: UIViewController, BindableType, UITableViewDel
     @IBOutlet weak var currentConditions: UIBarButtonItem!
     
     var viewModel: DiaryEntriesViewModel!
-    //let notifications = NotificationCenter.default.rx.notification(Notification.Name.UIDeviceOrientationDidChange)
     let dataSource = RxTableViewSectionedAnimatedDataSource<DiarySection>()
     let bag = DisposeBag()
     
@@ -38,30 +37,19 @@ class DiaryEntriesViewController: UIViewController, BindableType, UITableViewDel
     
     
     func bindViewModel() {
-        
         viewModel.sectionedItems
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: bag)
         
         addDiaryEntry.rx.action = viewModel.onCreateEntry()
         currentConditions.rx.action = viewModel.onCurrentPress()
-
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        
-        //set up somewhere else.  Maybe extension on the Cell
         let headerView = tableView.dequeueReusableCell(withIdentifier: "DiaryEntryCell") as! DiaryEntryTableViewCell
         headerView.initWithHeaderView()
         headerView.frame = view.frame
         view.addSubview(headerView)
-//        notifications.subscribe(onNext: { _ in //TODO: This is being called in the other controller.  What gives?
-//            print("Is this still beging called?")
-//            for subview in view.subviews {
-//                subview.frame = view.frame
-//            }
-//        })
-//            .addDisposableTo(bag)
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

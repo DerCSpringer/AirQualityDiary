@@ -21,7 +21,6 @@ class CurrentConditionsViewModel {
     let currentO3 = Variable<String>("Unavailable")
     let currentPM = Variable<String>("Unavailable")
     
-    //private let location = GeolocationService.instance.location
     private var fetchOnEmit : Observable<(CLLocationCoordinate2D, Int)>
     private let currentLocation : Observable<CLLocationCoordinate2D>
     private let diaryService : DiaryServiceType
@@ -39,6 +38,9 @@ class CurrentConditionsViewModel {
 
         
         currentLocation = GeolocationService.instance.location.asObservable()
+            .distinctUntilChanged { loc1, loc2 in //prevents constant fetching in some instances
+               return(loc1.latitude == loc2.latitude && loc1.longitude == loc2.longitude)
+        }
         //Filters for accuracy and makes sure a new location value is selected
 //        currentLocation = location
 //            .flatMap {
@@ -48,14 +50,13 @@ class CurrentConditionsViewModel {
 //                return $0.horizontalAccuracy <= kCLLocationAccuracyKilometer
 //        }
 
-        
-    
         let hourTimer = Observable<Int>
             .timer(1, period: 3600, scheduler: MainScheduler.instance)
 
         fetchOnEmit = Observable.combineLatest(currentLocation, hourTimer)
         { ($0,$1) }
-        //NEED to add a geo service later
+        //.throttle(5, scheduler: MainScheduler.instance)
+
         
         bindOutput()
     }
@@ -79,7 +80,9 @@ class CurrentConditionsViewModel {
             }
             .shareReplay(1)
         
-        //Maybe make polution items do something about unavailable
+        //currently when stuff is fetched the network fetcher returns a -1.  Maybe I should make it return a string with the number or unavailable
+        //Something to consider is the sorting of items and picking a smallest value which you're suseptible too
+        //-1 should not count( filtered out)
         //add activity indicator to VC
         let currentFetcher = fetchOnEmit.flatMap { location, _ -> Observable<[JSONObject]> in
             return AirNowAPI.shared.searchAirQuality(latitude: location.latitude, longitude: location.longitude)

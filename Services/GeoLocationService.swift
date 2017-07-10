@@ -43,11 +43,15 @@ class GeolocationService {
                 }
         }
         
-        location = locationManager.rx.didUpdateLocations
+        location = locationManager.rx.didUpdateLocations //When authorization is not permitted and then it is this will emit locations because it was defereed
             .asDriver(onErrorJustReturn: [])
             .flatMap {
                 return $0.last.map(Driver.just) ?? Driver.empty()
             }
+            
+//            .distinctUntilChanged { loc1, loc2 in //better but not great the loc could have changed
+//                return !(loc1.location == loc2.location)
+//            }
             .filter {
                 return ($0.timestamp.timeIntervalSinceNow < 300)
             }
