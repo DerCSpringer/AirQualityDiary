@@ -12,6 +12,7 @@ import Unbox
 enum ForecastDate {
     case tomorrow
     case today
+    case other
 }
 
 enum PolutantName {
@@ -31,6 +32,9 @@ struct PolutionItem {
 extension PolutionItem: Unboxable {
     init(unboxer: Unboxer) throws {
         let dateFormat = DateFormatter()
+        let today = Date()
+        let tomorrow = today.addingTimeInterval(86400)
+        
         dateFormat.dateFormat = "yyyy-MM-dd "
         self.AQI = try unboxer.unbox(key: "AQI")
         
@@ -51,13 +55,15 @@ extension PolutionItem: Unboxable {
         }
 
         let date : String? = try? unboxer.unbox(key: "DateForecast")
-
+        
         if date == nil {
             self.forecastFor = nil
-        } else if date == dateFormat.string(from: Date()){
+        } else if date == dateFormat.string(from: today){
             self.forecastFor = .today
-        } else {
+        } else if date == dateFormat.string(from: tomorrow){
             self.forecastFor = .tomorrow
+        } else {
+            self.forecastFor = .other
         }
         
     }

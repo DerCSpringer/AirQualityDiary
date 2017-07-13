@@ -33,9 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //To display on the screen
         //Then we must transistion to that scene
         sceneCoordinator.transition(to: firstScene, type: .root)
-        
-        //will also implement a geo service
-        
+                
         return true
     }
     

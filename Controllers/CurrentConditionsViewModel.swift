@@ -55,9 +55,8 @@ class CurrentConditionsViewModel {
 
         fetchOnEmit = Observable.combineLatest(currentLocation, hourTimer)
         { ($0,$1) }
-        //.throttle(5, scheduler: MainScheduler.instance)
+        .throttle(5, scheduler: MainScheduler.instance) //Just in case it decides to query very quickly
 
-        
         bindOutput()
     }
 
@@ -74,20 +73,37 @@ class CurrentConditionsViewModel {
             print(location)
             return AirNowAPI.shared.searchForcastedAirQuality(latitude: location.latitude, longitude: location.longitude)
             }
-            .flatMap { jsonArray -> Observable<PolutionItem> in
-                let polutionItems : PolutionItem = try unbox(dictionary: jsonArray)
+            .subscribeOn(MainScheduler.instance)
+            .observeOn(MainScheduler.instance)
+            .flatMap {json -> Observable<PolutionItem> in
+                let polutionItems : PolutionItem = try unbox(dictionary: json)
                 return Observable.of(polutionItems)
             }
             .shareReplay(1)
         
-        //currently when stuff is fetched the network fetcher returns a -1.  Maybe I should make it return a string with the number or unavailable
+        // I want to make acitivity indicatories moving and shown
+        //Immediately change all values to unavailable
+        //After each fetch I want to drive the indicators being shown and moving
+        fetchOnEmit
+            .subscribe(onNext:  { [weak self] _, _ in
+                self?.clearValues()
+            })
+        .disposed(by: bag)
+        
         //Something to consider is the sorting of items and picking a smallest value which you're suseptible too
-        //-1 should not count( filtered out)
-        //add activity indicator to VC
-        let currentFetcher = fetchOnEmit.flatMap { location, _ -> Observable<[JSONObject]> in
+        //-1 will mess this up.
+        
+        //-1 still displays sometimes in UI. I need to fix this
+        //Looks like clearValues() is not being executed on the main thread.  May need to think where I place it
+        
+        //I think clear item is being called at the wrong time
+        let currentFetcher = fetchOnEmit.flatMap { location, _  -> Observable<[JSONObject]> in
             return AirNowAPI.shared.searchAirQuality(latitude: location.latitude, longitude: location.longitude)
             }
-            .flatMap { jsonArray -> Observable<[PolutionItem]> in
+            .observeOn(MainScheduler.instance)
+            .subscribeOn(MainScheduler.instance)
+            .flatMap { [weak self] jsonArray -> Observable<[PolutionItem]> in
+
                 let polutionItems : [PolutionItem] = try unbox(dictionaries: jsonArray)
                 return Observable.from(optional: polutionItems)
             }
@@ -97,11 +113,13 @@ class CurrentConditionsViewModel {
             }
             .shareReplay(1)
         
-        currentFetcher.filter {
+        currentFetcher
+            .observeOn(MainScheduler.instance)
+            .filter {
             return $0.polututeName == .ozone
             }
             .map {
-                String($0.AQI)
+                ($0.AQI == -1) ? "Unavailable" : String($0.AQI)
             }
             .bind(to: currentO3)
             .disposed(by: bag)
@@ -110,7 +128,7 @@ class CurrentConditionsViewModel {
             return $0.polututeName == .PM2_5
             }
             .map {
-                String($0.AQI)
+                ($0.AQI == -1) ? "Unavailable" : String($0.AQI)
             }
             .bind(to: currentPM)
             .disposed(by: bag)
@@ -122,11 +140,12 @@ class CurrentConditionsViewModel {
             return polutionItem.forecastFor == .tomorrow
         }
 
-        tomorrowForecast.filter { polutionItem in
-            polutionItem.polututeName == .ozone
+        tomorrowForecast
+            .filter {
+            return $0.polututeName == .ozone
             }
-            .map { polutionItem in
-                return String(polutionItem.AQI)
+            .map {
+                return ($0.AQI == -1) ? "Unavailable" : String($0.AQI)
             }
             .bind(to: tomorrowO3)
             .disposed(by: bag)
@@ -134,8 +153,9 @@ class CurrentConditionsViewModel {
         tomorrowForecast.filter { polutionItem in
             polutionItem.polututeName == .PM2_5
             }
-            .map { polutionItem in
-                return String(polutionItem.AQI)
+            .map {
+                ($0.AQI == -1) ? "Unavailable" : String($0.AQI)
+
             }
             .bind(to: tomorrowPM)
             .disposed(by: bag)
@@ -143,8 +163,9 @@ class CurrentConditionsViewModel {
         todayForecast.filter { polutionItem in
             polutionItem.polututeName == .ozone
             }
-            .map { polutionItem in
-                return String(polutionItem.AQI)
+            .map {
+                ($0.AQI == -1) ? "Unavailable" : String($0.AQI)
+
             }
             .bind(to: currentForcastO3)
             .disposed(by: bag)
@@ -152,10 +173,25 @@ class CurrentConditionsViewModel {
         todayForecast.filter { polutionItem in
             polutionItem.polututeName == .PM2_5
             }
-            .map { polutionItem in
-                return String(polutionItem.AQI)
+            .map {
+                ($0.AQI == -1) ? "Unavailable" : String($0.AQI)
             }
             .bind(to: currentForcastPM)
             .disposed(by: bag)
+    }
+    
+    func clearValues() {
+        if Thread.isMainThread {
+            print("On main thread")
+        } else {
+            print("On background thread")
+        }
+
+        currentO3.value = "Unavailable"
+        currentPM.value = "Unavailable"
+        tomorrowO3.value = "Unavailable"
+        tomorrowPM.value = "Unavailable"
+        currentForcastO3.value = "Unavailable"
+        currentForcastPM.value = "Unavailable"
     }
 }
