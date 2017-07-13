@@ -20,6 +20,9 @@ class CurrentConditionsViewModel {
     let currentForcastO3 = Variable<String>("Unavailable")
     let currentO3 = Variable<String>("Unavailable")
     let currentPM = Variable<String>("Unavailable")
+    let forecastFetchIsFetching = Variable<Bool>(true)
+    let currentFetchIsFetching = Variable<Bool>(true)
+
     
     private var fetchOnEmit : Observable<(CLLocationCoordinate2D, Int)>
     private let currentLocation : Observable<CLLocationCoordinate2D>
@@ -80,15 +83,22 @@ class CurrentConditionsViewModel {
                 return Observable.of(polutionItems)
             }
             .shareReplay(1)
-        
-        // I want to make acitivity indicatories moving and shown
-        //Immediately change all values to unavailable
-        //After each fetch I want to drive the indicators being shown and moving
+
         fetchOnEmit
             .subscribe(onNext:  { [weak self] _, _ in
-                self?.clearValues()
+                self?.updateUIForFetch()
             })
         .disposed(by: bag)
+        
+        fetchOnEmit
+            .map { _ in return true }
+        .bind(to: currentFetchIsFetching)
+        .disposed(by: bag)
+        
+        fetchOnEmit
+            .map { _ in return true }
+            .bind(to: forecastFetchIsFetching)
+            .disposed(by: bag)
         
         //Something to consider is the sorting of items and picking a smallest value which you're suseptible too
         //-1 will mess this up.
@@ -96,13 +106,12 @@ class CurrentConditionsViewModel {
         //-1 still displays sometimes in UI. I need to fix this
         //Looks like clearValues() is not being executed on the main thread.  May need to think where I place it
         
-        //I think clear item is being called at the wrong time
         let currentFetcher = fetchOnEmit.flatMap { location, _  -> Observable<[JSONObject]> in
             return AirNowAPI.shared.searchAirQuality(latitude: location.latitude, longitude: location.longitude)
             }
             .observeOn(MainScheduler.instance)
             .subscribeOn(MainScheduler.instance)
-            .flatMap { [weak self] jsonArray -> Observable<[PolutionItem]> in
+            .flatMap {jsonArray -> Observable<[PolutionItem]> in
 
                 let polutionItems : [PolutionItem] = try unbox(dictionaries: jsonArray)
                 return Observable.from(optional: polutionItems)
@@ -112,6 +121,16 @@ class CurrentConditionsViewModel {
                 
             }
             .shareReplay(1)
+        
+        currentFetcher
+            .map { _ in return false }
+            .bind(to: currentFetchIsFetching)
+            .disposed(by: bag)
+        
+        forecastFetcher
+            .map { _ in false }
+            .bind(to: forecastFetchIsFetching)
+            .disposed(by:bag)
         
         currentFetcher
             .observeOn(MainScheduler.instance)
@@ -180,13 +199,13 @@ class CurrentConditionsViewModel {
             .disposed(by: bag)
     }
     
-    func clearValues() {
+    func updateUIForFetch() {
         if Thread.isMainThread {
             print("On main thread")
         } else {
             print("On background thread")
         }
-
+        
         currentO3.value = "Unavailable"
         currentPM.value = "Unavailable"
         tomorrowO3.value = "Unavailable"
