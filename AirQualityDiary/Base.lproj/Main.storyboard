@@ -24,11 +24,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Qw1-oV-XVS">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Qw1-oV-XVS">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DiaryEntryCell" id="pR7-6N-1Rl" customClass="DiaryEntryTableViewCell" customModule="AirQualityDiary" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DiaryEntryCell" id="pR7-6N-1Rl" customClass="DiaryEntryTableViewCell" customModule="AirQualityDiary" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pR7-6N-1Rl" id="8s3-U9-izD">
@@ -44,19 +44,19 @@
                                                     <color key="textColor" red="0.32171778934275264" green="0.67009391191709844" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="O3:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f6O-MC-f3D">
-                                                    <rect key="frame" x="139" y="11" width="35" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PM2.5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f6O-MC-f3D">
+                                                    <rect key="frame" x="139" y="11" width="54" height="21"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="35" id="C8C-yu-tvO"/>
+                                                        <constraint firstAttribute="width" constant="54" id="C8C-yu-tvO"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.3217177893" green="0.67009391190000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PM2.5:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mrg-ms-BjE">
-                                                    <rect key="frame" x="184" y="11" width="54" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="O3:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mrg-ms-BjE">
+                                                    <rect key="frame" x="208" y="11" width="35" height="21"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="53.5" id="iTt-bZ-Cgx"/>
+                                                        <constraint firstAttribute="width" constant="35" id="iTt-bZ-Cgx"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.3217177893" green="0.67009391190000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -86,10 +86,10 @@
                                                 <constraint firstItem="Va9-s3-v0a" firstAttribute="leading" secondItem="mrg-ms-BjE" secondAttribute="trailing" constant="22" id="ZdC-jt-6RR"/>
                                                 <constraint firstItem="mrg-ms-BjE" firstAttribute="leading" secondItem="f6O-MC-f3D" secondAttribute="trailing" constant="20" id="br2-dA-ybA"/>
                                                 <constraint firstItem="mrg-ms-BjE" firstAttribute="baseline" secondItem="Va9-s3-v0a" secondAttribute="baseline" id="d8i-I8-plH"/>
-                                                <constraint firstItem="Va9-s3-v0a" firstAttribute="leading" secondItem="mrg-ms-BjE" secondAttribute="trailing" constant="20" id="kfE-NT-V5I"/>
+                                                <constraint firstItem="Va9-s3-v0a" firstAttribute="leading" secondItem="mrg-ms-BjE" secondAttribute="trailing" constant="15" id="kfE-NT-V5I"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="f6O-MC-f3D" secondAttribute="bottom" constant="3.5" id="l5s-Pj-B5e"/>
                                                 <constraint firstItem="f6O-MC-f3D" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="yQG-9r-7U7" secondAttribute="trailing" constant="10" id="ol5-h7-X7R"/>
-                                                <constraint firstItem="mrg-ms-BjE" firstAttribute="leading" secondItem="f6O-MC-f3D" secondAttribute="trailing" constant="10" id="q7V-5O-J7j"/>
+                                                <constraint firstItem="mrg-ms-BjE" firstAttribute="leading" secondItem="f6O-MC-f3D" secondAttribute="trailing" constant="15" id="q7V-5O-J7j"/>
                                                 <constraint firstItem="yQG-9r-7U7" firstAttribute="top" secondItem="8s3-U9-izD" secondAttribute="topMargin" constant="3" id="r4u-91-rJX"/>
                                                 <constraint firstAttribute="bottom" secondItem="Va9-s3-v0a" secondAttribute="bottom" constant="7.5" id="urz-XC-EjR"/>
                                                 <constraint firstItem="f6O-MC-f3D" firstAttribute="leading" secondItem="yQG-9r-7U7" secondAttribute="trailing" constant="28" id="zwH-4t-AbX"/>
@@ -106,10 +106,10 @@
                                             </variation>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="PM25AQI" destination="mrg-ms-BjE" id="XTu-0P-pDy"/>
+                                            <outlet property="PM25AQI" destination="f6O-MC-f3D" id="AYq-xa-MTG"/>
                                             <outlet property="button" destination="Va9-s3-v0a" id="N0o-Bg-9HW"/>
                                             <outlet property="date" destination="yQG-9r-7U7" id="DKo-Ye-RQl"/>
-                                            <outlet property="o3AQI" destination="f6O-MC-f3D" id="Nn3-vC-q3w"/>
+                                            <outlet property="o3AQI" destination="mrg-ms-BjE" id="pbd-gR-XVo"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -120,8 +120,16 @@
                             <constraint firstAttribute="trailing" secondItem="Qw1-oV-XVS" secondAttribute="trailing" id="0pV-GG-jX2"/>
                             <constraint firstItem="Qw1-oV-XVS" firstAttribute="top" secondItem="9fv-dl-iZo" secondAttribute="top" id="2Yf-cj-MdU"/>
                             <constraint firstItem="Swh-Bh-y3z" firstAttribute="top" secondItem="Qw1-oV-XVS" secondAttribute="bottom" id="8IP-Dg-3Pa"/>
+                            <constraint firstItem="Qw1-oV-XVS" firstAttribute="top" secondItem="gNi-SP-NTc" secondAttribute="bottom" id="Axi-vA-8TO"/>
                             <constraint firstItem="Qw1-oV-XVS" firstAttribute="leading" secondItem="9fv-dl-iZo" secondAttribute="leading" id="kMY-ZG-gP9"/>
+                            <constraint firstItem="Qw1-oV-XVS" firstAttribute="top" secondItem="9fv-dl-iZo" secondAttribute="top" id="wl5-iP-Nho"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="2Yf-cj-MdU"/>
+                                <exclude reference="Axi-vA-8TO"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Air Quality Diary" id="JSm-7w-Xrp">
                         <barButtonItem key="leftBarButtonItem" title="Forecast" id="PCa-NO-Nms"/>
@@ -387,7 +395,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="f58-S2-tar">
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="f58-S2-tar">
                                 <rect key="frame" x="141.5" y="72" width="37" height="37"/>
                             </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PM 2.5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fwO-hd-QTP">

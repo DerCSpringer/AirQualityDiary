@@ -16,6 +16,7 @@ class AddDiaryEntryViewModel {
     let o3Text = Variable<Int>(-1)
     let pm25Text = Variable<Int>(-1)
     let isFetching = Variable<Bool>(true)
+    let note = Variable<String>("")
     private let onUpdate: Action<DiaryType, Void>
     let onCancel: CocoaAction!
     private let currentLocation : Observable<CLLocationCoordinate2D>
@@ -32,6 +33,16 @@ class AddDiaryEntryViewModel {
     //opening display could have black background
     //Forground text is different color depending on how bad teh forcast for the next day is for you
     
+    //Opening with a current item does not work
+    //It should init with a diary entry and not fetch at that point
+    
+    //I have two options.
+    //I can send an enum to say what to do or I can check to see if I have unavailable in both an no note, this would then 
+    //Hmm I have a date on entry creation
+    //If the date is less than say 10 minutes old then replace else do something else
+    //Maybe if date is less than 10 minutes and no note
+    //If the date is like 3 second old or less then we create a new entry else we edit the entry
+    
     
     init(entry: DiaryEntry,
          coordinator: SceneCoordinatorType,
@@ -40,7 +51,6 @@ class AddDiaryEntryViewModel {
         
         currentLocation = GeolocationService.instance.location.asObservable()
 
-        
         onUpdate = updateAction
         onUpdate.executionObservables //This needs to take one of the diaryType not the note
             .take(1)  //This takes the note, but we also need the weather quality
@@ -65,7 +75,16 @@ class AddDiaryEntryViewModel {
                 self?.onUpdate.execute(entry)
             })
             .disposed(by: bag)
-        bindOutput()
+        
+        if (entry.added.timeIntervalSinceNow > -3) {//If DiaryEntry is being added and not and not edited
+            print(entry.added.timeIntervalSinceNow)
+            bindOutput()
+        } else {
+            o3Text.value = entry.o3
+            pm25Text.value = entry.pm25
+            note.value = entry.notes
+            isFetching.value = false
+        }
     }
     
     lazy var onSave: Action<String,DiaryType> = Action { [weak self] note in

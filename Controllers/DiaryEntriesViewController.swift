@@ -31,7 +31,10 @@ class DiaryEntriesViewController: UIViewController, BindableType, UITableViewDel
         tableView.rx.setDelegate(self)
         .addDisposableTo(bag)
 
-        configureDataSource() //This must be done before we bind observables
+        configureDataSource()
+                
+
+        //This must be done before we bind observables
         //It probably starts observing only elements at time X.  If we wait until later it maybe not see stuff already in teh database
     }
     
@@ -43,6 +46,22 @@ class DiaryEntriesViewController: UIViewController, BindableType, UITableViewDel
         
         addDiaryEntry.rx.action = viewModel.onCreateEntry()
         currentConditions.rx.action = viewModel.onCurrentPress()
+        
+        tableView.rx.itemDeleted
+            .map { [unowned self] indexPath in
+                try! self.dataSource.model(at: indexPath) as! DiaryEntry
+            }
+            .subscribe(viewModel.deleteAction.inputs)
+            .disposed(by:bag)
+        
+        tableView.rx.itemSelected
+            .map { [unowned self] indexPath in
+                let this = try self.dataSource.model(at: indexPath) as! DiaryEntry
+                print(this)
+                return this
+            }
+            .subscribe(viewModel.editAction.inputs) //I have to feed the action using .inputs
+            .disposed(by: bag)
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -56,15 +75,21 @@ class DiaryEntriesViewController: UIViewController, BindableType, UITableViewDel
         return 44
     }
     
+//    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+//        print(self.tableView.cellForRow(at: indexPath)?.editingStyle)
+//        return .delete
+//    }
+    
+    
     fileprivate func configureDataSource() {
         
-        dataSource.canEditRowAtIndexPath = { _ in
-            true
+        dataSource.canEditRowAtIndexPath = { cell in
+            return true
         }
+        
         dataSource.titleForHeaderInSection = { dataSource, index in
             return ""
         }
-        
         
         dataSource.configureCell = {
             [weak self] dataSource, tableView, indexPath, entry in
@@ -76,6 +101,7 @@ class DiaryEntriesViewController: UIViewController, BindableType, UITableViewDel
                 //The cell is teh one which will execute the action which notifies the VM to do appropriate action(s)
                 //cell.configure(with: item, action: strongSelf.viewModel.onToggle(task: item))
             }
+            //print(cell.editingStyle.rawValue)
             return cell
         }
     }

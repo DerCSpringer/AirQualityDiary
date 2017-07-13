@@ -106,6 +106,8 @@ class CurrentConditionsViewModel {
         //-1 still displays sometimes in UI. I need to fix this
         //Looks like clearValues() is not being executed on the main thread.  May need to think where I place it
         
+        //Also need to show colors for conditions
+        
         let currentFetcher = fetchOnEmit.flatMap { location, _  -> Observable<[JSONObject]> in
             return AirNowAPI.shared.searchAirQuality(latitude: location.latitude, longitude: location.longitude)
             }

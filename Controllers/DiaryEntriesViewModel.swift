@@ -79,4 +79,21 @@ struct DiaryEntriesViewModel {
             return self.sceneCoordinator.pop()
         }
     }
+    
+    lazy var editAction: Action<DiaryEntry, Void> = { this in
+        return Action { entry in
+            let editViewModel = AddDiaryEntryViewModel(
+                entry: entry,
+                coordinator: this.sceneCoordinator,
+                updateAction: this.onUpdateEntry(entry: entry)
+            )
+            return this.sceneCoordinator.transition(to: Scene.addEntry(editViewModel), type: .modal)
+        }
+    }(self)
+    
+    lazy var deleteAction: Action<DiaryEntry, Void> = {service in
+        return Action { entry in
+            return service.delete(entry: entry)
+        }
+    }(self.diaryService)
 }

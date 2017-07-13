@@ -43,6 +43,10 @@ class AddDiaryEntryViewController: UIViewController, BindableType {
             })
             .disposed(by: bag)
         
+        viewModel.note.asDriver()
+            .drive(note.rx.text)
+        .addDisposableTo(bag)
+        
         addEntry.rx.tap
         .withLatestFrom(note.rx.text.orEmpty)
         .subscribe(viewModel.onSave.inputs)
@@ -52,11 +56,11 @@ class AddDiaryEntryViewController: UIViewController, BindableType {
             .drive(fetchingIndicator.rx.isAnimating)
             .addDisposableTo(bag)
         
-        viewModel.isFetching.asDriver()
-            .skip(1)
-            .map{ _ in true }
-            .drive(fetchingIndicator.rx.isHidden)
-            .addDisposableTo(bag)
+//        viewModel.isFetching.asDriver()
+//            //.skip(1)
+//            .map{ _ in true }
+//            .drive(fetchingIndicator.rx.isHidden)
+//            .addDisposableTo(bag)
         
         cancel.rx.action = viewModel.onCancel
     }
