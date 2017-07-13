@@ -32,7 +32,6 @@ class DiaryEntriesViewController: UIViewController, BindableType, UITableViewDel
         .addDisposableTo(bag)
 
         configureDataSource()
-                
 
         //This must be done before we bind observables
         //It probably starts observing only elements at time X.  If we wait until later it maybe not see stuff already in teh database
@@ -60,7 +59,7 @@ class DiaryEntriesViewController: UIViewController, BindableType, UITableViewDel
                 print(this)
                 return this
             }
-            .subscribe(viewModel.editAction.inputs) //I have to feed the action using .inputs
+            .subscribe(viewModel.editAction.inputs)
             .disposed(by: bag)
     }
     
@@ -74,11 +73,6 @@ class DiaryEntriesViewController: UIViewController, BindableType, UITableViewDel
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 44
     }
-    
-//    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-//        print(self.tableView.cellForRow(at: indexPath)?.editingStyle)
-//        return .delete
-//    }
     
     
     fileprivate func configureDataSource() {
@@ -101,7 +95,6 @@ class DiaryEntriesViewController: UIViewController, BindableType, UITableViewDel
                 //The cell is teh one which will execute the action which notifies the VM to do appropriate action(s)
                 //cell.configure(with: item, action: strongSelf.viewModel.onToggle(task: item))
             }
-            //print(cell.editingStyle.rawValue)
             return cell
         }
     }

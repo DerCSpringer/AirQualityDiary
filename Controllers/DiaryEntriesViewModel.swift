@@ -14,7 +14,6 @@ import Action
 typealias DiarySection = AnimatableSectionModel<String, DiaryEntry>
 
 struct DiaryEntriesViewModel {
-    //need to setup delete and edit
     let sceneCoordinator: SceneCoordinatorType
     let diaryService: DiaryServiceType
     

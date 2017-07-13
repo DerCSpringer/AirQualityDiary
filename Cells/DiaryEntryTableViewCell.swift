@@ -16,9 +16,6 @@ class DiaryEntryTableViewCell: UITableViewCell {
     @IBOutlet weak var button: UIButton!
     @IBOutlet weak var o3AQI: UILabel!
     @IBOutlet weak var PM25AQI: UILabel!
-    
-//    @IBOutlet weak var o3AQI: UILabel!
-//    @IBOutlet weak var PM25AQI: UILabel!
     @IBOutlet weak var date: UILabel!
     
     func configure(with entry: DiaryEntry, action: CocoaAction) {

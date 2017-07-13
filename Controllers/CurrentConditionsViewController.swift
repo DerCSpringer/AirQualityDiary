@@ -41,7 +41,7 @@ class CurrentConditionsViewController: UIViewController, BindableType {
     func bindViewModel() {
         diaryEntries.rx.action = viewModel.onEntryButtonPress()
         
-        //Current forecast O3 Label and Indicator
+        //MARK: Current forecast O3 Label and Indicator
         
         viewModel.currentForcastO3.asDriver()
         .drive(currentForcastO3.rx.text)
@@ -55,7 +55,7 @@ class CurrentConditionsViewController: UIViewController, BindableType {
             .drive(o3TodayForecastIndicator.rx.isAnimating)
             .addDisposableTo(bag)
         
-        //Current Forecast PM2.5 Label and Indicator
+        //MARK: Current Forecast PM2.5 Label and Indicator
 
         viewModel.currentForcastPM.asDriver()
             .drive(currentForcastPM.rx.text)
@@ -70,7 +70,7 @@ class CurrentConditionsViewController: UIViewController, BindableType {
             .drive(currentForcastPM.rx.isHidden)
         .addDisposableTo(bag)
         
-        //Tomorrow's Forecast O3 Label and Indicator
+        //MARK: Tomorrow's Forecast O3 Label and Indicator
         
         viewModel.tomorrowO3.asDriver()
             .drive(tomorrowO3.rx.text)
@@ -84,7 +84,7 @@ class CurrentConditionsViewController: UIViewController, BindableType {
             .drive(tomorrowO3.rx.isHidden)
             .addDisposableTo(bag)
 
-        //Tomorrow's Forecast PM2.5 Label and Indicator
+        //MARK: Tomorrow's Forecast PM2.5 Label and Indicator
         
         viewModel.tomorrowPM.asDriver()
             .drive(tomorrowPM.rx.text)
@@ -98,7 +98,7 @@ class CurrentConditionsViewController: UIViewController, BindableType {
             .drive(tomorrowPM.rx.isHidden)
             .addDisposableTo(bag)
         
-        //Current Conditions O3 Label and Indicator
+        //MARK: Current Conditions O3 Label and Indicator
         
         viewModel.currentO3.asDriver()
             .drive(currentO3.rx.text)
@@ -112,7 +112,7 @@ class CurrentConditionsViewController: UIViewController, BindableType {
             .drive(currentO3.rx.isHidden)
             .addDisposableTo(bag)
 
-        //Current Conditions PM2.5 Label and Indicator
+        //MARK: Current Conditions PM2.5 Label and Indicator
 
         viewModel.currentPM.asDriver()
             .drive(currentPM.rx.text)

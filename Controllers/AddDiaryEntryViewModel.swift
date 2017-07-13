@@ -22,27 +22,15 @@ class AddDiaryEntryViewModel {
     private let currentLocation : Observable<CLLocationCoordinate2D>
 
     
-    //TODO: Add delete and Edit for cells
+    //TODO:
     //Need an image for our cell
     //Sort data by ozone
     //errors for unable to fetch
-    //better note section and AddEntryVC
     //Add later
     //We could add something at the bottom of the DiaryEntriesTV to display the minium amount that bothers someone.
     //this could be displayed on the forcast and so forth
     //opening display could have black background
     //Forground text is different color depending on how bad teh forcast for the next day is for you
-    
-    //Opening with a current item does not work
-    //It should init with a diary entry and not fetch at that point
-    
-    //I have two options.
-    //I can send an enum to say what to do or I can check to see if I have unavailable in both an no note, this would then 
-    //Hmm I have a date on entry creation
-    //If the date is less than say 10 minutes old then replace else do something else
-    //Maybe if date is less than 10 minutes and no note
-    //If the date is like 3 second old or less then we create a new entry else we edit the entry
-    
     
     init(entry: DiaryEntry,
          coordinator: SceneCoordinatorType,

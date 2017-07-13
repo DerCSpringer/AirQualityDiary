@@ -56,12 +56,6 @@ class AddDiaryEntryViewController: UIViewController, BindableType {
             .drive(fetchingIndicator.rx.isAnimating)
             .addDisposableTo(bag)
         
-//        viewModel.isFetching.asDriver()
-//            //.skip(1)
-//            .map{ _ in true }
-//            .drive(fetchingIndicator.rx.isHidden)
-//            .addDisposableTo(bag)
-        
         cancel.rx.action = viewModel.onCancel
     }
 }
