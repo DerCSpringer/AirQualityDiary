@@ -38,6 +38,9 @@ class AddDiaryEntryViewModel {
          cancelAction: CocoaAction? = nil) {
         
         currentLocation = GeolocationService.instance.location.asObservable()
+        .distinctUntilChanged { loc1, loc2 in //prevents constant fetching in some instances
+                return(loc1.latitude == loc2.latitude && loc1.longitude == loc2.longitude)
+        }
 
         onUpdate = updateAction
         onUpdate.executionObservables //This needs to take one of the diaryType not the note
@@ -64,7 +67,7 @@ class AddDiaryEntryViewModel {
             })
             .disposed(by: bag)
         
-        if (entry.added.timeIntervalSinceNow > -3) {//If DiaryEntry is being added and not and not edited
+        if (entry.added.timeIntervalSinceNow > -1) {//If DiaryEntry is being added and not edited
             print(entry.added.timeIntervalSinceNow)
             bindOutput()
         } else {

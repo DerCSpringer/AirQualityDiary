@@ -390,7 +390,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="s2k-vW-Ooa">
-                                <rect key="frame" x="0.0" y="279" width="320" height="204"/>
+                                <rect key="frame" x="0.0" y="279" width="320" height="269"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -420,10 +420,11 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="bUN-aD-QJa" firstAttribute="top" secondItem="lAt-MN-xuH" secondAttribute="bottom" constant="1.5" id="9Ku-7Q-4bV"/>
-                            <constraint firstItem="Fge-Eg-Q7w" firstAttribute="top" secondItem="s2k-vW-Ooa" secondAttribute="bottom" constant="85" id="JUW-TM-ybL"/>
+                            <constraint firstItem="xhB-hm-07M" firstAttribute="top" secondItem="Mbi-iZ-HeD" secondAttribute="bottom" constant="55" id="AD6-67-W30"/>
+                            <constraint firstItem="Fge-Eg-Q7w" firstAttribute="top" secondItem="s2k-vW-Ooa" secondAttribute="bottom" constant="20" id="JUW-TM-ybL"/>
                             <constraint firstItem="lAt-MN-xuH" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fwO-hd-QTP" secondAttribute="trailing" constant="91" id="Jkf-W7-D7a"/>
                             <constraint firstItem="f58-S2-tar" firstAttribute="top" secondItem="fbI-6N-dY9" secondAttribute="bottom" constant="8" id="Kt2-gl-6EY"/>
-                            <constraint firstItem="xhB-hm-07M" firstAttribute="top" secondItem="Mbi-iZ-HeD" secondAttribute="bottom" constant="55" id="RHS-5k-9fM"/>
+                            <constraint firstItem="xhB-hm-07M" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Mbi-iZ-HeD" secondAttribute="bottom" constant="10" id="RHS-5k-9fM"/>
                             <constraint firstItem="s2k-vW-Ooa" firstAttribute="width" secondItem="uQk-Rc-Rnr" secondAttribute="width" id="Uyz-bu-rUT"/>
                             <constraint firstAttribute="leadingMargin" secondItem="xhB-hm-07M" secondAttribute="leading" id="WAe-JS-j86"/>
                             <constraint firstItem="s2k-vW-Ooa" firstAttribute="top" secondItem="xhB-hm-07M" secondAttribute="bottom" constant="8" id="Wu0-nN-vYh"/>
@@ -437,6 +438,11 @@
                             <constraint firstItem="lAt-MN-xuH" firstAttribute="top" secondItem="f58-S2-tar" secondAttribute="bottom" constant="23" id="k3i-pO-ZEG"/>
                             <constraint firstItem="s2k-vW-Ooa" firstAttribute="centerX" secondItem="uQk-Rc-Rnr" secondAttribute="centerX" id="y0p-I9-Qjb"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="RHS-5k-9fM"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Add Diary Entry" id="H4J-jw-a0f">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="4bK-KF-MsX"/>
