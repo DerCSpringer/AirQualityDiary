@@ -49,6 +49,7 @@ struct DiaryEntriesViewModel {
         }
     }
 
+    //TODO: We create an entry right here, but if we exit the next controller without a cancel or save button i.e. home button then an invalid entry is crdated
     func onCreateEntry() -> CocoaAction { //action sent to add VC to do  the right thing
         //We create a new diary item
         //If it is created then we instantiate a new AddDiaryEntryViewModel.
@@ -58,6 +59,7 @@ struct DiaryEntriesViewModel {
         return CocoaAction { _ in
             return self.diaryService
                 .createEntry(entry: (-1, -1, "")) //when add is pressed an entry is always created with garbage
+                
                 //This must be updated when everytime save is pressed
                 .flatMap { entry -> Observable<Void> in
                     //Here we setup what happens when each action is executed.

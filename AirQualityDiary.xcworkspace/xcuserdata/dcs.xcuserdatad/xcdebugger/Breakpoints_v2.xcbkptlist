@@ -372,11 +372,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/DiaryEntriesViewModel.swift"
-            timestampString = "521681554.265086"
+            timestampString = "521756082.344491"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
             landmarkName = "onCreateEntry()"
             landmarkType = "7">
          </BreakpointContent>
@@ -468,11 +468,11 @@
                   moduleName = "AirQualityDiary"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dcs/Developer/Swift/AirQualityDiary/Services/DiaryService.swift"
-                  timestampString = "520197145.892501"
+                  timestampString = "521751001.300839"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "89"
-                  endingLineNumber = "89"
+                  startingLineNumber = "82"
+                  endingLineNumber = "82"
                   offsetFromSymbolStart = "38">
                </Location>
                <Location
@@ -483,11 +483,11 @@
                   moduleName = "AirQualityDiary"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dcs/Developer/Swift/AirQualityDiary/Services/DiaryService.swift"
-                  timestampString = "520197145.89408"
+                  timestampString = "521751001.302792"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "90"
-                  endingLineNumber = "90"
+                  startingLineNumber = "83"
+                  endingLineNumber = "83"
                   offsetFromSymbolStart = "19">
                </Location>
             </Locations>
@@ -944,11 +944,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/DiaryEntriesViewModel.swift"
-            timestampString = "521681554.265086"
+            timestampString = "521756082.344491"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
             landmarkName = "onCreateEntry()"
             landmarkType = "7">
          </BreakpointContent>
@@ -960,11 +960,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/DiaryEntriesViewModel.swift"
-            timestampString = "521681554.265086"
+            timestampString = "521756082.344491"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
             landmarkName = "editAction"
             landmarkType = "24">
          </BreakpointContent>
@@ -1075,6 +1075,22 @@
                   offsetFromSymbolStart = "38">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Services/DiaryService.swift"
+            timestampString = "521755911.4723"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
+            landmarkName = "minO3Irritation()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

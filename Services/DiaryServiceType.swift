@@ -34,5 +34,9 @@ protocol DiaryServiceType {
     func toggle(entry: DiaryEntry) -> Observable<DiaryEntry>
     
     func entries() -> Observable<Results<DiaryEntry>>
+    
+    func minO3Irritation() -> Int?
+    
+    func minPM2_5Irritation() -> Int?
 
 }

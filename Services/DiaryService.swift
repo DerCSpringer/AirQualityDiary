@@ -82,8 +82,32 @@ struct DiaryService: DiaryServiceType {
         let result = withRealm("getting entries") { realm -> Observable<Results<DiaryEntry>> in
             let realm = try Realm()
             let entries = realm.objects(DiaryEntry.self)
+            //entries = entries.sorted(byKeyPath: "o3", ascending: false)
+
             return Observable.collection(from: entries)
         }
         return result ?? .empty()
+    }
+    
+    func minO3Irritation() -> Int? {
+          let result = withRealm("getting entries") { realm -> Int? in
+            let realm = try Realm()
+            let entries = realm.objects(DiaryEntry.self)
+            let filteredResults = entries.filter("(checked == true) AND (o3 != -1)")
+            return filteredResults.min(ofProperty: "o3") as Int!
+        }
+        return result!
+        
+    }
+    
+    func minPM2_5Irritation() -> Int? {
+        let result = withRealm("getting entries") { realm -> Int? in
+            let realm = try Realm()
+            let entries = realm.objects(DiaryEntry.self)
+            let filteredResults = entries.filter("(checked == true) AND (pm25 != -1)")
+            return filteredResults.min(ofProperty: "pm25") as Int!
+        }
+        return result!
+
     }
 }
