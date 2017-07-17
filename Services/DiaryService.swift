@@ -89,25 +89,62 @@ struct DiaryService: DiaryServiceType {
         return result ?? .empty()
     }
     
-    func minO3Irritation() -> Int? {
-          let result = withRealm("getting entries") { realm -> Int? in
+    func minO3Irritation() -> Observable<Int> {
+        let result = withRealm("getting entries") { realm -> Observable<Results<DiaryEntry>> in
             let realm = try Realm()
-            let entries = realm.objects(DiaryEntry.self)
-            let filteredResults = entries.filter("(checked == true) AND (o3 != -1)")
-            return filteredResults.min(ofProperty: "o3") as Int!
-        }
-        return result!
-        
+            let entries = realm.objects(DiaryEntry.self).filter("(checked == true) AND (o3 != -1)").sorted(byKeyPath: "o3", ascending: true)
+
+            return Observable.collection(from: entries)
+        } ?? .empty()
+        let min = result
+            .flatMap { results -> Observable<Int> in
+                if results.isEmpty {
+                    return .just(-1)
+                }
+                return Observable.from(optional: results.first?.o3)
+            }
+        .distinctUntilChanged()
+        return min
     }
     
-    func minPM2_5Irritation() -> Int? {
-        let result = withRealm("getting entries") { realm -> Int? in
+    func minPM2_5Irritation() -> Observable<Int> {
+        let result = withRealm("getting entries") { realm -> Observable<Results<DiaryEntry>> in
             let realm = try Realm()
-            let entries = realm.objects(DiaryEntry.self)
-            let filteredResults = entries.filter("(checked == true) AND (pm25 != -1)")
-            return filteredResults.min(ofProperty: "pm25") as Int!
-        }
-        return result!
-
+            let entries = realm.objects(DiaryEntry.self).filter("(checked == true) AND (pm25 != -1)").sorted(byKeyPath: "pm25", ascending: true)
+            
+            return Observable.collection(from: entries)
+            } ?? .empty()
+        let min = result
+            .flatMap { results -> Observable<Int> in
+                if results.isEmpty {
+                    return .just(-1)
+                }
+                return Observable.from(optional: results.first?.pm25)
+            }
+            .distinctUntilChanged()
+        return min
     }
+//    
+//    func minO3Irritation() -> Int? {
+//          let result = withRealm("getting entries") { realm -> Int? in
+//            let realm = try Realm()
+//            let entries = realm.objects(DiaryEntry.self)
+//            let filteredResults = entries.filter("(checked == true) AND (o3 != -1)")
+//            return filteredResults.min(ofProperty: "o3") as Int!
+//        }
+//        
+//        return result!
+//        
+//    }
+//    
+//    func minPM2_5Irritation() -> Observable<Int>? {
+//        let result = withRealm("getting entries") { realm -> Observable<Int> in
+//            let realm = try Realm()
+//            let entries = realm.objects(DiaryEntry.self)
+//            let filteredResults = entries.filter("(checked == true) AND (pm25 != -1)")
+//            return Observable.from(optional: filteredResults.min(ofProperty: "pm25") as Int!)
+//        }
+//        return result!
+//
+//    }
 }

@@ -20,6 +20,8 @@
 		0B2589B01EFB24DD00E12FAA /* AddDiaryEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2589AF1EFB24DD00E12FAA /* AddDiaryEntryViewController.swift */; };
 		0B2589B21EFB24F300E12FAA /* DiaryEntriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2589B11EFB24F300E12FAA /* DiaryEntriesViewController.swift */; };
 		0B2589B41EFB2B4700E12FAA /* DiaryEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2589B31EFB2B4700E12FAA /* DiaryEntryTableViewCell.swift */; };
+		0B2BBF1C1F197B290027A0B5 /* PolutionLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2BBF1B1F197B290027A0B5 /* PolutionLevel.swift */; };
+		0B2BBF1E1F1988D80027A0B5 /* MinimumIrritationLevelsForPolutants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2BBF1D1F1988D80027A0B5 /* MinimumIrritationLevelsForPolutants.swift */; };
 		0B2EBF801EFC7BEE00A3D244 /* DiaryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2EBF7F1EFC7BEE00A3D244 /* DiaryService.swift */; };
 		0B3F5B8E1EF85CF5008B6BBB /* AirNowAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3F5B8D1EF85CF5008B6BBB /* AirNowAPI.swift */; };
 		0B3F5B8F1EF86594008B6BBB /* AirNowAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3F5B8D1EF85CF5008B6BBB /* AirNowAPI.swift */; };
@@ -61,6 +63,8 @@
 		0B2589AF1EFB24DD00E12FAA /* AddDiaryEntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddDiaryEntryViewController.swift; path = Controllers/AddDiaryEntryViewController.swift; sourceTree = SOURCE_ROOT; };
 		0B2589B11EFB24F300E12FAA /* DiaryEntriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = DiaryEntriesViewController.swift; path = Controllers/DiaryEntriesViewController.swift; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		0B2589B31EFB2B4700E12FAA /* DiaryEntryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = DiaryEntryTableViewCell.swift; path = Cells/DiaryEntryTableViewCell.swift; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		0B2BBF1B1F197B290027A0B5 /* PolutionLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PolutionLevel.swift; sourceTree = "<group>"; };
+		0B2BBF1D1F1988D80027A0B5 /* MinimumIrritationLevelsForPolutants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinimumIrritationLevelsForPolutants.swift; sourceTree = "<group>"; };
 		0B2EBF7F1EFC7BEE00A3D244 /* DiaryService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiaryService.swift; path = Services/DiaryService.swift; sourceTree = SOURCE_ROOT; };
 		0B3F5B8D1EF85CF5008B6BBB /* AirNowAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = AirNowAPI.swift; path = Model/AirNowAPI.swift; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		0B4B5D1F1EF45BD200914880 /* AirQualityDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AirQualityDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -197,7 +201,9 @@
 			isa = PBXGroup;
 			children = (
 				0B1684EF1F1419A6009F5900 /* GeoLocationService.swift */,
+				0B2BBF1D1F1988D80027A0B5 /* MinimumIrritationLevelsForPolutants.swift */,
 				0B2EBF7F1EFC7BEE00A3D244 /* DiaryService.swift */,
+				0B2BBF1B1F197B290027A0B5 /* PolutionLevel.swift */,
 				0B4B5D491EF461A400914880 /* DiaryServiceType.swift */,
 			);
 			name = Services;
@@ -386,6 +392,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B63C50B1F06D0FD00C77080 /* CLLocationManager+Rx.swift in Sources */,
+				0B2BBF1E1F1988D80027A0B5 /* MinimumIrritationLevelsForPolutants.swift in Sources */,
 				0B1347E51F0EBD6100A262B7 /* UINavigationController+Rx.swift in Sources */,
 				0B4B5D431EF45E5B00914880 /* DiaryEntry.swift in Sources */,
 				0B2589AA1EFB23CA00E12FAA /* SceneCoordinator.swift in Sources */,
@@ -400,6 +407,7 @@
 				0B2EBF801EFC7BEE00A3D244 /* DiaryService.swift in Sources */,
 				0B4B5D451EF4606300914880 /* BindableType.swift in Sources */,
 				0B2589AC1EFB241500E12FAA /* Scene+ViewController.swift in Sources */,
+				0B2BBF1C1F197B290027A0B5 /* PolutionLevel.swift in Sources */,
 				0B2589B01EFB24DD00E12FAA /* AddDiaryEntryViewController.swift in Sources */,
 				0B3F5B8E1EF85CF5008B6BBB /* AirNowAPI.swift in Sources */,
 				0B4B5D231EF45BD200914880 /* AppDelegate.swift in Sources */,

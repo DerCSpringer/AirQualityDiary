@@ -38,6 +38,8 @@ class CurrentConditionsViewController: UIViewController, BindableType {
         super.viewDidLoad()
     }
     
+    //hmm I want the min values for pm25 and o3 known, but not nessicarily exposed
+    //Maybe I send values to a struct based upon what type and it returns a color
     func bindViewModel() {
         diaryEntries.rx.action = viewModel.onEntryButtonPress()
         

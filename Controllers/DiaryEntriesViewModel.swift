@@ -16,10 +16,19 @@ typealias DiarySection = AnimatableSectionModel<String, DiaryEntry>
 struct DiaryEntriesViewModel {
     let sceneCoordinator: SceneCoordinatorType
     let diaryService: DiaryServiceType
+    let bag = DisposeBag()
+    let type : PolutionLevel
     
     init(diaryService: DiaryServiceType, coordinator: SceneCoordinatorType) {
         self.diaryService = diaryService
         self.sceneCoordinator = coordinator
+        
+        type = PolutionLevel.init(polutantName: .ozone, withAQI: 55)
+        type.polutionType.asObservable()
+            .subscribe(onNext: {
+                print($0)
+            })
+            .disposed(by: bag)
     }
     
     //This executes when the bad? button is tapped
@@ -56,6 +65,38 @@ struct DiaryEntriesViewModel {
         //We pass along an updateCation which updates the anything in the new Diary item, and a cancel action which deletes the task item
         //This returns an Observable sequence.  We're integrating the whole create-edit procss into a single sequence
         //this completes once teh Add Diary entry Scene closese
+        
+
+        
+        
+
+        let a = self.diaryService.minO3Irritation()
+        let b = self.diaryService.minPM2_5Irritation()
+//            .flatMap { results -> Observable<Int> in
+//                if results.isEmpty {
+//                    return .just(-1)
+//                }
+//                return Observable.from(optional: results.first?.o3)
+//                }
+//        .distinctUntilChanged()
+        
+        a.subscribe(onNext: {
+            print("Min o3: \($0)")
+        })
+        .disposed(by: bag)
+        
+        b.subscribe(onNext: {
+            print("Min pm24: \($0) ")
+        })
+            .disposed(by: bag)
+        
+//        _ = self.diaryService.minPM2_5Irritation()!
+//            .subscribe(onNext: {
+//                print($0)
+//            })
+//        .disposed(by: bag)
+        
+        
         return CocoaAction { _ in
             return self.diaryService
                 .createEntry(entry: (-1, -1, "")) //when add is pressed an entry is always created with garbage

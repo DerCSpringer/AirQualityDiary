@@ -33,10 +33,12 @@ protocol DiaryServiceType {
     @discardableResult
     func toggle(entry: DiaryEntry) -> Observable<DiaryEntry>
     
+    func minO3Irritation() -> Observable<Int>
+    
     func entries() -> Observable<Results<DiaryEntry>>
     
-    func minO3Irritation() -> Int?
+//    func minO3Irritation() -> Int?
     
-    func minPM2_5Irritation() -> Int?
+    func minPM2_5Irritation() -> Observable<Int>
 
 }

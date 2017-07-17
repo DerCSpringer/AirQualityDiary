@@ -372,11 +372,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/DiaryEntriesViewModel.swift"
-            timestampString = "521756082.344491"
+            timestampString = "522013574.734728"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
             landmarkName = "onCreateEntry()"
             landmarkType = "7">
          </BreakpointContent>
@@ -468,7 +468,7 @@
                   moduleName = "AirQualityDiary"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dcs/Developer/Swift/AirQualityDiary/Services/DiaryService.swift"
-                  timestampString = "521751001.300839"
+                  timestampString = "521757179.535204"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "82"
@@ -483,7 +483,7 @@
                   moduleName = "AirQualityDiary"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dcs/Developer/Swift/AirQualityDiary/Services/DiaryService.swift"
-                  timestampString = "521751001.302792"
+                  timestampString = "521757179.537267"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "83"
@@ -500,11 +500,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/DiaryEntriesViewModel.swift"
-            timestampString = "521681554.265086"
+            timestampString = "522013574.734728"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
             landmarkName = "onUpdateEntry(entry:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -532,11 +532,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/DiaryEntriesViewModel.swift"
-            timestampString = "521681554.265086"
+            timestampString = "522013574.734728"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
             landmarkName = "onToggle(entry:)"
             landmarkType = "7">
             <Locations>
@@ -944,11 +944,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/DiaryEntriesViewModel.swift"
-            timestampString = "521756082.344491"
+            timestampString = "522013574.734728"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
             landmarkName = "onCreateEntry()"
             landmarkType = "7">
          </BreakpointContent>
@@ -960,11 +960,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/DiaryEntriesViewModel.swift"
-            timestampString = "521756082.344491"
+            timestampString = "522013574.734728"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
             landmarkName = "editAction"
             landmarkType = "24">
          </BreakpointContent>
@@ -1084,13 +1084,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Services/DiaryService.swift"
-            timestampString = "521755911.4723"
+            timestampString = "521769225.087625"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
-            landmarkName = "minO3Irritation()"
-            landmarkType = "7">
+            startingLineNumber = "133"
+            endingLineNumber = "133"
+            landmarkName = "DiaryService"
+            landmarkType = "14">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
