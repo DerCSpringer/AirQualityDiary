@@ -34,10 +34,6 @@ class CurrentConditionsViewModel {
     private let currentLocation : Observable<CLLocationCoordinate2D>
     private let diaryService : DiaryServiceType
     
-    private let badConditionColor = #colorLiteral(red: 1, green: 0.3244201541, blue: 0, alpha: 1)
-    private let cautionConditionColor = #colorLiteral(red: 0.9828135371, green: 1, blue: 0, alpha: 1)
-    private let goodConditionColor = #colorLiteral(red: 0.1539898217, green: 1, blue: 0, alpha: 1)
-    
     let sceneCoordinator: SceneCoordinatorType
     private let bag = DisposeBag()
     
@@ -145,7 +141,7 @@ class CurrentConditionsViewModel {
         }
         
         Observable.combineLatest(o3AQICurrent, o3Current.flatMap{$0.polutionType}){AQI, polutionType in
-            return (AQIAndLevel(AQI, polutionType))
+            AQIAndLevel(AQI, polutionType)
             }
             .bind(to: currentO3)
             .disposed(by: bag)
@@ -161,24 +157,24 @@ class CurrentConditionsViewModel {
         }
         
         Observable.combineLatest(pmAQICurrent, pmCurrent.flatMap{$0.polutionType}){AQI, polutionType in
-            return (AQIAndLevel(AQI, polutionType))
+            AQIAndLevel(AQI, polutionType)
             }
             .bind(to: currentPM)
             .disposed(by: bag)
 
         
         let todayForecast = forecastFetcher.filter { polutionItem in
-            return polutionItem.forecastFor == .today
+            polutionItem.forecastFor == .today
         }
         let tomorrowForecast = forecastFetcher.filter { polutionItem in
-            return polutionItem.forecastFor == .tomorrow
+            polutionItem.forecastFor == .tomorrow
         }
         
         //MARK: O3 for Tomorrow's Forecast
 
         let o3TomorrowForecast = tomorrowForecast
             .filter {
-            return $0.polututeName == .ozone
+            $0.polututeName == .ozone
             }
             .shareReplay(1)
         
@@ -188,15 +184,15 @@ class CurrentConditionsViewModel {
         }
         
         Observable.combineLatest(o3AQITomorrowForecast, o3TomorrowForecast.flatMap{$0.polutionType}){AQI, polutionType in
-            return (AQIAndLevel(AQI, polutionType))
+            AQIAndLevel(AQI, polutionType)
             }
             .bind(to: tomorrowO3)
             .disposed(by: bag)
         
         //MARK: pm for Tomorrow's forecast
         
-        let pmTomorrowForecast = tomorrowForecast.filter { polutionItem in
-            polutionItem.polututeName == .PM2_5
+        let pmTomorrowForecast = tomorrowForecast.filter {
+             $0.polututeName == .PM2_5
             }
         .shareReplay(1)
         
@@ -205,9 +201,9 @@ class CurrentConditionsViewModel {
         }
         
         Observable.combineLatest(pmAQITomorrowForecast, pmTomorrowForecast.flatMap{$0.polutionType}){AQI, polutionType in
-            return (AQIAndLevel(AQI, polutionType))
+            AQIAndLevel(AQI, polutionType)
             }
-            .bind(to: currentForcastPM)
+            .bind(to: tomorrowPM)
             .disposed(by: bag)
         
         //MARK: pm for Today's Forcast
@@ -223,7 +219,7 @@ class CurrentConditionsViewModel {
         }
         
         Observable.combineLatest(pmAQITodayForecast, pmTodayForecast.flatMap{$0.polutionType}){AQI, polutionType in
-            return (AQIAndLevel(AQI, polutionType))
+            AQIAndLevel(AQI, polutionType)
             }
             .bind(to: currentForcastPM)
             .disposed(by: bag)
@@ -241,7 +237,7 @@ class CurrentConditionsViewModel {
         }
 
         Observable.combineLatest(o3AQITodayForecast, o3TodayForecast.flatMap{$0.polutionType}){AQI, polutionType in
-            return (AQIAndLevel(AQI, polutionType))
+            AQIAndLevel(AQI, polutionType)
         }
         .bind(to: currentForecastO3)
         .disposed(by: bag)

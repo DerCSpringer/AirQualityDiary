@@ -30,7 +30,7 @@ class CurrentConditionsViewController: UIViewController, BindableType {
     @IBOutlet weak var pm25TomorrowForecastIndicator: UIActivityIndicatorView!
     @IBOutlet weak var o3TodayForecastIndicator: UIActivityIndicatorView!
     
-    let bag = DisposeBag()
+    private let bag = DisposeBag()
     
     var viewModel: CurrentConditionsViewModel!
     

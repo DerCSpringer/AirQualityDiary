@@ -15,8 +15,8 @@ class MinimumIrritationLevelsForPolutants {
     //output
     private (set) var minPM25 = Variable<Int>(-1)
     private (set) var minO3 = Variable<Int>(-1)
-    private let bag = DisposeBag()
     
+    private let bag = DisposeBag()
     //might wanna init this and send in service maybe from appdelegate
     private init() {
         let service = DiaryService()
