@@ -12,8 +12,17 @@ import RxCocoa
 import CoreLocation
 import Action
 import Unbox
+import UIKit
 
+
+//I think we want to make all these variables of Just string into a tupole of a String and airquality(.good etc)
+//I should send a model object
+//The VC then sends off the quality to get the color
+//It uses the color and the text to make the label
+//Maybe I should just pass along the polution type(Observable) and the VC can then handle the color and text
 class CurrentConditionsViewModel {
+    typealias PoluteNameAndLevel = (name: String, level: AirQualityLevel)
+    
     let tomorrowO3 = Variable<String>("Unavailable")
     let tomorrowPM = Variable<String>("Unavailable")
     let currentForcastPM = Variable<String>("Unavailable")
@@ -22,7 +31,8 @@ class CurrentConditionsViewModel {
     let currentPM = Variable<String>("Unavailable")
     let forecastFetchIsFetching = Variable<Bool>(true)
     let currentFetchIsFetching = Variable<Bool>(true)
-
+    
+    let test = Variable<PoluteNameAndLevel>(("Unavailable", .unknown))
     
     private var fetchOnEmit : Observable<(CLLocationCoordinate2D, Int)>
     private let currentLocation : Observable<CLLocationCoordinate2D>
@@ -33,7 +43,7 @@ class CurrentConditionsViewModel {
     private let goodConditionColor = #colorLiteral(red: 0.1539898217, green: 1, blue: 0, alpha: 1)
     
     let sceneCoordinator: SceneCoordinatorType
-    let bag = DisposeBag()
+    private let bag = DisposeBag()
     
     init(diaryService: DiaryServiceType, coordinator: SceneCoordinatorType) {
         self.diaryService = diaryService
@@ -100,12 +110,6 @@ class CurrentConditionsViewModel {
             .bind(to: forecastFetchIsFetching)
             .disposed(by: bag)
         
-        //Something to consider is the sorting of items and picking a smallest value which you're suseptible too
-        //-1 will mess this up.
-        
-        //-1 still displays sometimes in UI. I need to fix this
-        //Looks like clearValues() is not being executed on the main thread.  May need to think where I place it
-        
         //Also need to show colors for conditions
         
         let currentFetcher = fetchOnEmit.flatMap { location, _  -> Observable<[JSONObject]> in
@@ -140,7 +144,7 @@ class CurrentConditionsViewModel {
             return $0.polututeName == .ozone
             }
             .map {
-                ($0.AQI == -1) ? "Unavailable" : String($0.AQI)
+                return ($0.AQI == -1) ? "Unavailable" : String($0.AQI)
             }
             .bind(to: currentO3)
             .disposed(by: bag)
@@ -199,8 +203,37 @@ class CurrentConditionsViewModel {
             }
             .bind(to: currentForcastPM)
             .disposed(by: bag)
+        
+//        todayForecast.filter { polutionItem in
+//            polutionItem.polututeName == .ozone
+//    }
+//            .map {
+//                
+//        }
+//        let colorObsForecastO3 = currentForcastO3.asObservable()
+//            .map{ PolutionLevel.init(polutantName: <#T##PolutantName#>, withAQI: <#T##Int#>) }
+        
+        //When I do o3 and try to get an observalbe of the AirLEvel(A behavior subjecr) it doesn't update it
+        
+        let o3 = todayForecast
+            .filter {
+                return $0.polututeName == .ozone
+        }
+        .shareReplay(1)
+        
+          let d =  o3.map {
+                ($0.AQI == -1) ? "Unavailable" : String($0.AQI)
+        }
+
+            
+        Observable.combineLatest(d, o3.flatMap{$0.polutionType.asObservable()}){AQI, polutionType in
+            return (PoluteNameAndLevel(AQI, polutionType))
+            
+        }
+        .bind(to: test)
+        .disposed(by: bag)
+
     }
-    
     func updateUIForFetch() {
         if Thread.isMainThread {
             print("On main thread")

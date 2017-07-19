@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B0C99131F1D798200EB0036 /* UILabel+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0C99121F1D798200EB0036 /* UILabel+Rx.swift */; };
 		0B1347E51F0EBD6100A262B7 /* UINavigationController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1347E41F0EBD6100A262B7 /* UINavigationController+Rx.swift */; };
 		0B1684F01F1419A6009F5900 /* GeoLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1684EF1F1419A6009F5900 /* GeoLocationService.swift */; };
 		0B1CC5D91F10495900661355 /* PolutionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1CC5D81F10495900661355 /* PolutionItem.swift */; };
@@ -50,6 +51,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0B0C99121F1D798200EB0036 /* UILabel+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UILabel+Rx.swift"; path = "Extensions/UILabel+Rx.swift"; sourceTree = SOURCE_ROOT; };
 		0B1347E41F0EBD6100A262B7 /* UINavigationController+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UINavigationController+Rx.swift"; path = "Extensions/UINavigationController+Rx.swift"; sourceTree = SOURCE_ROOT; };
 		0B1684EF1F1419A6009F5900 /* GeoLocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GeoLocationService.swift; path = Services/GeoLocationService.swift; sourceTree = SOURCE_ROOT; };
 		0B1CC5D81F10495900661355 /* PolutionItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PolutionItem.swift; path = Model/PolutionItem.swift; sourceTree = SOURCE_ROOT; };
@@ -213,6 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				0B1347E41F0EBD6100A262B7 /* UINavigationController+Rx.swift */,
+				0B0C99121F1D798200EB0036 /* UILabel+Rx.swift */,
 				0B63C50A1F06D0FD00C77080 /* CLLocationManager+Rx.swift */,
 			);
 			name = Extensions;
@@ -398,6 +401,7 @@
 				0B2589AA1EFB23CA00E12FAA /* SceneCoordinator.swift in Sources */,
 				0B2589A21EFB224600E12FAA /* DiaryEntriesViewModel.swift in Sources */,
 				0B2589A81EFB238C00E12FAA /* SceneCoordinatorType.swift in Sources */,
+				0B0C99131F1D798200EB0036 /* UILabel+Rx.swift in Sources */,
 				0B1684F01F1419A6009F5900 /* GeoLocationService.swift in Sources */,
 				0B2589B21EFB24F300E12FAA /* DiaryEntriesViewController.swift in Sources */,
 				0B63C50E1F06E8B300C77080 /* CurrentConditionsViewController.swift in Sources */,

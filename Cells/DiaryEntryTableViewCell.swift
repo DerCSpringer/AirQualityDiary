@@ -13,6 +13,7 @@ import RxSwift
 class DiaryEntryTableViewCell: UITableViewCell {
     
     var disposeBag = DisposeBag()
+    
     @IBOutlet weak var button: UIButton!
     @IBOutlet weak var o3AQI: UILabel!
     @IBOutlet weak var PM25AQI: UILabel!
@@ -34,6 +35,7 @@ class DiaryEntryTableViewCell: UITableViewCell {
                 }
             })
             .disposed(by: disposeBag)
+        
         
         entry.rx.observe(Int.self, "pm25")
             .subscribe(onNext: { [weak self] pm25 in

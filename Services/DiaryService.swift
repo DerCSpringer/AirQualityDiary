@@ -124,27 +124,5 @@ struct DiaryService: DiaryServiceType {
             .distinctUntilChanged()
         return min
     }
-//    
-//    func minO3Irritation() -> Int? {
-//          let result = withRealm("getting entries") { realm -> Int? in
-//            let realm = try Realm()
-//            let entries = realm.objects(DiaryEntry.self)
-//            let filteredResults = entries.filter("(checked == true) AND (o3 != -1)")
-//            return filteredResults.min(ofProperty: "o3") as Int!
-//        }
-//        
-//        return result!
-//        
-//    }
-//    
-//    func minPM2_5Irritation() -> Observable<Int>? {
-//        let result = withRealm("getting entries") { realm -> Observable<Int> in
-//            let realm = try Realm()
-//            let entries = realm.objects(DiaryEntry.self)
-//            let filteredResults = entries.filter("(checked == true) AND (pm25 != -1)")
-//            return Observable.from(optional: filteredResults.min(ofProperty: "pm25") as Int!)
-//        }
-//        return result!
-//
-//    }
+
 }

@@ -56,7 +56,6 @@ class DiaryEntriesViewController: UIViewController, BindableType, UITableViewDel
         tableView.rx.itemSelected
             .map { [unowned self] indexPath in
                 let this = try self.dataSource.model(at: indexPath) as! DiaryEntry
-                print(this)
                 return this
             }
             .subscribe(viewModel.editAction.inputs)

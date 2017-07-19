@@ -8,6 +8,8 @@
 
 import Foundation
 import Unbox
+import RxCocoa
+import RxSwift
 
 enum ForecastDate {
     case tomorrow
@@ -27,6 +29,9 @@ struct PolutionItem {
     let forecastFor : ForecastDate?
     let AQI : Int
     let polututeName : PolutantName
+    var polutionType = BehaviorSubject<AirQualityLevel>(value: .unknown)
+    fileprivate var poluteLevel : PolutionLevel
+    fileprivate let bag = DisposeBag()
 }
 
 extension PolutionItem: Unboxable {
@@ -66,5 +71,8 @@ extension PolutionItem: Unboxable {
             self.forecastFor = .other
         }
         
+        poluteLevel = PolutionLevel.init(polutantName: self.polututeName, withAQI: AQI)
+        poluteLevel.polutionType.bind(to: polutionType)
+        .disposed(by: bag)
     }
 }

@@ -32,20 +32,16 @@ class PolutionLevel {
     //output
     let polutionType = BehaviorSubject<AirQualityLevel>(value: .unknown)
 
-    private var AQI : Int
-    private var polutant : PolutantName
     private let bag = DisposeBag()
     private let minO3 = MinimumIrritationLevelsForPolutants.instance.minO3.asObservable()
     private let minpm25 = MinimumIrritationLevelsForPolutants.instance.minPM25.asObservable()
     
     init(polutantName : PolutantName, withAQI AQI: Int) {
-        self.AQI = AQI
-        polutant = polutantName
-        
-        if polutantName == .ozone {
+
+        if polutantName == .ozone { //As soon as we get a new min we need to update the polutionType
             self.minO3
                 .map{ [weak self] min in
-                    (self?.polutionSeverity(withMinAQI: min, andCurrentAQI: AQI))!
+                    return (self?.polutionSeverity(withMinAQI: min, andCurrentAQI: AQI))!
                 }
                 .bind(to: polutionType)
                 .disposed(by: bag)
@@ -68,6 +64,21 @@ class PolutionLevel {
             return .moderate
         }  else {
             return .good
+        }
+    }
+}
+
+extension PolutionLevel {
+    static func colorForPolutionLevel(_ airLevel:AirQualityLevel) -> UIColor {
+        switch airLevel {
+        case .good:
+            return #colorLiteral(red: 0.1539898217, green: 1, blue: 0, alpha: 1)
+        case .bad:
+            return #colorLiteral(red: 1, green: 0.3244201541, blue: 0, alpha: 1)
+        case .moderate:
+            return #colorLiteral(red: 0.9828135371, green: 1, blue: 0, alpha: 1)
+        default:
+            return #colorLiteral(red: 0.9105119109, green: 0.9008874893, blue: 0.6748702526, alpha: 1)
         }
     }
 }

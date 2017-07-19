@@ -11,9 +11,9 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-    //only allow one orientation
-
 class CurrentConditionsViewController: UIViewController, BindableType {
+    
+    typealias ColorName = (name: String, color: Observable<UIColor>)
 
     @IBOutlet weak var currentForcastPM: UILabel!
     @IBOutlet weak var currentForcastO3: UILabel!
@@ -40,14 +40,34 @@ class CurrentConditionsViewController: UIViewController, BindableType {
     
     //hmm I want the min values for pm25 and o3 known, but not nessicarily exposed
     //Maybe I send values to a struct based upon what type and it returns a color
+    
+    //I want to use combine latest to have two things the color and the AQI level.  When either updates then the whole thing updates
     func bindViewModel() {
         diaryEntries.rx.action = viewModel.onEntryButtonPress()
         
         //MARK: Current forecast O3 Label and Indicator
         
-        viewModel.currentForcastO3.asDriver()
-        .drive(currentForcastO3.rx.text)
+        let stuff = viewModel.test.asObservable()
+        .shareReplay(1)
+        
+        stuff
+
+            .map{ return $0.name }
+        .asDriver(onErrorJustReturn: "Unavailable")
+        .drive(self.currentForcastO3.rx.text)
         .addDisposableTo(bag)
+        
+        //stuff.flatMap { $0.color }
+        stuff.map { PolutionLevel.colorForPolutionLevel($0.level) }
+        .asDriver(onErrorJustReturn: UIColor.blue)
+        .drive(self.currentForcastO3.rx.textColor)
+        .addDisposableTo(bag)
+        
+        
+        
+//        viewModel.currentForcastO3.asDriver()
+//        .drive(currentForcastO3.rx.text)
+//        .addDisposableTo(bag)
         
         viewModel.forecastFetchIsFetching.asDriver()
             .drive(currentForcastO3.rx.isHidden)
