@@ -13,7 +13,7 @@ import RxCocoa
 
 class CurrentConditionsViewController: UIViewController, BindableType {
     
-    typealias ColorName = (name: String, color: Observable<UIColor>)
+    //typealias ColorName = (name: String, color: Observable<UIColor>)
 
     @IBOutlet weak var currentForcastPM: UILabel!
     @IBOutlet weak var currentForcastO3: UILabel!
@@ -42,32 +42,26 @@ class CurrentConditionsViewController: UIViewController, BindableType {
     //Maybe I send values to a struct based upon what type and it returns a color
     
     //I want to use combine latest to have two things the color and the AQI level.  When either updates then the whole thing updates
+    
+    //Need to hook up the rest of the data to the new color
     func bindViewModel() {
         diaryEntries.rx.action = viewModel.onEntryButtonPress()
         
         //MARK: Current forecast O3 Label and Indicator
         
-        let stuff = viewModel.test.asObservable()
+        let currentForecastO3 = viewModel.currentForecastO3.asObservable()
         .shareReplay(1)
         
-        stuff
-
-            .map{ return $0.name }
+        currentForecastO3
+        .map{ return $0.AQI }
         .asDriver(onErrorJustReturn: "Unavailable")
         .drive(self.currentForcastO3.rx.text)
         .addDisposableTo(bag)
         
-        //stuff.flatMap { $0.color }
-        stuff.map { PolutionLevel.colorForPolutionLevel($0.level) }
+        currentForecastO3.map { PolutionLevel.colorForPolutionLevel($0.level) }
         .asDriver(onErrorJustReturn: UIColor.blue)
         .drive(self.currentForcastO3.rx.textColor)
         .addDisposableTo(bag)
-        
-        
-        
-//        viewModel.currentForcastO3.asDriver()
-//        .drive(currentForcastO3.rx.text)
-//        .addDisposableTo(bag)
         
         viewModel.forecastFetchIsFetching.asDriver()
             .drive(currentForcastO3.rx.isHidden)
@@ -79,8 +73,18 @@ class CurrentConditionsViewController: UIViewController, BindableType {
         
         //MARK: Current Forecast PM2.5 Label and Indicator
 
-        viewModel.currentForcastPM.asDriver()
-            .drive(currentForcastPM.rx.text)
+        let currentForecastPM = viewModel.currentForcastPM.asObservable()
+            .shareReplay(1)
+        
+        currentForecastPM
+            .map{ return $0.AQI }
+            .asDriver(onErrorJustReturn: "Unavailable")
+            .drive(self.currentForcastPM.rx.text)
+            .addDisposableTo(bag)
+        
+        currentForecastPM.map { PolutionLevel.colorForPolutionLevel($0.level) }
+            .asDriver(onErrorJustReturn: UIColor.blue)
+            .drive(self.currentForcastPM.rx.textColor)
             .addDisposableTo(bag)
         
         viewModel.forecastFetchIsFetching.asDriver()
@@ -94,8 +98,18 @@ class CurrentConditionsViewController: UIViewController, BindableType {
         
         //MARK: Tomorrow's Forecast O3 Label and Indicator
         
-        viewModel.tomorrowO3.asDriver()
-            .drive(tomorrowO3.rx.text)
+        let o3Tomorrow = viewModel.tomorrowO3.asObservable()
+            .shareReplay(1)
+        
+        o3Tomorrow
+            .map{ return $0.AQI }
+            .asDriver(onErrorJustReturn: "Unavailable")
+            .drive(self.tomorrowO3.rx.text)
+            .addDisposableTo(bag)
+        
+        o3Tomorrow.map { PolutionLevel.colorForPolutionLevel($0.level) }
+            .asDriver(onErrorJustReturn: UIColor.blue)
+            .drive(self.tomorrowO3.rx.textColor)
             .addDisposableTo(bag)
         
         viewModel.forecastFetchIsFetching.asDriver()
@@ -108,8 +122,18 @@ class CurrentConditionsViewController: UIViewController, BindableType {
 
         //MARK: Tomorrow's Forecast PM2.5 Label and Indicator
         
-        viewModel.tomorrowPM.asDriver()
-            .drive(tomorrowPM.rx.text)
+        let pmTomorrow = viewModel.tomorrowPM.asObservable()
+            .shareReplay(1)
+        
+        pmTomorrow
+            .map{ return $0.AQI }
+            .asDriver(onErrorJustReturn: "Unavailable")
+            .drive(self.tomorrowPM.rx.text)
+            .addDisposableTo(bag)
+        
+        pmTomorrow.map { PolutionLevel.colorForPolutionLevel($0.level) }
+            .asDriver(onErrorJustReturn: UIColor.blue)
+            .drive(self.tomorrowPM.rx.textColor)
             .addDisposableTo(bag)
         
         viewModel.forecastFetchIsFetching.asDriver()
@@ -122,8 +146,18 @@ class CurrentConditionsViewController: UIViewController, BindableType {
         
         //MARK: Current Conditions O3 Label and Indicator
         
-        viewModel.currentO3.asDriver()
-            .drive(currentO3.rx.text)
+        let o3Current = viewModel.currentO3.asObservable()
+            .shareReplay(1)
+        
+        o3Current
+            .map{ return $0.AQI }
+            .asDriver(onErrorJustReturn: "Unavailable")
+            .drive(self.currentO3.rx.text)
+            .addDisposableTo(bag)
+        
+        o3Current.map { PolutionLevel.colorForPolutionLevel($0.level) }
+            .asDriver(onErrorJustReturn: UIColor.blue)
+            .drive(self.currentO3.rx.textColor)
             .addDisposableTo(bag)
         
         viewModel.currentFetchIsFetching.asDriver()
@@ -136,8 +170,18 @@ class CurrentConditionsViewController: UIViewController, BindableType {
 
         //MARK: Current Conditions PM2.5 Label and Indicator
 
-        viewModel.currentPM.asDriver()
-            .drive(currentPM.rx.text)
+        let pmCurrent = viewModel.currentPM.asObservable()
+            .shareReplay(1)
+        
+        pmCurrent
+            .map{ return $0.AQI }
+            .asDriver(onErrorJustReturn: "Unavailable")
+            .drive(self.currentPM.rx.text)
+            .addDisposableTo(bag)
+        
+        pmCurrent.map { PolutionLevel.colorForPolutionLevel($0.level) }
+            .asDriver(onErrorJustReturn: UIColor.blue)
+            .drive(self.currentPM.rx.textColor)
             .addDisposableTo(bag)
         
         viewModel.currentFetchIsFetching.asDriver()
