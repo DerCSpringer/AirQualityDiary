@@ -17,6 +17,7 @@ import RxSwift
 //2. convert json as array ot polution objects in array
 //3. Our polution objects could have different dates but same names
         //Only in forecast
+//Use a reachablity to alert this so it can fetch again
 
 class AirNowAPI {
     

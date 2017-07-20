@@ -14,10 +14,8 @@ import Action
 import Unbox
 import UIKit
 
-//I should send a model object
 //The VC then sends off the quality to get the color
 //It uses the color and the text to make the label
-//Maybe I should just pass along the polution type(Observable) and the VC can then handle the color and text
 typealias AQIAndLevel = (AQI: String, level: AirQualityLevel)
 let defaultAQIAndLevel = AQIAndLevel("Unavailable", .unknown)
 
@@ -111,7 +109,7 @@ class CurrentConditionsViewModel {
             .shareReplay(1)
         
         currentFetcher
-            .map { _ in return false }
+            .map { _ in false }
             .bind(to: currentFetchIsFetching)
             .disposed(by: bag)
         
@@ -125,45 +123,13 @@ class CurrentConditionsViewModel {
         combineTitleAndPolutionTypeFor(currentFetcher, poluteName: .ozone)
             .bind(to: currentO3)
             .disposed(by: bag)
-        
-//        let o3Current = currentFetcher
-//            .observeOn(MainScheduler.instance)
-//            .filter {
-//            $0.polututeName == .ozone
-//            }
-//            .shareReplay(1)
-//        
-//        let o3AQICurrent =  o3Current.map {
-//            ($0.AQI == -1) ? "Unavailable" : String($0.AQI)
-//        }
-//        
-//        Observable.combineLatest(o3AQICurrent, o3Current.flatMap{$0.polutionType}){AQI, polutionType in
-//            AQIAndLevel(AQI, polutionType)
-//            }
-//            .bind(to: currentO3)
-//            .disposed(by: bag)
 
         //MARK: Current pm2.5
         
         combineTitleAndPolutionTypeFor(currentFetcher, poluteName: .PM2_5)
             .bind(to: currentPM)
             .disposed(by: bag)
-//        let pmCurrent = currentFetcher.filter {
-//            $0.polututeName == .PM2_5
-//            }
-//            .shareReplay(1)
-//        
-//        let pmAQICurrent =  pmCurrent.map {
-//            ($0.AQI == -1) ? "Unavailable" : String($0.AQI)
-//        }
-//        
-//        Observable.combineLatest(pmAQICurrent, pmCurrent.flatMap{$0.polutionType}){AQI, polutionType in
-//            AQIAndLevel(AQI, polutionType)
-//            }
-//            .bind(to: currentPM)
-//            .disposed(by: bag)
 
-        
         let todayForecast = forecastFetcher.filter { polutionItem in
             polutionItem.forecastFor == .today
         }
@@ -176,23 +142,6 @@ class CurrentConditionsViewModel {
         combineTitleAndPolutionTypeFor(tomorrowForecast, poluteName: .ozone)
             .bind(to: tomorrowO3)
             .disposed(by: bag)
-
-//        let o3TomorrowForecast = tomorrowForecast
-//            .filter {
-//            $0.polututeName == .ozone
-//            }
-//            .shareReplay(1)
-//        
-//        
-//        let o3AQITomorrowForecast =  o3TomorrowForecast.map {
-//            ($0.AQI == -1) ? "Unavailable" : String($0.AQI)
-//        }
-//        
-//        Observable.combineLatest(o3AQITomorrowForecast, o3TomorrowForecast.flatMap{$0.polutionType}){AQI, polutionType in
-//            AQIAndLevel(AQI, polutionType)
-//            }
-//            .bind(to: tomorrowO3)
-//            .disposed(by: bag)
         
         //MARK: pm for Tomorrow's forecast
         
@@ -200,64 +149,17 @@ class CurrentConditionsViewModel {
             .bind(to: tomorrowPM)
             .disposed(by: bag)
         
-//        let pmTomorrowForecast = tomorrowForecast.filter {
-//             $0.polututeName == .PM2_5
-//            }
-//        .shareReplay(1)
-//        
-//        let pmAQITomorrowForecast =  pmTomorrowForecast.map {
-//            ($0.AQI == -1) ? "Unavailable" : String($0.AQI)
-//        }
-//        
-//        Observable.combineLatest(pmAQITomorrowForecast, pmTomorrowForecast.flatMap{$0.polutionType}){AQI, polutionType in
-//            AQIAndLevel(AQI, polutionType)
-//            }
-//            .bind(to: tomorrowPM)
-//            .disposed(by: bag)
-        
         //MARK: pm for Today's Forcast
         
         combineTitleAndPolutionTypeFor(todayForecast, poluteName: .PM2_5)
             .bind(to: currentForcastPM)
             .disposed(by: bag)
-//        let pmTodayForecast = todayForecast
-//            .filter {
-//                $0.polututeName == .PM2_5
-//            }
-//            .shareReplay(1)
-//        
-//        let pmAQITodayForecast =  pmTodayForecast.map {
-//            ($0.AQI == -1) ? "Unavailable" : String($0.AQI)
-//        }
-//        
-//        Observable.combineLatest(pmAQITodayForecast, pmTodayForecast.flatMap{$0.polutionType}){AQI, polutionType in
-//            AQIAndLevel(AQI, polutionType)
-//            }
-//            .bind(to: currentForcastPM)
-//            .disposed(by: bag)
         
         //MARK: o3 for Today's Forcast
         
         combineTitleAndPolutionTypeFor(todayForecast, poluteName: .ozone)
         .bind(to: currentForecastO3)
         .disposed(by: bag)
-        
-//        let o3TodayForecast = todayForecast
-//            .filter {
-//                $0.polututeName == .ozone
-//        }
-//        .shareReplay(1)
-//        
-//        let o3AQITodayForecast =  o3TodayForecast.map {
-//                ($0.AQI == -1) ? "Unavailable" : String($0.AQI)
-//        }
-//
-//        Observable.combineLatest(o3AQITodayForecast, o3TodayForecast.flatMap{$0.polutionType}){AQI, polutionType in
-//            AQIAndLevel(AQI, polutionType)
-//        }
-//        .bind(to: currentForecastO3)
-//        .disposed(by: bag)
-
     }
     
     private func combineTitleAndPolutionTypeFor(_ obs: Observable<PolutionItem>, poluteName:PolutantName) -> Observable<AQIAndLevel> {
