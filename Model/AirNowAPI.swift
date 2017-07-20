@@ -54,25 +54,6 @@ class AirNowAPI {
             }
             return []
         }
-        
-//            { json in //map each json emit to an array
-//            if let a = json as? [String:Any] {
-//            return a
-//            }
- //       }
-//        if let data = data, let json = try? JSONSerialization.jsonObject(with: data, options: []) as? T, let result = json {
-//            observer.onNext(result)
-//        }
-//        observer.onCompleted()
- //   }
-
-//        return URLSession.shared.rx.json(request: request).map { json in
-//            if let jsonObj = json as? [String:Any] {
-//                return jsonObj
-//            } else {
-//                return [:]
-//            }
-//    }
     }
     
     //http://www.airnowapi.org/aq/forecast/latLong/?format=text/csv&latitude=33.9681&longitude=-118.3444&date=2017-07-04&distance=25&API_KEY=2758A15B-FD00-4191-AD80-11D2F8C73509
@@ -142,24 +123,24 @@ class AirNowAPI {
     }
 }
 
-extension AirNowAPI { //Garbage will fix once I figure out how to unbox array of items into single Model object
-    
-    var dateFormat: DateFormatter {
-        let format = DateFormatter()
-        format.dateFormat = "yyyy-MM-dd "
-        return format
-    }
-    
-    func formatJSON(jsonArray: [JSONObject]) -> JSONObject {
-        var o3 : Int?
-        var pm25 : Int?
-        var output : JSONObject = [:]
-        for airQuality in jsonArray {
-            if airQuality["ParameterName"] as? String == "O3" {o3 = airQuality["AQI"] as? Int }
-            if airQuality["ParameterName"] as? String == "PM2.5" { pm25 = airQuality["AQI"] as? Int }
-        }
-        output["PM2.5"] = pm25
-        output["O3"] = o3
-        return output
-    }
-}
+//extension AirNowAPI { //Garbage will fix once I figure out how to unbox array of items into single Model object
+//    
+//    var dateFormat: DateFormatter {
+//        let format = DateFormatter()
+//        format.dateFormat = "yyyy-MM-dd "
+//        return format
+//    }
+//    
+//    func formatJSON(jsonArray: [JSONObject]) -> JSONObject {
+//        var o3 : Int?
+//        var pm25 : Int?
+//        var output : JSONObject = [:]
+//        for airQuality in jsonArray {
+//            if airQuality["ParameterName"] as? String == "O3" {o3 = airQuality["AQI"] as? Int }
+//            if airQuality["ParameterName"] as? String == "PM2.5" { pm25 = airQuality["AQI"] as? Int }
+//        }
+//        output["PM2.5"] = pm25
+//        output["O3"] = o3
+//        return output
+//    }
+//}

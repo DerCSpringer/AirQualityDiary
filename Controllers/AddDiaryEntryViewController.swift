@@ -49,7 +49,6 @@ class AddDiaryEntryViewController: UIViewController, BindableType {
             .drive(self.pm25.rx.textColor)
             .addDisposableTo(bag)
         
-        
         viewModel.note.asDriver()
             .drive(note.rx.text)
         .addDisposableTo(bag)

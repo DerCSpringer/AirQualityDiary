@@ -46,10 +46,6 @@ class GeolocationService {
             .flatMap {
                 return $0.last.map(Driver.just) ?? Driver.empty()
             }
-            
-//            .distinctUntilChanged { loc1, loc2 in //better but not great the loc could have changed
-//                return !(loc1.location == loc2.location)
-//            }
             .filter {
                 $0.timestamp.timeIntervalSinceNow < 300
             }

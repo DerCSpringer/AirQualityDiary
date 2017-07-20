@@ -37,11 +37,11 @@ struct PollutionItem {
 extension PollutionItem {
     static func pollutionItemsFrom(diary: DiaryEntry) -> Observable<[PollutionItem]> {
         return Observable.create { observer in
-            
+            let bag = DisposeBag() //TODO: Is this ok to put in an observable?
             let polluteLevelPM25 = PollutionLevel.init(pollutantName:.PM2_5 , withAQI: diary.pm25)
             let airQualityLevelPM25 = BehaviorSubject<AirQualityLevel>(value: .unknown)
-            polluteLevelPM25.pollutionType.bind(to: airQualityLevelPM25)
-            //.disposed(by: bag)
+            polluteLevelPM25.pollutionType.bind(to: airQualityLevelPM25)  //TODO: Is it ok to bind when creating an Obs?
+            .disposed(by: bag)
             
             let pm = PollutionItem.init(forecastFor: nil,
                                         AQI: diary.pm25,
@@ -52,7 +52,7 @@ extension PollutionItem {
             let polluteLevelO3 = PollutionLevel.init(pollutantName:.ozone , withAQI: diary.o3)
             let airQualityLevelO3 = BehaviorSubject<AirQualityLevel>(value: .unknown)
             polluteLevelO3.pollutionType.bind(to: airQualityLevelO3)
-            //.disposed(by: bag)
+            .disposed(by: bag)
             
             let o3 = PollutionItem.init(forecastFor: nil,
                                         AQI: diary.o3,
@@ -62,34 +62,12 @@ extension PollutionItem {
             
             let polutionItems = [pm, o3]
             observer.onNext(polutionItems)
-//            observer.onNext(pm)
-//            observer.onNext(o3)
             observer.onCompleted()
             
             return Disposables.create()
         }
     }
 }
-
-//static var reachable: Observable<Bool> {
-//    return Observable.create { observer in
-//        
-//        let reachability = Reachability.forInternetConnection()
-//        
-//        if let reachability = reachability {
-//            observer.onNext(reachability.isReachable())
-//            reachability.reachableBlock = { _ in observer.onNext(true) }
-//            reachability.unreachableBlock = { _ in observer.onNext(false) }
-//            reachability.startNotifier()
-//        } else {
-//            observer.onError(Reachability.Errors.unavailable)
-//        }
-//        
-//        return Disposables.create {
-//            reachability?.stopNotifier()
-//        }
-//    }
-//}
 
 extension PollutionItem: Unboxable {
     init(unboxer: Unboxer) throws {

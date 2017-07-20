@@ -75,7 +75,6 @@ class DiaryEntriesViewController: UIViewController, BindableType, UITableViewDel
         return 44
     }
     
-    
     fileprivate func configureDataSource() {
         
         dataSource.canEditRowAtIndexPath = { cell in
@@ -85,7 +84,6 @@ class DiaryEntriesViewController: UIViewController, BindableType, UITableViewDel
         dataSource.titleForHeaderInSection = { dataSource, index in
             return ""
         }
-        
         
         dataSource.configureCell = {
             [weak self] dataSource, tableView, indexPath, entry in
