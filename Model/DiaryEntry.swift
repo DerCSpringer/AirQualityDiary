@@ -26,10 +26,10 @@ class DiaryEntry: Object {
         o3 = airQualityJSON["O3"] as? Int ?? -1
         pm25 = airQualityJSON["PM2.5"] as? Int ?? -1
     }
+    
     override class func primaryKey() -> String? {
         return "uid"
     }
-
 }
 
 extension DiaryEntry: IdentifiableType {

@@ -12,7 +12,6 @@ import RxSwift
 import RxCocoa
 
 class GeolocationService {
-    
     static let instance = GeolocationService()
     private (set) var authorized: Driver<Bool>
     private (set) var location: Driver<CLLocationCoordinate2D>
@@ -20,7 +19,6 @@ class GeolocationService {
     private let locationManager = CLLocationManager()
     
     private init() {
-        
         locationManager.distanceFilter = 5000
         locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
         
@@ -53,10 +51,9 @@ class GeolocationService {
 //                return !(loc1.location == loc2.location)
 //            }
             .filter {
-                return ($0.timestamp.timeIntervalSinceNow < 300)
+                $0.timestamp.timeIntervalSinceNow < 300
             }
             .map { $0.coordinate }
-        
         
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()

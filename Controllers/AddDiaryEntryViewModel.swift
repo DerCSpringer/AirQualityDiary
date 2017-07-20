@@ -8,20 +8,39 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
 import Action
 import CoreLocation
+import Unbox
+
 
 class AddDiaryEntryViewModel {
     private let bag = DisposeBag()
+//    let o3TextAndCondition = Variable<AQIAndLevel>(defaultAQIAndLevel)
+//    let pmTextAndCondition = Variable<AQIAndLevel>(defaultAQIAndLevel)
     let o3Text = Variable<Int>(-1)
     let pm25Text = Variable<Int>(-1)
+
     let isFetching = Variable<Bool>(true)
     let note = Variable<String>("")
     private let onUpdate: Action<DiaryType, Void>
     let onCancel: CocoaAction!
     private let currentLocation : Observable<CLLocationCoordinate2D>
-
+    //private let polutionItem : PolutionItem
     
+    //Finish Conversion for o3Text and pmText Variables
+    //I want to move these over and use a polutionItem struct
+    //I think everything in here will use a polution struct including the init
+    //It will emit only a text and condition to the VC
+    
+    //1.Maybe have two variables one for the diary entry and one for the polution item.  That's dumb though
+    //2. Get polution item from info give that to the VC.
+    //When I need to back out I could assign it to the diary entry
+    //How:
+    //Polution item each only have 1 polutant
+    //Create obs of polution items
+    //Take the polution items with o3 and pm25 and use that
+
     //TODO:
     //Need an image for our cell
     //errors for unable to fetch
@@ -88,11 +107,31 @@ class AddDiaryEntryViewModel {
         //I'm sharing fetcher, so anyone can use it, but it's local so that doesn't help much.
         //I can either make it public or I can somehow create a new observable and make that shareable
         
+        let fetcher2 = currentLocation.take(1).flatMap() { location -> Observable<[JSONObject]> in
+            print(location)
+            return AirNowAPI.shared.searchAirQuality(latitude: location.latitude, longitude: location.longitude)
+            }
+            .flatMap {jsonArray -> Observable<[PolutionItem]> in
+                
+                let polutionItems : [PolutionItem] = try unbox(dictionaries: jsonArray)
+                return Observable.from(optional: polutionItems)
+            }
+        .shareReplay(1)
+        
+        fetcher2.flatMap{ item in
+            Observable.from(item)
+        }
+            .filter {
+                $0.polututeName == .ozone
+        }
+        
+        
+        
         let fetcher = currentLocation.take(1).flatMap() { location -> Observable<[JSONObject]> in
             print(location)
             return AirNowAPI.shared.searchAirQuality(latitude: location.latitude, longitude: location.longitude)
-        }
-
+            }
+            
             .map {
                 AirNowAPI.shared.formatJSON(jsonArray: $0)
             }

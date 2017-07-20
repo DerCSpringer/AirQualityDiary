@@ -28,12 +28,11 @@ class RxCLLocationManagerDelegateProxy : DelegateProxy, CLLocationManagerDelegat
             locationManager.delegate = nil
         }
     }
+    
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         _forwardToDelegate?.locationManager(manager, didUpdateLocations: locations)
         didUpdateLocationsSubject.onNext(locations)
     }
-    
-
 }
 
 extension Reactive where Base: CLLocationManager {
@@ -53,5 +52,4 @@ extension Reactive where Base: CLLocationManager {
                 return CLAuthorizationStatus(rawValue: Int32(number!.intValue)) ?? .notDetermined //recheck optional status
         }
     }
-
 }

@@ -21,7 +21,7 @@ import RxSwift
 class AirNowAPI {
     
     static let shared = AirNowAPI()
-    typealias  JSONObject = [String:Any]
+    typealias JSONObject = [String:Any]
     
     private let apiKey = "2758A15B-FD00-4191-AD80-11D2F8C73509"
     
@@ -116,7 +116,6 @@ class AirNowAPI {
         let dateFormat = DateFormatter()
         dateFormat.dateFormat = "yyyy-MM-dd"
         
-        
         let url = URL(string: "https://www.airnowapi.org/aq/forecast/latLong/")!
         var request = URLRequest(url: url)
         let format = URLQueryItem(name: "format", value: "application/json")
@@ -162,5 +161,4 @@ extension AirNowAPI { //Garbage will fix once I figure out how to unbox array of
         output["O3"] = o3
         return output
     }
-    
 }
