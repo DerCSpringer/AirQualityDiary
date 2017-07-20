@@ -20,6 +20,9 @@ class DiaryEntryTableViewCell: UITableViewCell {
     @IBOutlet weak var date: UILabel!
     
     func configure(with entry: DiaryEntry, action: CocoaAction) {
+        date.lineBreakMode = .byWordWrapping
+        //date.size
+        //Need to allow for bigger font
         button.rx.action = action
         self.backgroundColor = UIColor.black
         let format = DateFormatter()
@@ -80,7 +83,8 @@ extension DiaryEntryTableViewCell {
         self.o3AQI.text = "O3"
         self.PM25AQI.text = "PM 2.5"
         self.date.text = "Date of Observation"
-        self.button.setTitle("Bad?", for: .normal)
+        self.button.setTitle("Bad day?", for: .normal)
+        self.button.titleLabel?.lineBreakMode = .byWordWrapping
         self.button.isUserInteractionEnabled = false
     }
 }

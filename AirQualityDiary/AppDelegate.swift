@@ -8,10 +8,13 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    //TODO:  Turn off resource counting -D TRACE_RESOURCES in Pods.RXSwift other swift flags
     
     let bag = DisposeBag()
 
@@ -33,7 +36,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //To display on the screen
         //Then we must transistion to that scene
         sceneCoordinator.transition(to: firstScene, type: .root)
-                
+        
+//        _ = Observable<Int>.interval(1, scheduler: MainScheduler.instance)
+//            .subscribe(onNext: { _ in
+//                print("Resource count \(RxSwift.Resources.total)")
+//            })
+        
         return true
     }
     

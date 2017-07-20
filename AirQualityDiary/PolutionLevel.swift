@@ -16,18 +16,6 @@ enum AirQualityLevel {
     case unknown
 }
 
-//2 ways
-//Send a value + value type and return a AirQuality Observable with infor about airquality color
-//When you get an onNext: we'd change color
-//Implementation would keep observables for min values of both types
-//On updat it would update airqualtyeLevel
-
-//I could have Observables in diaryentry which would //Wouldn't work becuase I'd still have to create a new one each time I look at observables
-//I could have a second singleton which would keep track of min values and update with observables
-
-//If I have singleton I just sub to it's observables
-//Could return
-
 class PollutionLevel {
     //output
     let pollutionType = BehaviorSubject<AirQualityLevel>(value: .unknown)
@@ -38,7 +26,7 @@ class PollutionLevel {
     
     init(pollutantName : PollutantName, withAQI AQI: Int) {
 
-        if pollutantName == .ozone { //As soon as we get a new min we need to update the pollutionType
+        if pollutantName == .ozone {
             self.minO3
                 .map{ [weak self] min in
                     return (self?.pollutionSeverity(withMinAQI: min, andCurrentAQI: AQI))!
@@ -83,4 +71,3 @@ extension PollutionLevel {
     }
 }
     //This will be created many times, but I don't want to pass in a million diary service structs
-

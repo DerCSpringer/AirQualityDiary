@@ -10,12 +10,12 @@ import Foundation
 import RxSwift
 
 //diary item has 2 entries, pm25 and o3
-//If each item is stored as a polution item how can I convert it to a diary item
+//If each item is stored as a pollution item how can I convert it to a diary item
 //If I kept this an array then I could filter for a string
 
 //1. get json from web as array
-//2. convert json as array ot polution objects in array
-//3. Our polution objects could have different dates but same names
+//2. convert json as array ot pollution objects in array
+//3. Our pollution objects could have different dates but same names
         //Only in forecast
 //Use a reachablity to alert this so it can fetch again
 

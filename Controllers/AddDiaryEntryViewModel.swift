@@ -16,35 +16,18 @@ import Unbox
 
 class AddDiaryEntryViewModel {
     private let bag = DisposeBag()
-//    let o3TextAndCondition = Variable<AQIAndLevel>(defaultAQIAndLevel)
-//    let pmTextAndCondition = Variable<AQIAndLevel>(defaultAQIAndLevel)
-    let o3Text = Variable<Int>(-1)
-    let pm25Text = Variable<Int>(-1)
+    let o3TextAndCondition = Variable<AQIAndLevel>(defaultAQIAndLevel)
+    let pmTextAndCondition = Variable<AQIAndLevel>(defaultAQIAndLevel)
 
     let isFetching = Variable<Bool>(true)
     let note = Variable<String>("")
     private let onUpdate: Action<DiaryType, Void>
     let onCancel: CocoaAction!
     private let currentLocation : Observable<CLLocationCoordinate2D>
-    //private let pollutionItem : PollutionItem
-    
-    //Finish Conversion for o3Text and pmText Variables
-    //I want to move these over and use a pollutionItem struct
-    //I think everything in here will use a pollution struct including the init
-    //It will emit only a text and condition to the VC
-    
-    //1.Maybe have two variables one for the diary entry and one for the pollution item.  That's dumb though
-    //2. Get pollution item from info give that to the VC.
-    //When I need to back out I could assign it to the diary entry
-    //How:
-    //Pollution item each only have 1 pollutant
-    //Create obs of pollution items
-    //Take the pollution items with o3 and pm25 and use that
 
     //TODO:
     //Need an image for our cell
-    //errors for unable to fetch
-    //Fetch should report back Pollution Item
+    //errors for unable to fetch: REachability
     //Add later
     //We could add something at the bottom of the DiaryEntriesTV to display the minium amount that bothers someone.
     //this could be displayed on the forcast and so forth
@@ -91,15 +74,40 @@ class AddDiaryEntryViewModel {
             print(entry.added.timeIntervalSinceNow)
             bindOutput()
         } else {
-            o3Text.value = entry.o3
-            pm25Text.value = entry.pm25
+            let pollute = PollutionItem.pollutionItemsFrom(diary: entry)
+                .flatMap{ Observable.from($0) }
+                .shareReplay(2) //Immediately emits both pm and o3 entries
+            
+            combineTitleAndPollutionTypeFor(pollute, polluteName: .ozone)
+            .bind(to: o3TextAndCondition)
+            .disposed(by: bag)
+            
+            combineTitleAndPollutionTypeFor(pollute, polluteName: .PM2_5)
+            .bind(to: pmTextAndCondition)
+            .disposed(by: bag)
+            
             note.value = entry.notes
             isFetching.value = false
         }
     }
     
     lazy var onSave: Action<String,DiaryType> = Action { [weak self] note in
-        let diary = DiaryType(pm25:(self?.pm25Text.value)!, o3:(self?.o3Text.value)!, note:note)
+        //TODO: Fix this.  Not a fan
+        var pm : Int
+        var o3 : Int
+        if let tempPM = Int((self?.pmTextAndCondition.value.AQI)!) {
+            pm = tempPM
+        } else {
+            pm = -1
+        }
+        
+        if let tempO3 = Int((self?.o3TextAndCondition.value.AQI)!) {
+            o3 = tempO3
+        } else {
+            o3 = -1
+        }
+        
+        let diary = DiaryType(pm25:pm, o3:o3, note:note)
         return .just(diary)
     }
     
@@ -118,40 +126,36 @@ class AddDiaryEntryViewModel {
             }
         .shareReplay(1)
         
-        fetcher2.flatMap{ item in
+        let fetchedResults = fetcher2.flatMap{ item in
             Observable.from(item)
         }
-            .filter {
-                $0.polluteName == .ozone
-        }
+        .shareReplay(1)
         
+        combineTitleAndPollutionTypeFor(fetchedResults, polluteName: .ozone)
+        .bind(to: self.o3TextAndCondition)
+        .disposed(by: bag)
         
+        combineTitleAndPollutionTypeFor(fetchedResults, polluteName: .PM2_5)
+        .bind(to: self.pmTextAndCondition)
+        .disposed(by: bag)
         
-        let fetcher = currentLocation.take(1).flatMap() { location -> Observable<[JSONObject]> in
-            print(location)
-            return AirNowAPI.shared.searchAirQuality(latitude: location.latitude, longitude: location.longitude)
-            }
-            
-            .map {
-                AirNowAPI.shared.formatJSON(jsonArray: $0)
-            }
-            .map {
-                DiaryEntry(airQualityJSON: $0)
-            }
-            .shareReplay(1)
-        
-        fetcher.map { $0.o3 }
-            .bind(to: o3Text)
-            .disposed(by: bag)
-        
-        fetcher.map { $0.pm25 }
-            .bind(to: pm25Text)
-            .disposed(by: bag)
-        
-        fetcher.map { _ in false }
+        fetcher2.map { _ in false }
             .bind(to: isFetching)
             .disposed(by: bag)
     }
     
-
+    //TODO: duplicated func from CurrentConditionsVM
+    private func combineTitleAndPollutionTypeFor(_ obs: Observable<PollutionItem>, polluteName:PollutantName) -> Observable<AQIAndLevel> {
+        let pollute = obs.filter {
+            $0.polluteName == polluteName
+            }
+            .shareReplay(1)
+        
+        let aqi = pollute.map {
+            ($0.AQI == -1) ? "Unavailable" : String($0.AQI)
+        }
+        return Observable.combineLatest(aqi, pollute.flatMap{$0.pollutionType}){AQI, pollutionType in
+            AQIAndLevel(AQI, pollutionType)
+        }
+    }
 }

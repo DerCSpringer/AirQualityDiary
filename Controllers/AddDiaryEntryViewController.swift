@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import RxSwift
+import RxCocoa
 
 class AddDiaryEntryViewController: UIViewController, BindableType {
     @IBOutlet weak var ozone: UILabel!
@@ -22,26 +23,32 @@ class AddDiaryEntryViewController: UIViewController, BindableType {
     private let bag = DisposeBag()
     
     func bindViewModel() {
+                
+        viewModel.o3TextAndCondition.asObservable()
+            .map{ $0.AQI }
+            .asDriver(onErrorJustReturn: "Unavailable")
+            .drive(self.ozone.rx.text)
+            .addDisposableTo(bag)
         
-        viewModel.pm25Text.asDriver()
-            .drive(onNext: { [weak self] pm25 in
-                if pm25 == -1 {
-                    self?.pm25.text = "Unavailable"
-                } else {
-                self?.pm25.text = String(pm25)
-                }
-            })
-            .disposed(by: bag)
+        viewModel.o3TextAndCondition.asObservable()
+            .map{ PollutionLevel.colorForPollutionLevel($0.level) }
+            .asDriver(onErrorJustReturn: UIColor.blue)
+            .drive(self.ozone.rx.textColor)
+            .addDisposableTo(bag)
         
-        viewModel.o3Text.asDriver()
-            .drive(onNext: { [weak self] o3 in
-                if o3 == -1 {
-                    self?.ozone.text = "Unavailable"
-                } else {
-                self?.ozone.text = String(o3)
-                }
-            })
-            .disposed(by: bag)
+        
+        viewModel.pmTextAndCondition.asObservable()
+            .map{ return $0.AQI }
+            .asDriver(onErrorJustReturn: "Unavailable")
+            .drive(self.pm25.rx.text)
+            .addDisposableTo(bag)
+        
+        viewModel.pmTextAndCondition.asObservable()
+            .map{ PollutionLevel.colorForPollutionLevel($0.level) }
+            .asDriver(onErrorJustReturn: UIColor.blue)
+            .drive(self.pm25.rx.textColor)
+            .addDisposableTo(bag)
+        
         
         viewModel.note.asDriver()
             .drive(note.rx.text)

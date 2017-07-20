@@ -25,7 +25,9 @@ class DiaryEntriesViewController: UIViewController, BindableType, UITableViewDel
                 
         setEditing(true, animated: false)
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 60
+        tableView.estimatedRowHeight = 100
+        //TODO: Change row heigh based on font size
+        //Allow date to wrap around
         tableView.backgroundColor = UIColor.black
         
         tableView.rx.setDelegate(self)
@@ -83,6 +85,7 @@ class DiaryEntriesViewController: UIViewController, BindableType, UITableViewDel
         dataSource.titleForHeaderInSection = { dataSource, index in
             return ""
         }
+        
         
         dataSource.configureCell = {
             [weak self] dataSource, tableView, indexPath, entry in

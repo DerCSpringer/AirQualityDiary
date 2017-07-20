@@ -30,9 +30,66 @@ struct PollutionItem {
     let AQI : Int
     let polluteName : PollutantName
     var pollutionType = BehaviorSubject<AirQualityLevel>(value: .unknown)
-    fileprivate var polluteLevel : PollutionLevel
+    fileprivate var polluteLevel : PollutionLevel?
     fileprivate let bag = DisposeBag()
 }
+
+extension PollutionItem {
+    static func pollutionItemsFrom(diary: DiaryEntry) -> Observable<[PollutionItem]> {
+        return Observable.create { observer in
+            
+            let polluteLevelPM25 = PollutionLevel.init(pollutantName:.PM2_5 , withAQI: diary.pm25)
+            let airQualityLevelPM25 = BehaviorSubject<AirQualityLevel>(value: .unknown)
+            polluteLevelPM25.pollutionType.bind(to: airQualityLevelPM25)
+            //.disposed(by: bag)
+            
+            let pm = PollutionItem.init(forecastFor: nil,
+                                        AQI: diary.pm25,
+                                        polluteName: .PM2_5,
+                                        pollutionType: airQualityLevelPM25,
+                                        polluteLevel: polluteLevelPM25)
+            
+            let polluteLevelO3 = PollutionLevel.init(pollutantName:.ozone , withAQI: diary.o3)
+            let airQualityLevelO3 = BehaviorSubject<AirQualityLevel>(value: .unknown)
+            polluteLevelO3.pollutionType.bind(to: airQualityLevelO3)
+            //.disposed(by: bag)
+            
+            let o3 = PollutionItem.init(forecastFor: nil,
+                                        AQI: diary.o3,
+                                        polluteName: .ozone,
+                                        pollutionType: airQualityLevelO3,
+                                        polluteLevel: polluteLevelO3)
+            
+            let polutionItems = [pm, o3]
+            observer.onNext(polutionItems)
+//            observer.onNext(pm)
+//            observer.onNext(o3)
+            observer.onCompleted()
+            
+            return Disposables.create()
+        }
+    }
+}
+
+//static var reachable: Observable<Bool> {
+//    return Observable.create { observer in
+//        
+//        let reachability = Reachability.forInternetConnection()
+//        
+//        if let reachability = reachability {
+//            observer.onNext(reachability.isReachable())
+//            reachability.reachableBlock = { _ in observer.onNext(true) }
+//            reachability.unreachableBlock = { _ in observer.onNext(false) }
+//            reachability.startNotifier()
+//        } else {
+//            observer.onError(Reachability.Errors.unavailable)
+//        }
+//        
+//        return Disposables.create {
+//            reachability?.stopNotifier()
+//        }
+//    }
+//}
 
 extension PollutionItem: Unboxable {
     init(unboxer: Unboxer) throws {
@@ -72,7 +129,7 @@ extension PollutionItem: Unboxable {
         }
         
         polluteLevel = PollutionLevel.init(pollutantName: self.polluteName, withAQI: AQI)
-        polluteLevel.pollutionType.bind(to: pollutionType)
+        polluteLevel?.pollutionType.bind(to: pollutionType)
         .disposed(by: bag)
     }
 }

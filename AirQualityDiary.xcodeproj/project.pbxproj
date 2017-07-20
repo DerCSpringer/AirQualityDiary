@@ -564,6 +564,7 @@
 				DEVELOPMENT_TEAM = 3K4ALTN6AF;
 				INFOPLIST_FILE = AirQualityDiary/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D TRACE_RESOURCES";
 				PRODUCT_BUNDLE_IDENTIFIER = dcs.AirQualityDiary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
@@ -578,6 +579,7 @@
 				DEVELOPMENT_TEAM = 3K4ALTN6AF;
 				INFOPLIST_FILE = AirQualityDiary/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D TRACE_RESOURCES";
 				PRODUCT_BUNDLE_IDENTIFIER = dcs.AirQualityDiary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;

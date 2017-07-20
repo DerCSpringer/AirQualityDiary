@@ -33,7 +33,7 @@ class CurrentConditionsViewModel {
     private let currentLocation : Observable<CLLocationCoordinate2D>
     private let diaryService : DiaryServiceType
     
-    let sceneCoordinator: SceneCoordinatorType
+    private let sceneCoordinator: SceneCoordinatorType
     private let bag = DisposeBag()
     
     init(diaryService: DiaryServiceType, coordinator: SceneCoordinatorType) {
@@ -62,7 +62,7 @@ class CurrentConditionsViewModel {
             }
         }
     
-    func bindOutput() {
+    private func bindOutput() {
         //Using an non-array for this right now
         let forecastFetcher = fetchOnEmit.flatMap() { location, _ -> Observable<JSONObject> in
             print(location)
@@ -175,7 +175,7 @@ class CurrentConditionsViewModel {
             AQIAndLevel(AQI, pollutionType)
         }
     }
-    func clearUIForFetch() {
+    private func clearUIForFetch() {
         if Thread.isMainThread {
             print("On main thread")
         } else {
