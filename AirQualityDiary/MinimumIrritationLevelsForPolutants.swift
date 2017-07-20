@@ -1,5 +1,5 @@
 //
-//  MinimumIrritationLevelsForPolutants.swift
+//  MinimumIrritationLevelsForPollutants.swift
 //  AirQualityDiary
 //
 //  Created by Daniel Springer on 7/14/17.
@@ -10,8 +10,8 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class MinimumIrritationLevelsForPolutants {
-    static let instance = MinimumIrritationLevelsForPolutants()
+class MinimumIrritationLevelsForPollutants {
+    static let instance = MinimumIrritationLevelsForPollutants()
     //output
     private (set) var minPM25 = Variable<Int>(-1)
     private (set) var minO3 = Variable<Int>(-1)

@@ -58,7 +58,7 @@ class CurrentConditionsViewController: UIViewController, BindableType {
         .drive(self.currentForcastO3.rx.text)
         .addDisposableTo(bag)
         
-        currentForecastO3.map { PolutionLevel.colorForPolutionLevel($0.level) }
+        currentForecastO3.map { PollutionLevel.colorForPollutionLevel($0.level) }
         .asDriver(onErrorJustReturn: UIColor.blue)
         .drive(self.currentForcastO3.rx.textColor)
         .addDisposableTo(bag)
@@ -82,7 +82,7 @@ class CurrentConditionsViewController: UIViewController, BindableType {
             .drive(self.currentForcastPM.rx.text)
             .addDisposableTo(bag)
         
-        currentForecastPM.map { PolutionLevel.colorForPolutionLevel($0.level) }
+        currentForecastPM.map { PollutionLevel.colorForPollutionLevel($0.level) }
             .asDriver(onErrorJustReturn: UIColor.blue)
             .drive(self.currentForcastPM.rx.textColor)
             .addDisposableTo(bag)
@@ -107,7 +107,7 @@ class CurrentConditionsViewController: UIViewController, BindableType {
             .drive(self.tomorrowO3.rx.text)
             .addDisposableTo(bag)
         
-        o3Tomorrow.map { PolutionLevel.colorForPolutionLevel($0.level) }
+        o3Tomorrow.map { PollutionLevel.colorForPollutionLevel($0.level) }
             .asDriver(onErrorJustReturn: UIColor.blue)
             .drive(self.tomorrowO3.rx.textColor)
             .addDisposableTo(bag)
@@ -131,7 +131,7 @@ class CurrentConditionsViewController: UIViewController, BindableType {
             .drive(self.tomorrowPM.rx.text)
             .addDisposableTo(bag)
         
-        pmTomorrow.map { PolutionLevel.colorForPolutionLevel($0.level) }
+        pmTomorrow.map { PollutionLevel.colorForPollutionLevel($0.level) }
             .asDriver(onErrorJustReturn: UIColor.blue)
             .drive(self.tomorrowPM.rx.textColor)
             .addDisposableTo(bag)
@@ -155,7 +155,7 @@ class CurrentConditionsViewController: UIViewController, BindableType {
             .drive(self.currentO3.rx.text)
             .addDisposableTo(bag)
         
-        o3Current.map { PolutionLevel.colorForPolutionLevel($0.level) }
+        o3Current.map { PollutionLevel.colorForPollutionLevel($0.level) }
             .asDriver(onErrorJustReturn: UIColor.blue)
             .drive(self.currentO3.rx.textColor)
             .addDisposableTo(bag)
@@ -179,7 +179,7 @@ class CurrentConditionsViewController: UIViewController, BindableType {
             .drive(self.currentPM.rx.text)
             .addDisposableTo(bag)
         
-        pmCurrent.map { PolutionLevel.colorForPolutionLevel($0.level) }
+        pmCurrent.map { PollutionLevel.colorForPollutionLevel($0.level) }
             .asDriver(onErrorJustReturn: UIColor.blue)
             .drive(self.currentPM.rx.textColor)
             .addDisposableTo(bag)

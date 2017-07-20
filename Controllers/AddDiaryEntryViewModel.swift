@@ -26,25 +26,25 @@ class AddDiaryEntryViewModel {
     private let onUpdate: Action<DiaryType, Void>
     let onCancel: CocoaAction!
     private let currentLocation : Observable<CLLocationCoordinate2D>
-    //private let polutionItem : PolutionItem
+    //private let pollutionItem : PollutionItem
     
     //Finish Conversion for o3Text and pmText Variables
-    //I want to move these over and use a polutionItem struct
-    //I think everything in here will use a polution struct including the init
+    //I want to move these over and use a pollutionItem struct
+    //I think everything in here will use a pollution struct including the init
     //It will emit only a text and condition to the VC
     
-    //1.Maybe have two variables one for the diary entry and one for the polution item.  That's dumb though
-    //2. Get polution item from info give that to the VC.
+    //1.Maybe have two variables one for the diary entry and one for the pollution item.  That's dumb though
+    //2. Get pollution item from info give that to the VC.
     //When I need to back out I could assign it to the diary entry
     //How:
-    //Polution item each only have 1 polutant
-    //Create obs of polution items
-    //Take the polution items with o3 and pm25 and use that
+    //Pollution item each only have 1 pollutant
+    //Create obs of pollution items
+    //Take the pollution items with o3 and pm25 and use that
 
     //TODO:
     //Need an image for our cell
     //errors for unable to fetch
-    //Fetch should report back Polution Item
+    //Fetch should report back Pollution Item
     //Add later
     //We could add something at the bottom of the DiaryEntriesTV to display the minium amount that bothers someone.
     //this could be displayed on the forcast and so forth
@@ -111,10 +111,10 @@ class AddDiaryEntryViewModel {
             print(location)
             return AirNowAPI.shared.searchAirQuality(latitude: location.latitude, longitude: location.longitude)
             }
-            .flatMap {jsonArray -> Observable<[PolutionItem]> in
+            .flatMap {jsonArray -> Observable<[PollutionItem]> in
                 
-                let polutionItems : [PolutionItem] = try unbox(dictionaries: jsonArray)
-                return Observable.from(optional: polutionItems)
+                let pollutionItems : [PollutionItem] = try unbox(dictionaries: jsonArray)
+                return Observable.from(optional: pollutionItems)
             }
         .shareReplay(1)
         
@@ -122,7 +122,7 @@ class AddDiaryEntryViewModel {
             Observable.from(item)
         }
             .filter {
-                $0.polututeName == .ozone
+                $0.polluteName == .ozone
         }
         
         

@@ -1,5 +1,5 @@
 //
-//  PolutionItem.swift
+//  PollutionItem.swift
 //  AirQualityDiary
 //
 //  Created by Daniel Springer on 7/7/17.
@@ -17,7 +17,7 @@ enum ForecastDate {
     case other
 }
 
-enum PolutantName {
+enum PollutantName {
     case ozone
     case PM2_5
     case NO2
@@ -25,16 +25,16 @@ enum PolutantName {
     case CO
     case other
 }
-struct PolutionItem {
+struct PollutionItem {
     let forecastFor : ForecastDate?
     let AQI : Int
-    let polututeName : PolutantName
-    var polutionType = BehaviorSubject<AirQualityLevel>(value: .unknown)
-    fileprivate var poluteLevel : PolutionLevel
+    let polluteName : PollutantName
+    var pollutionType = BehaviorSubject<AirQualityLevel>(value: .unknown)
+    fileprivate var polluteLevel : PollutionLevel
     fileprivate let bag = DisposeBag()
 }
 
-extension PolutionItem: Unboxable {
+extension PollutionItem: Unboxable {
     init(unboxer: Unboxer) throws {
         let dateFormat = DateFormatter()
         let today = Date()
@@ -43,20 +43,20 @@ extension PolutionItem: Unboxable {
         dateFormat.dateFormat = "yyyy-MM-dd "
         self.AQI = try unboxer.unbox(key: "AQI")
         
-        let polututeName : String = try unboxer.unbox(key: "ParameterName")
-        switch polututeName {
+        let polluteName : String = try unboxer.unbox(key: "ParameterName")
+        switch polluteName {
         case "CO":
-            self.polututeName = .CO
+            self.polluteName = .CO
         case "PM2.5":
-            self.polututeName = .PM2_5
+            self.polluteName = .PM2_5
         case "NO2":
-            self.polututeName = .NO2
+            self.polluteName = .NO2
         case "PM10":
-            self.polututeName = .PM10
+            self.polluteName = .PM10
         case "O3":
-            self.polututeName = .ozone
+            self.polluteName = .ozone
         default:
-            self.polututeName = .other
+            self.polluteName = .other
         }
 
         let date : String? = try? unboxer.unbox(key: "DateForecast")
@@ -71,8 +71,8 @@ extension PolutionItem: Unboxable {
             self.forecastFor = .other
         }
         
-        poluteLevel = PolutionLevel.init(polutantName: self.polututeName, withAQI: AQI)
-        poluteLevel.polutionType.bind(to: polutionType)
+        polluteLevel = PollutionLevel.init(pollutantName: self.polluteName, withAQI: AQI)
+        polluteLevel.pollutionType.bind(to: pollutionType)
         .disposed(by: bag)
     }
 }

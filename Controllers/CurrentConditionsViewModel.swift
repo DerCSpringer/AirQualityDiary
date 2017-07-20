@@ -70,9 +70,9 @@ class CurrentConditionsViewModel {
             }
             .subscribeOn(MainScheduler.instance)
             .observeOn(MainScheduler.instance)
-            .flatMap {json -> Observable<PolutionItem> in
-                let polutionItems : PolutionItem = try unbox(dictionary: json)
-                return Observable.of(polutionItems)
+            .flatMap {json -> Observable<PollutionItem> in
+                let pollutionItems : PollutionItem = try unbox(dictionary: json)
+                return Observable.of(pollutionItems)
             }
             .shareReplay(1)
 
@@ -97,13 +97,13 @@ class CurrentConditionsViewModel {
             }
             .observeOn(MainScheduler.instance)
             .subscribeOn(MainScheduler.instance)
-            .flatMap {jsonArray -> Observable<[PolutionItem]> in
+            .flatMap {jsonArray -> Observable<[PollutionItem]> in
 
-                let polutionItems : [PolutionItem] = try unbox(dictionaries: jsonArray)
-                return Observable.from(optional: polutionItems)
+                let pollutionItems : [PollutionItem] = try unbox(dictionaries: jsonArray)
+                return Observable.from(optional: pollutionItems)
             }
-            .flatMap { polutionItems -> Observable<PolutionItem> in
-                return Observable.from(polutionItems)
+            .flatMap { pollutionItems -> Observable<PollutionItem> in
+                return Observable.from(pollutionItems)
                 
             }
             .shareReplay(1)
@@ -120,59 +120,59 @@ class CurrentConditionsViewModel {
         
         //MARK: Current o3
         
-        combineTitleAndPolutionTypeFor(currentFetcher, poluteName: .ozone)
+        combineTitleAndPollutionTypeFor(currentFetcher, polluteName: .ozone)
             .bind(to: currentO3)
             .disposed(by: bag)
 
         //MARK: Current pm2.5
         
-        combineTitleAndPolutionTypeFor(currentFetcher, poluteName: .PM2_5)
+        combineTitleAndPollutionTypeFor(currentFetcher, polluteName: .PM2_5)
             .bind(to: currentPM)
             .disposed(by: bag)
 
-        let todayForecast = forecastFetcher.filter { polutionItem in
-            polutionItem.forecastFor == .today
+        let todayForecast = forecastFetcher.filter { pollutionItem in
+            pollutionItem.forecastFor == .today
         }
-        let tomorrowForecast = forecastFetcher.filter { polutionItem in
-            polutionItem.forecastFor == .tomorrow
+        let tomorrowForecast = forecastFetcher.filter { pollutionItem in
+            pollutionItem.forecastFor == .tomorrow
         }
         
         //MARK: O3 for Tomorrow's Forecast
         
-        combineTitleAndPolutionTypeFor(tomorrowForecast, poluteName: .ozone)
+        combineTitleAndPollutionTypeFor(tomorrowForecast, polluteName: .ozone)
             .bind(to: tomorrowO3)
             .disposed(by: bag)
         
         //MARK: pm for Tomorrow's forecast
         
-        combineTitleAndPolutionTypeFor(tomorrowForecast, poluteName: .PM2_5)
+        combineTitleAndPollutionTypeFor(tomorrowForecast, polluteName: .PM2_5)
             .bind(to: tomorrowPM)
             .disposed(by: bag)
         
         //MARK: pm for Today's Forcast
         
-        combineTitleAndPolutionTypeFor(todayForecast, poluteName: .PM2_5)
+        combineTitleAndPollutionTypeFor(todayForecast, polluteName: .PM2_5)
             .bind(to: currentForcastPM)
             .disposed(by: bag)
         
         //MARK: o3 for Today's Forcast
         
-        combineTitleAndPolutionTypeFor(todayForecast, poluteName: .ozone)
+        combineTitleAndPollutionTypeFor(todayForecast, polluteName: .ozone)
         .bind(to: currentForecastO3)
         .disposed(by: bag)
     }
     
-    private func combineTitleAndPolutionTypeFor(_ obs: Observable<PolutionItem>, poluteName:PolutantName) -> Observable<AQIAndLevel> {
-        let polute = obs.filter {
-            $0.polututeName == poluteName
+    private func combineTitleAndPollutionTypeFor(_ obs: Observable<PollutionItem>, polluteName:PollutantName) -> Observable<AQIAndLevel> {
+        let pollute = obs.filter {
+            $0.polluteName == polluteName
         }
         .shareReplay(1)
         
-        let aqi = polute.map {
+        let aqi = pollute.map {
             ($0.AQI == -1) ? "Unavailable" : String($0.AQI)
         }
-        return Observable.combineLatest(aqi, polute.flatMap{$0.polutionType}){AQI, polutionType in
-            AQIAndLevel(AQI, polutionType)
+        return Observable.combineLatest(aqi, pollute.flatMap{$0.pollutionType}){AQI, pollutionType in
+            AQIAndLevel(AQI, pollutionType)
         }
     }
     func clearUIForFetch() {

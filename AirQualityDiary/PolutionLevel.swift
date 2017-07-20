@@ -1,5 +1,5 @@
 //
-//  PolutionLevel.swift
+//  PollutionLevel.swift
 //  AirQualityDiary
 //
 //  Created by Daniel Springer on 7/14/17.
@@ -28,34 +28,34 @@ enum AirQualityLevel {
 //If I have singleton I just sub to it's observables
 //Could return
 
-class PolutionLevel {
+class PollutionLevel {
     //output
-    let polutionType = BehaviorSubject<AirQualityLevel>(value: .unknown)
+    let pollutionType = BehaviorSubject<AirQualityLevel>(value: .unknown)
 
     private let bag = DisposeBag()
-    private let minO3 = MinimumIrritationLevelsForPolutants.instance.minO3.asObservable()
-    private let minpm25 = MinimumIrritationLevelsForPolutants.instance.minPM25.asObservable()
+    private let minO3 = MinimumIrritationLevelsForPollutants.instance.minO3.asObservable()
+    private let minpm25 = MinimumIrritationLevelsForPollutants.instance.minPM25.asObservable()
     
-    init(polutantName : PolutantName, withAQI AQI: Int) {
+    init(pollutantName : PollutantName, withAQI AQI: Int) {
 
-        if polutantName == .ozone { //As soon as we get a new min we need to update the polutionType
+        if pollutantName == .ozone { //As soon as we get a new min we need to update the pollutionType
             self.minO3
                 .map{ [weak self] min in
-                    return (self?.polutionSeverity(withMinAQI: min, andCurrentAQI: AQI))!
+                    return (self?.pollutionSeverity(withMinAQI: min, andCurrentAQI: AQI))!
                 }
-                .bind(to: polutionType)
+                .bind(to: pollutionType)
                 .disposed(by: bag)
-        } else if polutantName == .PM2_5 {
+        } else if pollutantName == .PM2_5 {
             self.minpm25
                 .map{ [weak self] min in
-                    (self?.polutionSeverity(withMinAQI: min, andCurrentAQI: AQI))!
+                    (self?.pollutionSeverity(withMinAQI: min, andCurrentAQI: AQI))!
                 }
-                .bind(to: polutionType)
+                .bind(to: pollutionType)
                 .disposed(by: bag)
         }
     }
         
-    private func polutionSeverity(withMinAQI minAQI: Int, andCurrentAQI currentAQI:Int) -> AirQualityLevel {
+    private func pollutionSeverity(withMinAQI minAQI: Int, andCurrentAQI currentAQI:Int) -> AirQualityLevel {
         if currentAQI == -1 || minAQI == -1{
             return .unknown
         } else if ((currentAQI - minAQI) >= 0) {
@@ -68,8 +68,8 @@ class PolutionLevel {
     }
 }
 
-extension PolutionLevel {
-    static func colorForPolutionLevel(_ airLevel:AirQualityLevel) -> UIColor {
+extension PollutionLevel {
+    static func colorForPollutionLevel(_ airLevel:AirQualityLevel) -> UIColor {
         switch airLevel {
         case .good:
             return #colorLiteral(red: 0.1539898217, green: 1, blue: 0, alpha: 1)
