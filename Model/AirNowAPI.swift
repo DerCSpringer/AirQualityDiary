@@ -122,25 +122,3 @@ class AirNowAPI {
         }
     }
 }
-
-//extension AirNowAPI { //Garbage will fix once I figure out how to unbox array of items into single Model object
-//    
-//    var dateFormat: DateFormatter {
-//        let format = DateFormatter()
-//        format.dateFormat = "yyyy-MM-dd "
-//        return format
-//    }
-//    
-//    func formatJSON(jsonArray: [JSONObject]) -> JSONObject {
-//        var o3 : Int?
-//        var pm25 : Int?
-//        var output : JSONObject = [:]
-//        for airQuality in jsonArray {
-//            if airQuality["ParameterName"] as? String == "O3" {o3 = airQuality["AQI"] as? Int }
-//            if airQuality["ParameterName"] as? String == "PM2.5" { pm25 = airQuality["AQI"] as? Int }
-//        }
-//        output["PM2.5"] = pm25
-//        output["O3"] = o3
-//        return output
-//    }
-//}

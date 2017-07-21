@@ -22,7 +22,7 @@ class DiaryEntryTableViewCell: UITableViewCell {
     func configure(with entry: DiaryEntry, action: CocoaAction) {
         date.lineBreakMode = .byWordWrapping
         //date.size
-        //Need to allow for bigger font
+        //TODO: Need to allow for bigger font
         button.rx.action = action
         self.backgroundColor = UIColor.black
         let format = DateFormatter()
@@ -32,7 +32,7 @@ class DiaryEntryTableViewCell: UITableViewCell {
         entry.rx.observe(Int.self, "o3")
             .subscribe(onNext: { [weak self] o3 in
                 if o3 == -1 {
-                    self?.o3AQI.text = "Unv"
+                    self?.o3AQI.text = "N/A"
                 } else {
                 self?.o3AQI.text = String(o3!)
                 }
@@ -42,7 +42,7 @@ class DiaryEntryTableViewCell: UITableViewCell {
         entry.rx.observe(Int.self, "pm25")
             .subscribe(onNext: { [weak self] pm25 in
                 if pm25 == -1 {
-                    self?.PM25AQI.text = "Unv"
+                    self?.PM25AQI.text = "N/A"
                 } else {
                 self?.PM25AQI.text = String(pm25!)
                 }
@@ -63,7 +63,7 @@ class DiaryEntryTableViewCell: UITableViewCell {
             })
         .disposed(by: disposeBag)
     }
-        
+    
     override func prepareForReuse() {
         button.rx.action = nil
         disposeBag = DisposeBag()
