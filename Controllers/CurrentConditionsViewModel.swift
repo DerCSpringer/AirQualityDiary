@@ -14,8 +14,6 @@ import Action
 import Unbox
 import UIKit
 
-//The VC then sends off the quality to get the color
-//It uses the color and the text to make the label
 typealias AQIAndLevel = (AQI: String, level: AirQualityLevel)
 let defaultAQIAndLevel = AQIAndLevel("Unavailable", .unknown)
 
