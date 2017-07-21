@@ -13,8 +13,6 @@ import RxCocoa
 
 class CurrentConditionsViewController: UIViewController, BindableType {
     
-    //typealias ColorName = (name: String, color: Observable<UIColor>)
-
     @IBOutlet weak var currentForcastPM: UILabel!
     @IBOutlet weak var currentForcastO3: UILabel!
     @IBOutlet weak var currentPM: UILabel!
@@ -38,12 +36,6 @@ class CurrentConditionsViewController: UIViewController, BindableType {
         super.viewDidLoad()
     }
     
-    //hmm I want the min values for pm25 and o3 known, but not nessicarily exposed
-    //Maybe I send values to a struct based upon what type and it returns a color
-    
-    //I want to use combine latest to have two things the color and the AQI level.  When either updates then the whole thing updates
-    
-    //Need to hook up the rest of the data to the new color
     func bindViewModel() {
         diaryEntries.rx.action = viewModel.onEntryButtonPress()
         
