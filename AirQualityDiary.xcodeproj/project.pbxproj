@@ -560,6 +560,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 46AF1142F07FCAF906C2FFD3 /* Pods-AirQualityDiary.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 3K4ALTN6AF;
 				INFOPLIST_FILE = AirQualityDiary/Info.plist;
@@ -575,6 +576,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3DBB33EDE1CB47E98EC4458C /* Pods-AirQualityDiary.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 3K4ALTN6AF;
 				INFOPLIST_FILE = AirQualityDiary/Info.plist;

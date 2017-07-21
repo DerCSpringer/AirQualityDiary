@@ -39,7 +39,6 @@ class DiaryEntryTableViewCell: UITableViewCell {
             })
             .disposed(by: disposeBag)
         
-        
         entry.rx.observe(Int.self, "pm25")
             .subscribe(onNext: { [weak self] pm25 in
                 if pm25 == -1 {
@@ -59,18 +58,12 @@ class DiaryEntryTableViewCell: UITableViewCell {
         
         entry.rx.observe(Bool.self, "checked")
             .subscribe(onNext: { [weak self] checked in
-                if checked! {
-                    self?.button.setTitle("C", for: .normal)
-                }
-                else {
-                    self?.button.setTitle("UC", for: .normal)
-                }
+                let image = UIImage(named: checked == false ? "itemNotChecked" : "itemChecked")
+                self?.button.setImage(image, for: .normal)
             })
         .disposed(by: disposeBag)
     }
-    
-    //TODO: setup button graphics
-    
+        
     override func prepareForReuse() {
         button.rx.action = nil
         disposeBag = DisposeBag()
