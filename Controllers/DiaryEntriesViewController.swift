@@ -27,7 +27,7 @@ class DiaryEntriesViewController: UIViewController, BindableType, UITableViewDel
         setEditing(true, animated: false)
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
-        tableView.backgroundColor = UIColor.black
+        tableView.backgroundColor = UIColor.blue
         
         tableView.rx.setDelegate(self)
         .addDisposableTo(bag)

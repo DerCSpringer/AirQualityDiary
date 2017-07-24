@@ -111,10 +111,7 @@ class AddDiaryEntryViewModel {
     }
     
     func bindOutput() {
-        //I'm sharing fetcher, so anyone can use it, but it's local so that doesn't help much.
-        //I can either make it public or I can somehow create a new observable and make that shareable
-        
-        let fetcher2 = currentLocation.take(1).flatMap() { location -> Observable<[JSONObject]> in
+        let fetcher = currentLocation.take(1).flatMap() { location -> Observable<[JSONObject]> in
             print(location)
             return AirNowAPI.shared.searchAirQuality(latitude: location.latitude, longitude: location.longitude)
             }
@@ -125,7 +122,7 @@ class AddDiaryEntryViewModel {
             }
         .shareReplay(1)
         
-        let fetchedResults = fetcher2.flatMap{ item in
+        let fetchedResults = fetcher.flatMap{ item in
             Observable.from(item)
         }
         .shareReplay(1)
@@ -138,7 +135,7 @@ class AddDiaryEntryViewModel {
         .bind(to: self.pmTextAndCondition)
         .disposed(by: bag)
         
-        fetcher2.map { _ in false }
+        fetcher.map { _ in false }
             .bind(to: isFetching)
             .disposed(by: bag)
     }

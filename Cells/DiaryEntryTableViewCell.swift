@@ -21,7 +21,7 @@ class DiaryEntryTableViewCell: UITableViewCell {
     
     func configure(with entry: DiaryEntry, action: CocoaAction) {
         button.rx.action = action
-        self.backgroundColor = UIColor.black
+        self.backgroundColor = UIColor.blue
         let format = DateFormatter()
         format.dateFormat = "MM/dd/yyyy 'at' HH:mm"
 
@@ -66,7 +66,7 @@ class DiaryEntryTableViewCell: UITableViewCell {
     func configureFontSizes() {
         self.o3AQI.font = UIFont.preferredFont(forTextStyle: .headline)
         self.PM25AQI.font = UIFont.preferredFont(forTextStyle: .headline)
-        self.date.font = UIFont.preferredFont(forTextStyle: .body)
+        self.date.font = UIFont.preferredFont(forTextStyle: .headline)
         self.button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
     }
     
