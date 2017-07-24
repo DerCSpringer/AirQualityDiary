@@ -23,6 +23,8 @@ class AddDiaryEntryViewController: UIViewController, BindableType {
     private let bag = DisposeBag()
     
     func bindViewModel() {
+        
+        note.font = UIFont.preferredFont(forTextStyle: .body)
                 
         viewModel.o3TextAndCondition.asObservable()
             .map{ $0.AQI }

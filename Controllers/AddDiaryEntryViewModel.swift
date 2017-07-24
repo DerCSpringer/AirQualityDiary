@@ -26,7 +26,6 @@ class AddDiaryEntryViewModel {
     private let currentLocation : Observable<CLLocationCoordinate2D>
 
     //TODO:
-    //Need an image for our cell
     //errors for unable to fetch: REachability
     //Add later
     //We could add something at the bottom of the DiaryEntriesTV to display the minium amount that bothers someone.
@@ -111,7 +110,7 @@ class AddDiaryEntryViewModel {
         return .just(diary)
     }
     
-    func bindOutput() { //input will be lat/lon or zipcode when implemented later  output is obs
+    func bindOutput() {
         //I'm sharing fetcher, so anyone can use it, but it's local so that doesn't help much.
         //I can either make it public or I can somehow create a new observable and make that shareable
         

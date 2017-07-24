@@ -18,11 +18,11 @@ import RxSwift
 //3. Our pollution objects could have different dates but same names
         //Only in forecast
 //Use a reachablity to alert this so it can fetch again
+typealias JSONObject = [String:Any]
 
 class AirNowAPI {
     
     static let shared = AirNowAPI()
-    typealias JSONObject = [String:Any]
     
     private let apiKey = "2758A15B-FD00-4191-AD80-11D2F8C73509"
     
@@ -45,9 +45,7 @@ class AirNowAPI {
         
         request.url = urlComponents.url!
         request.httpMethod = "GET"
-        
-        //request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
+                
         return URLSession.shared.rx.json(request: request).map { json in
             if let a = json as? [Any], let b = a as? [[String : Any]] {
                 return b

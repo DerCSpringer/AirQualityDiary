@@ -32,17 +32,12 @@ class CurrentConditionsViewController: UIViewController, BindableType {
     
     var viewModel: CurrentConditionsViewModel!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     func bindViewModel() {
         diaryEntries.rx.action = viewModel.onEntryButtonPress()
         
         //MARK: Current forecast O3 Label and Indicator
         
         let currentForecastO3 = viewModel.currentForecastO3.asObservable()
-        .shareReplay(1)
         
         currentForecastO3
         .map{ return $0.AQI }
@@ -66,7 +61,6 @@ class CurrentConditionsViewController: UIViewController, BindableType {
         //MARK: Current Forecast PM2.5 Label and Indicator
 
         let currentForecastPM = viewModel.currentForcastPM.asObservable()
-            .shareReplay(1)
         
         currentForecastPM
             .map{ return $0.AQI }
@@ -91,7 +85,6 @@ class CurrentConditionsViewController: UIViewController, BindableType {
         //MARK: Tomorrow's Forecast O3 Label and Indicator
         
         let o3Tomorrow = viewModel.tomorrowO3.asObservable()
-            .shareReplay(1)
         
         o3Tomorrow
             .map{ return $0.AQI }
@@ -115,7 +108,6 @@ class CurrentConditionsViewController: UIViewController, BindableType {
         //MARK: Tomorrow's Forecast PM2.5 Label and Indicator
         
         let pmTomorrow = viewModel.tomorrowPM.asObservable()
-            .shareReplay(1)
         
         pmTomorrow
             .map{ return $0.AQI }
@@ -139,7 +131,6 @@ class CurrentConditionsViewController: UIViewController, BindableType {
         //MARK: Current Conditions O3 Label and Indicator
         
         let o3Current = viewModel.currentO3.asObservable()
-            .shareReplay(1)
         
         o3Current
             .map{ return $0.AQI }
@@ -163,7 +154,6 @@ class CurrentConditionsViewController: UIViewController, BindableType {
         //MARK: Current Conditions PM2.5 Label and Indicator
 
         let pmCurrent = viewModel.currentPM.asObservable()
-            .shareReplay(1)
         
         pmCurrent
             .map{ return $0.AQI }

@@ -17,6 +17,7 @@ class DiaryEntriesViewController: UIViewController, BindableType, UITableViewDel
     @IBOutlet weak var currentConditions: UIBarButtonItem!
     
     var viewModel: DiaryEntriesViewModel!
+    var header : DiaryEntryTableViewCell?
     let dataSource = RxTableViewSectionedAnimatedDataSource<DiarySection>()
     let bag = DisposeBag()
     
@@ -26,8 +27,6 @@ class DiaryEntriesViewController: UIViewController, BindableType, UITableViewDel
         setEditing(true, animated: false)
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
-        //TODO: Change row heigh based on font size
-        //Allow date to wrap around
         tableView.backgroundColor = UIColor.black
         
         tableView.rx.setDelegate(self)
@@ -38,7 +37,6 @@ class DiaryEntriesViewController: UIViewController, BindableType, UITableViewDel
         //This must be done before we bind observables
         //It probably starts observing only elements at time X.  If we wait until later it maybe not see stuff already in teh database
     }
-    
     
     func bindViewModel() {
         viewModel.sectionedItems
@@ -62,27 +60,27 @@ class DiaryEntriesViewController: UIViewController, BindableType, UITableViewDel
             }
             .subscribe(viewModel.editAction.inputs)
             .disposed(by: bag)
+        
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+
         let headerView = tableView.dequeueReusableCell(withIdentifier: "DiaryEntryCell") as! DiaryEntryTableViewCell
         headerView.initWithHeaderView()
         headerView.frame = view.frame
         view.addSubview(headerView)
     }
     
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 44
+        //TODO: figure out some way to do this dynamically with RXSwift
+        return 72
     }
     
     fileprivate func configureDataSource() {
         
         dataSource.canEditRowAtIndexPath = { cell in
             return true
-        }
-        
-        dataSource.titleForHeaderInSection = { dataSource, index in
-            return ""
         }
         
         dataSource.configureCell = {

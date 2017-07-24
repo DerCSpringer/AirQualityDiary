@@ -81,9 +81,7 @@ struct DiaryService: DiaryServiceType {
     func entries() -> Observable<Results<DiaryEntry>> {
         let result = withRealm("getting entries") { realm -> Observable<Results<DiaryEntry>> in
             let realm = try Realm()
-            let entries = realm.objects(DiaryEntry.self)
-            //entries = entries.sorted(byKeyPath: "o3", ascending: false)
-
+            let entries = realm.objects(DiaryEntry.self).sorted(byKeyPath: "added", ascending: false)
             return Observable.collection(from: entries)
         }
         return result ?? .empty()

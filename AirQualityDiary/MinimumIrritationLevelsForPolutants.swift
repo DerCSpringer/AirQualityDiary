@@ -17,11 +17,9 @@ class MinimumIrritationLevelsForPollutants {
     private (set) var minO3 = Variable<Int>(-1)
     
     private let bag = DisposeBag()
-    //might wanna init this and send in service maybe from appdelegate
     private init() {
         let service = DiaryService()
         
-        //setup correct sequence for Driver
         service.minPM2_5Irritation()
         .bind(to: minPM25)
         .disposed(by: bag)

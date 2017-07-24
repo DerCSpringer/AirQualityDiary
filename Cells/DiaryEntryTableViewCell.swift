@@ -20,9 +20,6 @@ class DiaryEntryTableViewCell: UITableViewCell {
     @IBOutlet weak var date: UILabel!
     
     func configure(with entry: DiaryEntry, action: CocoaAction) {
-        date.lineBreakMode = .byWordWrapping
-        //date.size
-        //TODO: Need to allow for bigger font
         button.rx.action = action
         self.backgroundColor = UIColor.black
         let format = DateFormatter()
@@ -62,6 +59,15 @@ class DiaryEntryTableViewCell: UITableViewCell {
                 self?.button.setImage(image, for: .normal)
             })
         .disposed(by: disposeBag)
+        
+        configureFontSizes()
+    }
+    
+    func configureFontSizes() {
+        self.o3AQI.font = UIFont.preferredFont(forTextStyle: .headline)
+        self.PM25AQI.font = UIFont.preferredFont(forTextStyle: .headline)
+        self.date.font = UIFont.preferredFont(forTextStyle: .body)
+        self.button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
     }
     
     override func prepareForReuse() {
@@ -77,7 +83,8 @@ extension DiaryEntryTableViewCell {
         self.PM25AQI.text = "PM 2.5"
         self.date.text = "Date of Observation"
         self.button.setTitle("Bad day?", for: .normal)
-        self.button.titleLabel?.lineBreakMode = .byWordWrapping
+        self.button.titleLabel?.numberOfLines = 2
         self.button.isUserInteractionEnabled = false
+        configureFontSizes()
     }
 }

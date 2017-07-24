@@ -50,7 +50,6 @@ struct DiaryEntriesViewModel {
         }
     }
 
-    //TODO: We create an entry right here, but if we exit the next controller without a cancel or save button i.e. home button then an invalid entry is crdated
     func onCreateEntry() -> CocoaAction { //action sent to add VC to do  the right thing
         //We create a new diary item
         //If it is created then we instantiate a new AddDiaryEntryViewModel.
