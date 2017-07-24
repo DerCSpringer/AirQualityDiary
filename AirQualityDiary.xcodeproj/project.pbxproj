@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0B0C99131F1D798200EB0036 /* UILabel+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0C99121F1D798200EB0036 /* UILabel+Rx.swift */; };
+		0B1180AD1F26A9FA003D4033 /* Reachability+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1180AC1F26A9FA003D4033 /* Reachability+Rx.swift */; };
 		0B1347E51F0EBD6100A262B7 /* UINavigationController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1347E41F0EBD6100A262B7 /* UINavigationController+Rx.swift */; };
 		0B1684F01F1419A6009F5900 /* GeoLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1684EF1F1419A6009F5900 /* GeoLocationService.swift */; };
 		0B1CC5D91F10495900661355 /* PolutionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1CC5D81F10495900661355 /* PolutionItem.swift */; };
@@ -52,6 +53,7 @@
 
 /* Begin PBXFileReference section */
 		0B0C99121F1D798200EB0036 /* UILabel+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UILabel+Rx.swift"; path = "Extensions/UILabel+Rx.swift"; sourceTree = SOURCE_ROOT; };
+		0B1180AC1F26A9FA003D4033 /* Reachability+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Reachability+Rx.swift"; path = "Extensions/Reachability+Rx.swift"; sourceTree = SOURCE_ROOT; };
 		0B1347E41F0EBD6100A262B7 /* UINavigationController+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UINavigationController+Rx.swift"; path = "Extensions/UINavigationController+Rx.swift"; sourceTree = SOURCE_ROOT; };
 		0B1684EF1F1419A6009F5900 /* GeoLocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GeoLocationService.swift; path = Services/GeoLocationService.swift; sourceTree = SOURCE_ROOT; };
 		0B1CC5D81F10495900661355 /* PolutionItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = PolutionItem.swift; path = Model/PolutionItem.swift; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -214,6 +216,7 @@
 		0B63C50C1F06E47D00C77080 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				0B1180AC1F26A9FA003D4033 /* Reachability+Rx.swift */,
 				0B1347E41F0EBD6100A262B7 /* UINavigationController+Rx.swift */,
 				0B0C99121F1D798200EB0036 /* UILabel+Rx.swift */,
 				0B63C50A1F06D0FD00C77080 /* CLLocationManager+Rx.swift */,
@@ -404,6 +407,7 @@
 				0B0C99131F1D798200EB0036 /* UILabel+Rx.swift in Sources */,
 				0B1684F01F1419A6009F5900 /* GeoLocationService.swift in Sources */,
 				0B2589B21EFB24F300E12FAA /* DiaryEntriesViewController.swift in Sources */,
+				0B1180AD1F26A9FA003D4033 /* Reachability+Rx.swift in Sources */,
 				0B63C50E1F06E8B300C77080 /* CurrentConditionsViewController.swift in Sources */,
 				0B4B5D4A1EF461A400914880 /* DiaryServiceType.swift in Sources */,
 				0B25899F1EFB218F00E12FAA /* Scene.swift in Sources */,

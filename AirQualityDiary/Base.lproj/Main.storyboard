@@ -45,7 +45,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PM 2.5" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f6O-MC-f3D">
-                                                    <rect key="frame" x="148" y="8" width="54" height="27.5"/>
+                                                    <rect key="frame" x="158" y="8" width="54" height="27.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="54" id="C8C-yu-tvO"/>
                                                     </constraints>
@@ -54,9 +54,9 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="O3:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mrg-ms-BjE">
-                                                    <rect key="frame" x="210" y="8" width="40" height="27.5"/>
+                                                    <rect key="frame" x="220" y="8" width="30" height="27.5"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="iTt-bZ-Cgx"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="iTt-bZ-Cgx"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.90889039500000002" green="0.90117084540000003" blue="0.69943024099999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
