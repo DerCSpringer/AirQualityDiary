@@ -31,9 +31,6 @@ class CurrentConditionsViewModel {
     private let currentFetcher: Observable<PollutionItem>
     private let api = AirNowAPI.instance
 
-
-
-    
     private let sceneCoordinator: SceneCoordinatorType
     private let bag = DisposeBag()
     
@@ -98,63 +95,7 @@ class CurrentConditionsViewModel {
         //If I make it private I can't do that but it isn't called twice
         //FIXED: Hmm looks like becuase I was setting a variable right away it was running the flatmap thing once then and once again when it was called.
         
-//        let api = AirNowAPI()
-        //Using an non-array for this right now
-//        let forecastFetcher = self.forecastConditions.asObservable()
-////            fetchOnEmit.flatMap { location, _ -> Observable<JSONObject> in
-////            print(location)
-////            return AirNowAPI.shared.searchForcastedAirQuality(latitude: location.latitude, longitude: location.longitude)
-////            }
-//            .subscribeOn(MainScheduler.instance)
-//            .observeOn(MainScheduler.instance)
-//            .flatMap {json -> Observable<PollutionItem> in
-//                let pollutionItems : PollutionItem = try unbox(dictionary: json)
-//                return Observable.of(pollutionItems)
-//            }
-//            .shareReplay(1)
 
-//        fetchOnEmit
-//            .subscribe(onNext:  { [weak self] _, _ in
-//                self?.clearUIForFetch()
-//            })
-//        .disposed(by: bag)
-        
-
-        
-//        fetchOnEmit
-//            .map { _ in return true }
-//        .bind(to: currentFetchIsFetching)
-//        .disposed(by: bag)
-//        
-//        fetchOnEmit
-//            .map { _ in return true }
-//            .bind(to: forecastFetchIsFetching)
-//            .disposed(by: bag)
-        
-//        let currentFetcher = fetchOnEmit.flatMap { location, _  -> Observable<[JSONObject]> in
-//            return AirNowAPI.shared.searchAirQuality(latitude: location.latitude, longitude: location.longitude)
-//            }
-//            .observeOn(MainScheduler.instance)
-//            .subscribeOn(MainScheduler.instance)
-//            let currentFetcher = api.currentConditions
-//                .observeOn(MainScheduler.instance)
-//                .subscribeOn(MainScheduler.instance)
-//            .flatMap {jsonArray -> Observable<[PollutionItem]> in
-//                let pollutionItems : [PollutionItem] = try unbox(dictionaries: jsonArray)
-//                return Observable.from(optional: pollutionItems)
-//            }
-//            .flatMap { pollutionItems -> Observable<PollutionItem> in
-//                return Observable.from(pollutionItems)
-//                
-//            }
-//            .shareReplay(1)
-        
-
-        
-//        forecastFetcher
-//            .map { _ in false }
-//            .bind(to: forecastFetchIsFetching)
-//            .disposed(by:bag)
         
         //MARK: Current o3
         
@@ -204,12 +145,11 @@ class CurrentConditionsViewModel {
         let pollute = obs.filter {
             $0.polluteName == polluteName
         }
-//        .shareReplay(1)
         
         let aqi = pollute.map {
             ($0.AQI == -1) ? "Unavailable" : String($0.AQI)
         }
-        return Observable.combineLatest(aqi, pollute.flatMap{$0.pollutionType}){AQI, pollutionType in
+        return Observable.combineLatest(aqi, pollute.flatMap{$0.pollutionType}){ AQI, pollutionType in
             AQIAndLevel(AQI, pollutionType)
         }
     }

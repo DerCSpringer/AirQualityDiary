@@ -23,26 +23,16 @@ class AddDiaryEntryViewModel {
     let note = Variable<String>("")
     private let onUpdate: Action<DiaryType, Void>
     let onCancel: CocoaAction!
-//    private let currentLocation : Observable<CLLocationCoordinate2D>
 
     //TODO:
-    //errors for unable to fetch: REachability
     //Add later
     //We could add something at the bottom of the DiaryEntriesTV to display the minium amount that bothers someone.
     //this could be displayed on the forcast and so forth
-    //opening display could have black background
-    //Forground text is different color depending on how bad teh forcast for the next day is for you
-    
-    
+
     init(entry: DiaryEntry,
          coordinator: SceneCoordinatorType,
          updateAction: Action<DiaryType, Void>,
          cancelAction: CocoaAction? = nil) {
-        
-//        currentLocation = GeolocationService.instance.location.asObservable()
-//        .distinctUntilChanged { loc1, loc2 in //prevents constant fetching in some instances
-//                return(loc1.latitude == loc2.latitude && loc1.longitude == loc2.longitude)
-//        }
 
         onUpdate = updateAction
         onUpdate.executionObservables //This needs to take one of the diaryType not the note
@@ -122,7 +112,6 @@ class AddDiaryEntryViewModel {
         let fetchedResults = fetcher.flatMap{ item in
             Observable.from(item)
         }
-//        .shareReplay(1)
         
         combineTitleAndPollutionTypeFor(fetchedResults, polluteName: .ozone)
         .bind(to: self.o3TextAndCondition)
