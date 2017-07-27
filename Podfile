@@ -9,4 +9,5 @@ target ‘AirQualityDiary’ do
   pod 'RxDataSources'
   pod 'Action'
   pod 'Unbox'
+  pod 'Reachability'
 end

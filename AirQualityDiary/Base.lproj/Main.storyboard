@@ -36,9 +36,9 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yQG-9r-7U7">
-                                                    <rect key="frame" x="8" y="8" width="132" height="27.5"/>
+                                                    <rect key="frame" x="8" y="8" width="140" height="27.5"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="132" id="gHG-FE-h0b"/>
+                                                        <constraint firstAttribute="width" constant="140" id="gHG-FE-h0b"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.90889039500000002" green="0.90117084540000003" blue="0.69943024099999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -56,7 +56,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="O3:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mrg-ms-BjE">
                                                     <rect key="frame" x="220" y="8" width="30" height="27.5"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="iTt-bZ-Cgx"/>
+                                                        <constraint firstAttribute="width" constant="30" id="iTt-bZ-Cgx"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.90889039500000002" green="0.90117084540000003" blue="0.69943024099999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -185,13 +185,13 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="6u2-Zm-ErV">
-                                <rect key="frame" x="8" y="122" width="304" height="558"/>
+                                <rect key="frame" x="8" y="122" width="304" height="402.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" semanticContentAttribute="spatial" distribution="equalSpacing" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="dj8-e0-h6f">
-                                        <rect key="frame" x="0.0" y="0.0" width="304" height="119.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="304" height="67.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="PQX-Cd-tnQ">
-                                                <rect key="frame" x="0.0" y="0.0" width="136" height="119.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="136" height="67.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PM 2.5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vRi-kk-9qT">
                                                         <rect key="frame" x="29.5" y="0.0" width="77.5" height="27.5"/>
@@ -200,13 +200,13 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unavailable" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wyL-VS-UFj">
-                                                        <rect key="frame" x="0.0" y="42.5" width="136" height="30"/>
+                                                        <rect key="frame" x="0.0" y="37.5" width="136" height="30"/>
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
                                                         <color key="textColor" red="0.90889039500000002" green="0.90117084540000003" blue="0.69943024099999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="GPW-2r-fPW">
-                                                        <rect key="frame" x="49.5" y="82.5" width="37" height="37"/>
+                                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="GPW-2r-fPW">
+                                                        <rect key="frame" x="49.5" y="67.5" width="37" height="0.0"/>
                                                     </activityIndicatorView>
                                                 </subviews>
                                                 <constraints>
@@ -221,7 +221,7 @@
                                                 </variation>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hcL-d3-hNh">
-                                                <rect key="frame" x="168" y="2.5" width="136" height="114.5"/>
+                                                <rect key="frame" x="168" y="0.0" width="136" height="67.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ozone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Is4-zl-EZB">
                                                         <rect key="frame" x="31.5" y="0.0" width="73" height="27.5"/>
@@ -236,17 +236,17 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="GgI-zt-hKv">
-                                                        <rect key="frame" x="49.5" y="77.5" width="37" height="37"/>
+                                                        <rect key="frame" x="49.5" y="67.5" width="37" height="0.0"/>
                                                     </activityIndicatorView>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="t8V-pF-44q">
-                                        <rect key="frame" x="0.0" y="219.5" width="304" height="119"/>
+                                        <rect key="frame" x="0.0" y="167.5" width="304" height="67.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ebk-mQ-u68">
-                                                <rect key="frame" x="0.0" y="2" width="136" height="114.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="136" height="67.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PM 2.5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m4W-Nz-nK5">
                                                         <rect key="frame" x="29.5" y="0.0" width="77.5" height="27.5"/>
@@ -261,12 +261,12 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="5uA-0P-big">
-                                                        <rect key="frame" x="49.5" y="77.5" width="37" height="37"/>
+                                                        <rect key="frame" x="49.5" y="67.5" width="37" height="0.0"/>
                                                     </activityIndicatorView>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="lru-OJ-vmM">
-                                                <rect key="frame" x="168" y="2" width="136" height="114.5"/>
+                                                <rect key="frame" x="168" y="0.0" width="136" height="67.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ozone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="94y-4c-gu4">
                                                         <rect key="frame" x="31.5" y="0.0" width="73" height="27.5"/>
@@ -281,17 +281,17 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="B9I-UL-Un8">
-                                                        <rect key="frame" x="49.5" y="77.5" width="37" height="37"/>
+                                                        <rect key="frame" x="49.5" y="67.5" width="37" height="0.0"/>
                                                     </activityIndicatorView>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="DbC-YT-LFo">
-                                        <rect key="frame" x="0.0" y="438.5" width="304" height="119.5"/>
+                                        <rect key="frame" x="0.0" y="335" width="304" height="67.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="5Wm-AH-eRy">
-                                                <rect key="frame" x="0.0" y="2.5" width="136" height="114.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="136" height="67.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PM 2.5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="141-go-TlP">
                                                         <rect key="frame" x="29.5" y="0.0" width="77.5" height="27.5"/>
@@ -306,12 +306,12 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="wab-Rz-UTd">
-                                                        <rect key="frame" x="49.5" y="77.5" width="37" height="37"/>
+                                                        <rect key="frame" x="49.5" y="67.5" width="37" height="0.0"/>
                                                     </activityIndicatorView>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="yof-hV-aLT">
-                                                <rect key="frame" x="168" y="2.5" width="136" height="114.5"/>
+                                                <rect key="frame" x="168" y="0.0" width="136" height="67.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ozone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YxG-2J-5WH">
                                                         <rect key="frame" x="31.5" y="0.0" width="73" height="27.5"/>
@@ -326,7 +326,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Lx9-r0-7cw">
-                                                        <rect key="frame" x="49.5" y="77.5" width="37" height="37"/>
+                                                        <rect key="frame" x="49.5" y="67.5" width="37" height="0.0"/>
                                                     </activityIndicatorView>
                                                 </subviews>
                                             </stackView>

@@ -23,7 +23,7 @@ class AddDiaryEntryViewModel {
     let note = Variable<String>("")
     private let onUpdate: Action<DiaryType, Void>
     let onCancel: CocoaAction!
-    private let currentLocation : Observable<CLLocationCoordinate2D>
+//    private let currentLocation : Observable<CLLocationCoordinate2D>
 
     //TODO:
     //errors for unable to fetch: REachability
@@ -39,10 +39,10 @@ class AddDiaryEntryViewModel {
          updateAction: Action<DiaryType, Void>,
          cancelAction: CocoaAction? = nil) {
         
-        currentLocation = GeolocationService.instance.location.asObservable()
-        .distinctUntilChanged { loc1, loc2 in //prevents constant fetching in some instances
-                return(loc1.latitude == loc2.latitude && loc1.longitude == loc2.longitude)
-        }
+//        currentLocation = GeolocationService.instance.location.asObservable()
+//        .distinctUntilChanged { loc1, loc2 in //prevents constant fetching in some instances
+//                return(loc1.latitude == loc2.latitude && loc1.longitude == loc2.longitude)
+//        }
 
         onUpdate = updateAction
         onUpdate.executionObservables //This needs to take one of the diaryType not the note
@@ -111,12 +111,9 @@ class AddDiaryEntryViewModel {
     }
     
     func bindOutput() {
-        let fetcher = currentLocation.take(1).flatMap() { location -> Observable<[JSONObject]> in
-            print(location)
-            return AirNowAPI.shared.searchAirQuality(latitude: location.latitude, longitude: location.longitude)
-            }
+        let api = AirNowAPI.instance
+        let fetcher = api.currentConditions.asObservable()
             .flatMap {jsonArray -> Observable<[PollutionItem]> in
-                
                 let pollutionItems : [PollutionItem] = try unbox(dictionaries: jsonArray)
                 return Observable.from(optional: pollutionItems)
             }
@@ -125,7 +122,7 @@ class AddDiaryEntryViewModel {
         let fetchedResults = fetcher.flatMap{ item in
             Observable.from(item)
         }
-        .shareReplay(1)
+//        .shareReplay(1)
         
         combineTitleAndPollutionTypeFor(fetchedResults, polluteName: .ozone)
         .bind(to: self.o3TextAndCondition)
@@ -135,7 +132,7 @@ class AddDiaryEntryViewModel {
         .bind(to: self.pmTextAndCondition)
         .disposed(by: bag)
         
-        fetcher.map { _ in false }
+        api.currentFetchIsRunning.asObservable()
             .bind(to: isFetching)
             .disposed(by: bag)
     }

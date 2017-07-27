@@ -25,7 +25,6 @@ class DiaryEntryTableViewCell: UITableViewCell {
         let format = DateFormatter()
         format.dateFormat = "MM/dd/yyyy 'at' HH:mm"
 
-        //Every time entry is updated our tableview Will be too, but this usually won't be necessary in the current incantation of the app
         entry.rx.observe(Int.self, "o3")
             .subscribe(onNext: { [weak self] o3 in
                 if o3 == -1 {
@@ -81,6 +80,8 @@ extension DiaryEntryTableViewCell {
     func initWithHeaderView() {
         self.o3AQI.text = "O3"
         self.PM25AQI.text = "PM 2.5"
+        //the date can be one or two lines even with the same number of characters.  Need to figure something out. 
+        //possible sol'n with monospaced font
         self.date.text = "Date of Observation"
         self.button.setTitle("Bad day?", for: .normal)
         self.button.titleLabel?.numberOfLines = 2

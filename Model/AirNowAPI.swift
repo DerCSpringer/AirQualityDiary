@@ -8,54 +8,79 @@
 
 import Foundation
 import RxSwift
+import Reachability
+import CoreLocation
 
-//diary item has 2 entries, pm25 and o3
-//If each item is stored as a pollution item how can I convert it to a diary item
-//If I kept this an array then I could filter for a string
-
-//1. get json from web as array
-//2. convert json as array ot pollution objects in array
-//3. Our pollution objects could have different dates but same names
-        //Only in forecast
-//Use a reachablity to alert this so it can fetch again
 typealias JSONObject = [String:Any]
 
 class AirNowAPI {
     
-    static let shared = AirNowAPI()
+    private let bag = DisposeBag()
     
-    private let apiKey = "2758A15B-FD00-4191-AD80-11D2F8C73509"
+    let currentConditions =  Variable<[JSONObject]>([[:]])
+    let forecastConditions = Variable<JSONObject>([:])
+    let currentFetchIsRunning = Variable<Bool>(false)
+    let forecastFetchIsRunning = Variable<Bool>(false)
+    static let instance = AirNowAPI()
     
-    func searchAirQuality(latitude: Double, longitude: Double) -> Observable<[JSONObject]> {
-        print("Calling current API")
-
-        let lat = String(latitude)
-        let lon = String(longitude)
-
-        let url = URL(string: "https://www.airnowapi.org/aq/observation/latLong/current/")!
-        var request = URLRequest(url: url)
-        let format = URLQueryItem(name: "format", value: "application/json")
-        let keyQueryItem = URLQueryItem(name: "API_KEY", value: apiKey)
-        let distQueryItem = URLQueryItem(name: "distance", value: String(25))
-        let latQueryItem = URLQueryItem(name: "latitude", value: lat)
-        let lonQueryItem = URLQueryItem(name: "longitude", value: lon)
-        let urlComponents = NSURLComponents(url: url, resolvingAgainstBaseURL: true)!
-        
-        urlComponents.queryItems = [format, latQueryItem, lonQueryItem, distQueryItem, keyQueryItem]
-        
-        request.url = urlComponents.url!
-        request.httpMethod = "GET"
-                
-        return URLSession.shared.rx.json(request: request).map { json in
-            if let a = json as? [Any], let b = a as? [[String : Any]] {
-                return b
-            }
-            return []
-        }
+    private let geoLocation = GeolocationService.instance.location.asObservable()
+        .distinctUntilChanged { loc1, loc2 in //prevents constant fetching in some instances
+            return((loc1.latitude == loc2.latitude) && (loc1.longitude == loc2.longitude))
     }
     
-    //http://www.airnowapi.org/aq/forecast/latLong/?format=text/csv&latitude=33.9681&longitude=-118.3444&date=2017-07-04&distance=25&API_KEY=2758A15B-FD00-4191-AD80-11D2F8C73509
-    func searchForcastedAirQuality(latitude: Double, longitude: Double) -> Observable<JSONObject> {
+    private init() {
+        let api = AirNowAPICall()
+        
+        let reachabilityFetch = Observable.combineLatest(
+            geoLocation,
+            Observable<Int>.timer(1, period: 3600, scheduler: MainScheduler.instance),
+            Reachability.rx.reachable,
+            resultSelector: {location, _, reachable -> CLLocationCoordinate2D? in
+                return reachable ? location : nil  //If it's not reachable it won't emit anything
+        })
+            .filter { loc in
+                return loc != nil }
+            .map { $0! }
+            .throttle(5, scheduler: MainScheduler.instance)
+
+        
+        reachabilityFetch.map {_ in return true }
+            .bind(to: forecastFetchIsRunning)
+            .disposed(by: bag)
+        
+        reachabilityFetch.map { _ in return true } //on update say it is fetching
+        .bind(to: currentFetchIsRunning)
+        .disposed(by: bag)
+        
+        reachabilityFetch
+            .flatMap { api.searchForcastedAirQuality(latitude: $0.latitude, longitude:$0.longitude) }
+        .bind(to: forecastConditions)
+            .disposed(by:bag)
+
+        forecastConditions.asObservable().map { _ in return false }
+            .bind(to: forecastFetchIsRunning)
+            .disposed(by: bag)
+
+        
+        reachabilityFetch
+        .flatMap { api.searchAirQuality(latitude: $0.latitude, longitude:$0.longitude) }
+        .bind(to: currentConditions)
+        .disposed(by: bag)
+        
+        currentConditions.asObservable().map { _ in return false }
+        .bind(to: currentFetchIsRunning)
+        .disposed(by: bag)
+    }
+
+    
+}
+
+struct AirNowAPICall {
+    
+    private let apiKey = "2758A15B-FD00-4191-AD80-11D2F8C73509"
+
+     fileprivate func searchForcastedAirQuality(latitude: Double, longitude: Double) -> Observable<JSONObject> {
+        
         
         print("Calling forecast API")
         let lat = String(latitude)
@@ -88,35 +113,32 @@ class AirNowAPI {
         }
     }
     
-    func searchForcastedAirQuality2(latitude: Double, longitude: Double) -> Observable<[JSONObject]> {
+    fileprivate func searchAirQuality(latitude: Double, longitude: Double) -> Observable<[JSONObject]> {
+        print("Calling current API")
         
-        print("Calling forecast API")
         let lat = String(latitude)
         let lon = String(longitude)
-        let dateFormat = DateFormatter()
-        dateFormat.dateFormat = "yyyy-MM-dd"
         
-        let url = URL(string: "https://www.airnowapi.org/aq/forecast/latLong/")!
+        let url = URL(string: "https://www.airnowapi.org/aq/observation/latLong/current/")!
         var request = URLRequest(url: url)
         let format = URLQueryItem(name: "format", value: "application/json")
-        let date = URLQueryItem(name: "date", value: "\(dateFormat.string(from: Date()))")
         let keyQueryItem = URLQueryItem(name: "API_KEY", value: apiKey)
         let distQueryItem = URLQueryItem(name: "distance", value: String(25))
         let latQueryItem = URLQueryItem(name: "latitude", value: lat)
         let lonQueryItem = URLQueryItem(name: "longitude", value: lon)
         let urlComponents = NSURLComponents(url: url, resolvingAgainstBaseURL: true)!
         
-        urlComponents.queryItems = [format, latQueryItem, lonQueryItem, date, distQueryItem, keyQueryItem]
+        urlComponents.queryItems = [format, latQueryItem, lonQueryItem, distQueryItem, keyQueryItem]
         
         request.url = urlComponents.url!
         request.httpMethod = "GET"
         
-        return URLSession.shared.rx.json(request: request)
-            .map {  json in
-                if let a = json as? [Any], let b = a as? [JSONObject] {
-                    return b
-                }
-                return []
+        return URLSession.shared.rx.json(request: request).map { json in
+            if let a = json as? [Any], let b = a as? [[String : Any]] {
+                return b
+            }
+            return []
         }
     }
+
 }

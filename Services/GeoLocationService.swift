@@ -49,7 +49,7 @@ class GeolocationService {
             .filter {
                 $0.timestamp.timeIntervalSinceNow < 300
             }
-            .map { $0.coordinate }
+            .map {$0.coordinate }
         
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()

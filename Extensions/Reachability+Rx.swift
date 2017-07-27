@@ -17,7 +17,6 @@ extension Reachability {
 }
 
 extension Reactive where Base: Reachability {
-    
     static var reachable: Observable<Bool> {
         return Observable.create { observer in
             
@@ -31,7 +30,6 @@ extension Reactive where Base: Reachability {
             } else {
                 observer.onError(Reachability.Errors.unavailable)
             }
-            
             return Disposables.create {
                 reachability?.stopNotifier()
             }
