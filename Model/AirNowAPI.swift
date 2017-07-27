@@ -31,17 +31,20 @@ class AirNowAPI {
     private init() {
         let api = AirNowAPICall()
         
+        //This is emitting when you go from no internet to internet no matter what
+        //Instead when you go from 0 to 1 state it should check that
         let reachabilityFetch = Observable.combineLatest(
             geoLocation,
             Observable<Int>.timer(1, period: 3600, scheduler: MainScheduler.instance),
             Reachability.rx.reachable,
             resultSelector: {location, _, reachable -> CLLocationCoordinate2D? in
+                print("Emmiting")
                 return reachable ? location : nil  //If it's not reachable it won't emit anything
         })
             .filter { loc in
                 return loc != nil }
             .map { $0! }
-            .throttle(5, scheduler: MainScheduler.instance)
+            .throttle(15, scheduler: MainScheduler.instance)
 
         
         reachabilityFetch.map {_ in return true }

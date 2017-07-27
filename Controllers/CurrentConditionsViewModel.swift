@@ -38,7 +38,6 @@ class CurrentConditionsViewModel {
         self.diaryService = diaryService
         self.sceneCoordinator = coordinator
         
-        //TODO: fix skipping 1 won't alway work and do it below and in AddDiaryEntryVM
         forecastFetcher = api.forecastConditions.asObservable().skip(1)
             .subscribeOn(MainScheduler.instance)
             .observeOn(MainScheduler.instance)
@@ -89,12 +88,7 @@ class CurrentConditionsViewModel {
         }
     
     private func bindOutput() {
-        //TODO: below is very buggy
-        //I think something is wrong with my implementation of bags and instances
-        //If I make it public above then I can subscribe to variables and do work(clear ui)
-        //If I make it private I can't do that but it isn't called twice
-        //FIXED: Hmm looks like becuase I was setting a variable right away it was running the flatmap thing once then and once again when it was called.
-        
+        //TODO: label color is not updating when I update the min value
 
         
         //MARK: Current o3
@@ -150,7 +144,7 @@ class CurrentConditionsViewModel {
             ($0.AQI == -1) ? "Unavailable" : String($0.AQI)
         }
         return Observable.combineLatest(aqi, pollute.flatMap{$0.pollutionType}){ AQI, pollutionType in
-            AQIAndLevel(AQI, pollutionType)
+            return AQIAndLevel(AQI, pollutionType)
         }
     }
     private func clearUIForFetch() {

@@ -101,8 +101,12 @@ class AddDiaryEntryViewModel {
     }
     
     func bindOutput() {
+        //TODO: if I start with no internet connect in here and reenable internet connect it will not fetch
         let api = AirNowAPI.instance
         let fetcher = api.currentConditions.asObservable()
+            .filter { loc in
+                print(loc.count)
+                return loc.count != 1 }
             .flatMap {jsonArray -> Observable<[PollutionItem]> in
                 let pollutionItems : [PollutionItem] = try unbox(dictionaries: jsonArray)
                 return Observable.from(optional: pollutionItems)
