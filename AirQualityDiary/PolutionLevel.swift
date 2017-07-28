@@ -25,7 +25,6 @@ class PollutionLevel {
     private let minpm25 = MinimumIrritationLevelsForPollutants.instance.minPM25.asObservable()
     
     init(pollutantName : PollutantName, withAQI AQI: Int) {
-
         if pollutantName == .ozone {
             self.minO3
                 .map{ [weak self] min in

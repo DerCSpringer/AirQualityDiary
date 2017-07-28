@@ -20,7 +20,6 @@ class DiaryEntriesViewController: UIViewController, BindableType, UITableViewDel
     var header : DiaryEntryTableViewCell?
     let dataSource = RxTableViewSectionedAnimatedDataSource<DiarySection>()
     let bag = DisposeBag()
-    //TODO: breaking constraint when I delete a row
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -23,7 +23,6 @@ class AddDiaryEntryViewController: UIViewController, BindableType {
     private let bag = DisposeBag()
     
     func bindViewModel() {
-        
         note.font = UIFont.preferredFont(forTextStyle: .body)
                 
         viewModel.o3TextAndCondition.asObservable()
@@ -37,7 +36,6 @@ class AddDiaryEntryViewController: UIViewController, BindableType {
             .asDriver(onErrorJustReturn: UIColor.blue)
             .drive(self.ozone.rx.textColor)
             .addDisposableTo(bag)
-        
         
         viewModel.pmTextAndCondition.asObservable()
             .map{ return $0.AQI }

@@ -23,7 +23,7 @@ struct DiaryEntriesViewModel {
         self.sceneCoordinator = coordinator
     }
     
-    //This executes when the bad? button is tapped
+    //This executes when the bad day? button is tapped
     func onToggle(entry: DiaryEntry) -> CocoaAction {
         return CocoaAction {
             return self.diaryService.toggle(entry: entry).map { _ in }

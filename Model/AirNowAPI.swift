@@ -38,7 +38,6 @@ class AirNowAPI {
             Observable<Int>.timer(1, period: 3600, scheduler: MainScheduler.instance),
             Reachability.rx.reachable,
             resultSelector: {location, _, reachable -> CLLocationCoordinate2D? in
-                print("Emmiting")
                 return reachable ? location : nil  //If it's not reachable it won't emit anything
         })
             .filter { loc in

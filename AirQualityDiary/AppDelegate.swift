@@ -37,10 +37,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Then we must transistion to that scene
         sceneCoordinator.transition(to: firstScene, type: .root)
         
-//        _ = Observable<Int>.interval(1, scheduler: MainScheduler.instance)
-//            .subscribe(onNext: { _ in
-//                print("Resource count \(RxSwift.Resources.total)")
-//            })
+        _ = Observable<Int>.interval(1, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { _ in
+                print("Resource count \(RxSwift.Resources.total)")
+            })
         
         return true
     }

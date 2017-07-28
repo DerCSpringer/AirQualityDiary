@@ -36,8 +36,10 @@ struct PollutionItem {
 
 extension PollutionItem {
     static func pollutionItemsFrom(diary: DiaryEntry) -> Observable<[PollutionItem]> {
+        
+        let bag = DisposeBag()
         return Observable.create { observer in
-            let bag = DisposeBag() //TODO: Is this ok to put in an observable?
+            //let bag = DisposeBag() //TODO: Is this ok to put in an observable?
             let polluteLevelPM25 = PollutionLevel.init(pollutantName:.PM2_5 , withAQI: diary.pm25)
             let airQualityLevelPM25 = BehaviorSubject<AirQualityLevel>(value: .unknown)
             polluteLevelPM25.pollutionType.bind(to: airQualityLevelPM25)  //TODO: Is it ok to bind when creating an Obs?
@@ -107,7 +109,9 @@ extension PollutionItem: Unboxable {
         }
         
         polluteLevel = PollutionLevel.init(pollutantName: self.polluteName, withAQI: AQI)
-        polluteLevel?.pollutionType.bind(to: pollutionType)
-        .disposed(by: bag)
+        
+        polluteLevel?.pollutionType
+            .bind(to: pollutionType)
+            .disposed(by: bag)
     }
 }

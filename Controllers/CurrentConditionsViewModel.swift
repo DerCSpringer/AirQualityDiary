@@ -88,8 +88,6 @@ class CurrentConditionsViewModel {
         }
     
     private func bindOutput() {
-        //TODO: label color is not updating when I update the min value
-
         
         //MARK: Current o3
         
@@ -139,6 +137,7 @@ class CurrentConditionsViewModel {
         let pollute = obs.filter {
             $0.polluteName == polluteName
         }
+        .shareReplay(1)
         
         let aqi = pollute.map {
             ($0.AQI == -1) ? "Unavailable" : String($0.AQI)
