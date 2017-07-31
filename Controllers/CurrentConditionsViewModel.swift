@@ -64,7 +64,6 @@ class CurrentConditionsViewModel {
             .subscribeOn(MainScheduler.instance)
             .filter { $0 == true }
             .subscribe(onNext: { [weak self] _ in
-                print("clearing")
                 self?.clearUIForFetch()
             })
             .disposed(by: bag)
@@ -91,13 +90,13 @@ class CurrentConditionsViewModel {
         
         //MARK: Current o3
         
-        combineTitleAndPollutionTypeFor(currentFetcher, polluteName: .ozone)
+        PollutionLevel.combineTitleAndPollutionTypeFor(currentFetcher, polluteName: .ozone)
             .bind(to: currentO3)
             .disposed(by: bag)
 
         //MARK: Current pm2.5
         
-        combineTitleAndPollutionTypeFor(currentFetcher, polluteName: .PM2_5)
+        PollutionLevel.combineTitleAndPollutionTypeFor(currentFetcher, polluteName: .PM2_5)
             .bind(to: currentPM)
             .disposed(by: bag)
 
@@ -111,54 +110,29 @@ class CurrentConditionsViewModel {
         //MARK: O3 for Tomorrow's Forecast
         
         
-        combineTitleAndPollutionTypeFor(tomorrowForecast, polluteName: .ozone)
+        PollutionLevel.combineTitleAndPollutionTypeFor(tomorrowForecast, polluteName: .ozone)
             .bind(to: tomorrowO3)
             .disposed(by: bag)
         
         //MARK: pm for Tomorrow's forecast
         
-        combineTitleAndPollutionTypeFor(tomorrowForecast, polluteName: .PM2_5)
+        PollutionLevel.combineTitleAndPollutionTypeFor(tomorrowForecast, polluteName: .PM2_5)
             .bind(to: tomorrowPM)
             .disposed(by: bag)
         
         //MARK: pm for Today's Forcast
         
-        combineTitleAndPollutionTypeFor(todayForecast, polluteName: .PM2_5)
+        PollutionLevel.combineTitleAndPollutionTypeFor(todayForecast, polluteName: .PM2_5)
             .bind(to: currentForcastPM)
             .disposed(by: bag)
         
         //MARK: o3 for Today's Forcast
         
-        combineTitleAndPollutionTypeFor(todayForecast, polluteName: .ozone)
+        PollutionLevel.combineTitleAndPollutionTypeFor(todayForecast, polluteName: .ozone)
         .bind(to: currentForecastO3)
         .disposed(by: bag)
     }
     
-    private func combineTitleAndPollutionTypeFor(_ obs: Observable<PollutionItem>, polluteName:PollutantName) -> Observable<AQIAndLevel> {
-        let pollute = obs.filter {
-            $0.polluteName == polluteName
-        }
-        .shareReplay(1)
-        
-        let aqi = pollute.map {
-            $0.AQI
-        }
-        let min: Observable<Int>
-        
-        if polluteName == .ozone {
-            min = self.diaryService.minO3Irritation()
-        } else if polluteName == .PM2_5 {
-            min = self.diaryService.minPM2_5Irritation()
-        } else {
-            return Observable.of(AQIAndLevel("Unavailable", .unknown))
-        }
-        
-        return Observable.combineLatest(aqi, min){ AQI, min in
-            let level = PollutionItem.pollutionSeverity(withMinAQI: min, andCurrentAQI: AQI)
-            let aqiString = (AQI == -1) ? "Unavailable" : String(AQI)
-            return AQIAndLevel(aqiString, level)
-        }
-    }
     private func clearUIForFetch() {
         //TODO: Delete following
         if Thread.isMainThread {

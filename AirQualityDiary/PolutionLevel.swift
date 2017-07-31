@@ -16,33 +16,12 @@ enum AirQualityLevel {
     case unknown
 }
 
-//TODO: Get rid of most of thist stuff.  Maybe I can keep the severity and color and just use those as helpers
 struct PollutionLevel {
-    //output
-    let pollutionType = BehaviorSubject<AirQualityLevel>(value: .unknown)
 
     private let bag = DisposeBag()
-    private let minO3 = MinimumIrritationLevelsForPollutants.instance.minO3.asObservable()
-    private let minpm25 = MinimumIrritationLevelsForPollutants.instance.minPM25.asObservable()
+    private static let minO3 = MinimumIrritationLevelsForPollutants.instance.minO3.asObservable()
+    private static let minpm25 = MinimumIrritationLevelsForPollutants.instance.minPM25.asObservable()
     
-    init(pollutantName : PollutantName, withAQI AQI: Int) {
-        if pollutantName == .ozone {
-            self.minO3
-                .map{ min in
-                    return (PollutionLevel.pollutionSeverity(withMinAQI: min, andCurrentAQI: AQI))
-                }
-                .bind(to: pollutionType)
-                .disposed(by: bag)
-        } else if pollutantName == .PM2_5 {
-            self.minpm25
-                .map{ min in
-                    (PollutionLevel.pollutionSeverity(withMinAQI: min, andCurrentAQI: AQI))
-                }
-                .bind(to: pollutionType)
-                .disposed(by: bag)
-        }
-    }
-        
     private static func pollutionSeverity(withMinAQI minAQI: Int, andCurrentAQI currentAQI:Int) -> AirQualityLevel {
         if currentAQI == -1 || minAQI == -1{
             return .unknown
@@ -52,6 +31,32 @@ struct PollutionLevel {
             return .moderate
         }  else {
             return .good
+        }
+    }
+    
+    static func combineTitleAndPollutionTypeFor(_ obs: Observable<PollutionItem>, polluteName:PollutantName) -> Observable<AQIAndLevel> {
+        let pollute = obs.filter {
+            $0.polluteName == polluteName
+            }
+            .shareReplay(1)
+        
+        let aqi = pollute.map {
+            $0.AQI
+        }
+        let min: Observable<Int>
+        
+        if polluteName == .ozone {
+            min = minO3
+        } else if polluteName == .PM2_5 {
+            min = minpm25
+        } else {
+            return Observable.of(AQIAndLevel("Unavailable", .unknown))
+        }
+        
+        return Observable.combineLatest(aqi, min){ AQI, min in
+            let level = PollutionLevel.pollutionSeverity(withMinAQI: min, andCurrentAQI: AQI)
+            let aqiString = (AQI == -1) ? "Unavailable" : String(AQI)
+            return AQIAndLevel(aqiString, level)
         }
     }
 }

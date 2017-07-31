@@ -30,7 +30,6 @@ struct PollutionItem {
     let AQI : Int
     let polluteName : PollutantName
     fileprivate let bag = DisposeBag()
-    
 }
 
 extension PollutionItem {
@@ -79,7 +78,6 @@ extension PollutionItem: Unboxable {
         default:
             self.polluteName = .other
         }
-        
 
         let date : String? = try? unboxer.unbox(key: "DateForecast")
         
@@ -94,18 +92,4 @@ extension PollutionItem: Unboxable {
         }
         
     }
-    
-    //Maybe put this and color function in a helper class
-    static func pollutionSeverity(withMinAQI minAQI: Int, andCurrentAQI currentAQI:Int) -> AirQualityLevel {
-        if currentAQI == -1 || minAQI == -1{
-            return .unknown
-        } else if ((currentAQI - minAQI) >= 0) {
-            return .bad
-        } else if ((currentAQI - minAQI) >= -5) {
-            return .moderate
-        }  else {
-            return .good
-        }
-    }
- 
 }

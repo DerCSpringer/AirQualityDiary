@@ -15,6 +15,7 @@ import RxCocoa
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //TODO:  Turn off resource counting -D TRACE_RESOURCES in Pods.RXSwift other swift flags
+    //TODO: change from forcast to forecast
     
     let bag = DisposeBag()
 

@@ -30,9 +30,6 @@ class AirNowAPI {
     
     private init() {
         let api = AirNowAPICall()
-        
-        //This is emitting when you go from no internet to internet no matter what
-        //Instead when you go from 0 to 1 state it should check that
         let reachabilityFetch = Observable.combineLatest(
             geoLocation,
             Observable<Int>.timer(1, period: 3600, scheduler: MainScheduler.instance),
@@ -40,8 +37,7 @@ class AirNowAPI {
             resultSelector: {location, _, reachable -> CLLocationCoordinate2D? in
                 return reachable ? location : nil  //If it's not reachable it won't emit anything
         })
-            .filter { loc in
-                return loc != nil }
+            .filter { $0 != nil }
             .map { $0! }
             .throttle(15, scheduler: MainScheduler.instance)
 
@@ -55,7 +51,7 @@ class AirNowAPI {
         .disposed(by: bag)
         
         reachabilityFetch
-            .flatMap { api.searchForcastedAirQuality(latitude: $0.latitude, longitude:$0.longitude) }
+            .flatMap { api.getForecastedAirQuality(latitude: $0.latitude, longitude:$0.longitude) }
         .bind(to: forecastConditions)
             .disposed(by:bag)
 
@@ -65,7 +61,7 @@ class AirNowAPI {
 
         
         reachabilityFetch
-        .flatMap { api.searchAirQuality(latitude: $0.latitude, longitude:$0.longitude) }
+        .flatMap { api.getCurrentAirQuality(latitude: $0.latitude, longitude:$0.longitude) }
         .bind(to: currentConditions)
         .disposed(by: bag)
         
@@ -81,7 +77,7 @@ struct AirNowAPICall {
     
     private let apiKey = "2758A15B-FD00-4191-AD80-11D2F8C73509"
 
-     fileprivate func searchForcastedAirQuality(latitude: Double, longitude: Double) -> Observable<JSONObject> {
+     fileprivate func getForecastedAirQuality(latitude: Double, longitude: Double) -> Observable<JSONObject> {
         
         
         print("Calling forecast API")
@@ -115,7 +111,7 @@ struct AirNowAPICall {
         }
     }
     
-    fileprivate func searchAirQuality(latitude: Double, longitude: Double) -> Observable<[JSONObject]> {
+    fileprivate func getCurrentAirQuality(latitude: Double, longitude: Double) -> Observable<[JSONObject]> {
         print("Calling current API")
         
         let lat = String(latitude)

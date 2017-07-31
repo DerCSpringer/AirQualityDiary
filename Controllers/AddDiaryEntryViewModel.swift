@@ -18,12 +18,11 @@ class AddDiaryEntryViewModel {
     private let bag = DisposeBag()
     let o3TextAndCondition = Variable<AQIAndLevel>(defaultAQIAndLevel)
     let pmTextAndCondition = Variable<AQIAndLevel>(defaultAQIAndLevel)
-
     let isFetching = Variable<Bool>(true)
     let note = Variable<String>("")
+    
     private let onUpdate: Action<DiaryType, Void>
     let onCancel: CocoaAction!
-
 
     //Add later
     //We could add something at the bottom of the DiaryEntriesTV to display the minium amount that bothers someone.
@@ -63,15 +62,15 @@ class AddDiaryEntryViewModel {
             print(entry.added.timeIntervalSinceNow)
             bindOutput()
         } else {
-            let pollute = PollutionItem.pollutionItemsFrom(diary: entry)
+            let pollutes = PollutionItem.pollutionItemsFrom(diary: entry)
                 .flatMap{ Observable.from($0) }
                 .shareReplay(2) //Immediately emits both pm and o3 entries
             
-            combineTitleAndPollutionTypeFor(pollute, polluteName: .ozone)
+            PollutionLevel.combineTitleAndPollutionTypeFor(pollutes, polluteName: .ozone)
             .bind(to: o3TextAndCondition)
             .disposed(by: bag)
             
-            combineTitleAndPollutionTypeFor(pollute, polluteName: .PM2_5)
+            PollutionLevel.combineTitleAndPollutionTypeFor(pollutes, polluteName: .PM2_5)
             .bind(to: pmTextAndCondition)
             .disposed(by: bag)
             
@@ -95,7 +94,6 @@ class AddDiaryEntryViewModel {
         } else {
             o3 = -1
         }
-        
         let diary = DiaryType(pm25:pm, o3:o3, note:note)
         return .just(diary)
     }
@@ -114,11 +112,11 @@ class AddDiaryEntryViewModel {
             Observable.from(item)
         }
         
-        combineTitleAndPollutionTypeFor(fetchedResults, polluteName: .ozone)
+        PollutionLevel.combineTitleAndPollutionTypeFor(fetchedResults, polluteName: .ozone)
         .bind(to: self.o3TextAndCondition)
         .disposed(by: bag)
         
-        combineTitleAndPollutionTypeFor(fetchedResults, polluteName: .PM2_5)
+        PollutionLevel.combineTitleAndPollutionTypeFor(fetchedResults, polluteName: .PM2_5)
         .bind(to: self.pmTextAndCondition)
         .disposed(by: bag)
         
@@ -126,36 +124,4 @@ class AddDiaryEntryViewModel {
             .bind(to: isFetching)
             .disposed(by: bag)
     }
-    
-    //TODO: duplicated func from CurrentConditionsVM
-    private func combineTitleAndPollutionTypeFor(_ obs: Observable<PollutionItem>, polluteName:PollutantName) -> Observable<AQIAndLevel> {
-        let pollute = obs.filter {
-            $0.polluteName == polluteName
-            }
-            .shareReplay(1)
-        
-        let aqi = pollute.map {
-            $0.AQI
-        }
-        let min: Observable<Int>
-        
-        let diary = DiaryService()
-        
-        if polluteName == .ozone {
-            min = diary.minO3Irritation()
-        } else if polluteName == .PM2_5 {
-            min = diary.minPM2_5Irritation()
-        } else {
-            return Observable.of(AQIAndLevel("Unavailable", .unknown))
-        }
-        
-        //TODO: Think about these helper funcs pollutionseverity
-        return Observable.combineLatest(aqi, min){ AQI, min in
-            let level = PollutionItem.pollutionSeverity(withMinAQI: min, andCurrentAQI: AQI)
-            let aqiString = (AQI == -1) ? "Unavailable" : String(AQI)
-            return AQIAndLevel(aqiString, level)
-        }
-    }
-    
-
 }

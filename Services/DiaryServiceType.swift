@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 import RealmSwift
 
-//TODO: must be some way to make this better
+//TODO: must be some way to make DiaryType thing better
 typealias DiaryType = (pm25:Int, o3:Int, note: String)
 
 enum DiaryServiceError: Error {
