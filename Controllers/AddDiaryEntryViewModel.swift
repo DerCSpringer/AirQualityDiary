@@ -24,9 +24,7 @@ class AddDiaryEntryViewModel {
     private let onUpdate: Action<DiaryType, Void>
     let onCancel: CocoaAction!
 
-    //TODO:
-    //Memory leak only happens when I try to add something and then click cancel or save
-    //It does does not happen when I open an already created diary item
+
     //Add later
     //We could add something at the bottom of the DiaryEntriesTV to display the minium amount that bothers someone.
     //this could be displayed on the forcast and so forth
@@ -116,17 +114,17 @@ class AddDiaryEntryViewModel {
             Observable.from(item)
         }
         
-//        combineTitleAndPollutionTypeFor(fetchedResults, polluteName: .ozone)
-//        .bind(to: self.o3TextAndCondition)
-//        .disposed(by: bag)
-//        
-//        combineTitleAndPollutionTypeFor(fetchedResults, polluteName: .PM2_5)
-//        .bind(to: self.pmTextAndCondition)
-//        .disposed(by: bag)
-//        
-//        api.currentFetchIsRunning.asObservable()
-//            .bind(to: isFetching)
-//            .disposed(by: bag)
+        combineTitleAndPollutionTypeFor(fetchedResults, polluteName: .ozone)
+        .bind(to: self.o3TextAndCondition)
+        .disposed(by: bag)
+        
+        combineTitleAndPollutionTypeFor(fetchedResults, polluteName: .PM2_5)
+        .bind(to: self.pmTextAndCondition)
+        .disposed(by: bag)
+        
+        api.currentFetchIsRunning.asObservable()
+            .bind(to: isFetching)
+            .disposed(by: bag)
     }
     
     //TODO: duplicated func from CurrentConditionsVM
@@ -151,6 +149,7 @@ class AddDiaryEntryViewModel {
             return Observable.of(AQIAndLevel("Unavailable", .unknown))
         }
         
+        //TODO: Think about these helper funcs pollutionseverity
         return Observable.combineLatest(aqi, min){ AQI, min in
             let level = PollutionItem.pollutionSeverity(withMinAQI: min, andCurrentAQI: AQI)
             let aqiString = (AQI == -1) ? "Unavailable" : String(AQI)

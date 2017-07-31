@@ -202,11 +202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/DiaryEntriesViewController.swift"
-            timestampString = "522962698.762219"
+            timestampString = "523228083.585269"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108">
+            startingLineNumber = "105"
+            endingLineNumber = "105">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -248,11 +248,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/DiaryEntriesViewController.swift"
-            timestampString = "522962698.762219"
+            timestampString = "523228083.585269"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109">
+            startingLineNumber = "106"
+            endingLineNumber = "106">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -262,11 +262,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/DiaryEntriesViewController.swift"
-            timestampString = "522962698.762219"
+            timestampString = "523228083.585269"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111">
+            startingLineNumber = "108"
+            endingLineNumber = "108">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -708,11 +708,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/DiaryEntriesViewController.swift"
-            timestampString = "522962698.762219"
+            timestampString = "523228083.585269"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
             landmarkName = "configureDataSource()"
             landmarkType = "7">
             <Locations>
@@ -756,11 +756,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/DiaryEntriesViewController.swift"
-            timestampString = "522962698.762219"
+            timestampString = "523228083.585269"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
             landmarkName = "tableView(_:heightForHeaderInSection:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -982,22 +982,6 @@
             startingLineNumber = "105"
             endingLineNumber = "105"
             landmarkName = "bindOutput()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Model/PolutionItem.swift"
-            timestampString = "523052036.520719"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
-            landmarkName = "pollutionItemsFrom(diary:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

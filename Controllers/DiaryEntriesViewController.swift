@@ -63,14 +63,11 @@ class DiaryEntriesViewController: UIViewController, BindableType, UITableViewDel
         
     }
     
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-
-        let headerView = tableView.dequeueReusableCell(withIdentifier: "DiaryEntryCell") as! DiaryEntryTableViewCell
-        headerView.initWithHeaderView()
-        headerView.frame = view.frame
-        view.addSubview(headerView)
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = tableView.dequeueReusableCell(withIdentifier: "headerCell") as! DiaryEntryTableViewCell
+        headerView.initForHeaderView()
+        return headerView.contentView
     }
-    
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         //TODO: figure out some way to do this dynamically with RXSwift

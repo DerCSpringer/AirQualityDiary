@@ -20,8 +20,11 @@ class DiaryEntryTableViewCell: UITableViewCell {
     @IBOutlet weak var date: UILabel!
     
     func configure(with entry: DiaryEntry, action: CocoaAction) {
-        button.rx.action = action
+        self.selectedBackgroundView = UIView(frame: self.frame)
+        self.selectedBackgroundView?.backgroundColor = UIColor.init(red: 0.646667, green: 0.646667, blue: 0.97, alpha: 0.75)
         self.backgroundColor = UIColor.blue
+        
+        button.rx.action = action
         let format = DateFormatter()
         format.dateFormat = "MM/dd/yyyy 'at' HH:mm"
 
@@ -77,13 +80,17 @@ class DiaryEntryTableViewCell: UITableViewCell {
 }
 
 extension DiaryEntryTableViewCell {
-    func initWithHeaderView() {
+    func initForHeaderView() {
+        self.isUserInteractionEnabled = false
         self.o3AQI.text = "O3"
         self.PM25AQI.text = "PM 2.5"
         self.date.text = "Date of Observation"
         self.button.setTitle("Bad day?", for: .normal)
         self.button.titleLabel?.numberOfLines = 2
         self.button.isUserInteractionEnabled = false
+        let blueTransparentColor = UIColor.init(red: 0.646667, green: 0.646667, blue: 0.97, alpha: 1)
+        self.contentView.backgroundColor = blueTransparentColor
         configureFontSizes()
     }
+
 }

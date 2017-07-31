@@ -29,42 +29,22 @@ struct PollutionItem {
     let forecastFor : ForecastDate?
     let AQI : Int
     let polluteName : PollutantName
-    //var pollutionType = BehaviorSubject<AirQualityLevel>(value: .unknown) //Delete this and figure out ramifications later
-    //fileprivate var polluteLevel : PollutionLevel?
     fileprivate let bag = DisposeBag()
     
 }
 
 extension PollutionItem {
     static func pollutionItemsFrom(diary: DiaryEntry) -> Observable<[PollutionItem]> {
-        
-//        let bag = DisposeBag()
         return Observable.create { observer in
-            //let bag = DisposeBag() //TODO: Is this ok to put in an observable?
-//            let polluteLevelPM25 = PollutionLevel.init(pollutantName:.PM2_5 , withAQI: diary.pm25)
-//            let airQualityLevelPM25 = BehaviorSubject<AirQualityLevel>(value: .unknown)
-//            polluteLevelPM25.pollutionType.bind(to: airQualityLevelPM25)  //TODO: Is it ok to bind when creating an Obs?
-//            .disposed(by: bag)
-            
             let pm = PollutionItem.init(forecastFor: nil,
                                         AQI: diary.pm25,
                                         polluteName: .PM2_5
-                                        //pollutionType: airQualityLevelPM25
-                                        //polluteLevel: polluteLevelPM25
             )
-            
-//            let polluteLevelO3 = PollutionLevel.init(pollutantName:.ozone , withAQI: diary.o3)
-//            let airQualityLevelO3 = BehaviorSubject<AirQualityLevel>(value: .unknown)
-//            polluteLevelO3.pollutionType.bind(to: airQualityLevelO3)
-//            .disposed(by: bag)
             
             let o3 = PollutionItem.init(forecastFor: nil,
                                         AQI: diary.o3,
                                         polluteName: .ozone
-                                        //pollutionType: airQualityLevelO3
-                                        //polluteLevel: polluteLevelO3
             )
-            
             
             let polutionItems = [pm, o3]
             observer.onNext(polutionItems)
