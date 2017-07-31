@@ -29,38 +29,42 @@ struct PollutionItem {
     let forecastFor : ForecastDate?
     let AQI : Int
     let polluteName : PollutantName
-    var pollutionType = BehaviorSubject<AirQualityLevel>(value: .unknown)
-    fileprivate var polluteLevel : PollutionLevel?
+    //var pollutionType = BehaviorSubject<AirQualityLevel>(value: .unknown) //Delete this and figure out ramifications later
+    //fileprivate var polluteLevel : PollutionLevel?
     fileprivate let bag = DisposeBag()
+    
 }
 
 extension PollutionItem {
     static func pollutionItemsFrom(diary: DiaryEntry) -> Observable<[PollutionItem]> {
         
-        let bag = DisposeBag()
+//        let bag = DisposeBag()
         return Observable.create { observer in
             //let bag = DisposeBag() //TODO: Is this ok to put in an observable?
-            let polluteLevelPM25 = PollutionLevel.init(pollutantName:.PM2_5 , withAQI: diary.pm25)
-            let airQualityLevelPM25 = BehaviorSubject<AirQualityLevel>(value: .unknown)
-            polluteLevelPM25.pollutionType.bind(to: airQualityLevelPM25)  //TODO: Is it ok to bind when creating an Obs?
-            .disposed(by: bag)
+//            let polluteLevelPM25 = PollutionLevel.init(pollutantName:.PM2_5 , withAQI: diary.pm25)
+//            let airQualityLevelPM25 = BehaviorSubject<AirQualityLevel>(value: .unknown)
+//            polluteLevelPM25.pollutionType.bind(to: airQualityLevelPM25)  //TODO: Is it ok to bind when creating an Obs?
+//            .disposed(by: bag)
             
             let pm = PollutionItem.init(forecastFor: nil,
                                         AQI: diary.pm25,
-                                        polluteName: .PM2_5,
-                                        pollutionType: airQualityLevelPM25,
-                                        polluteLevel: polluteLevelPM25)
+                                        polluteName: .PM2_5
+                                        //pollutionType: airQualityLevelPM25
+                                        //polluteLevel: polluteLevelPM25
+            )
             
-            let polluteLevelO3 = PollutionLevel.init(pollutantName:.ozone , withAQI: diary.o3)
-            let airQualityLevelO3 = BehaviorSubject<AirQualityLevel>(value: .unknown)
-            polluteLevelO3.pollutionType.bind(to: airQualityLevelO3)
-            .disposed(by: bag)
+//            let polluteLevelO3 = PollutionLevel.init(pollutantName:.ozone , withAQI: diary.o3)
+//            let airQualityLevelO3 = BehaviorSubject<AirQualityLevel>(value: .unknown)
+//            polluteLevelO3.pollutionType.bind(to: airQualityLevelO3)
+//            .disposed(by: bag)
             
             let o3 = PollutionItem.init(forecastFor: nil,
                                         AQI: diary.o3,
-                                        polluteName: .ozone,
-                                        pollutionType: airQualityLevelO3,
-                                        polluteLevel: polluteLevelO3)
+                                        polluteName: .ozone
+                                        //pollutionType: airQualityLevelO3
+                                        //polluteLevel: polluteLevelO3
+            )
+            
             
             let polutionItems = [pm, o3]
             observer.onNext(polutionItems)
@@ -95,6 +99,7 @@ extension PollutionItem: Unboxable {
         default:
             self.polluteName = .other
         }
+        
 
         let date : String? = try? unboxer.unbox(key: "DateForecast")
         
@@ -108,10 +113,19 @@ extension PollutionItem: Unboxable {
             self.forecastFor = .other
         }
         
-        polluteLevel = PollutionLevel.init(pollutantName: self.polluteName, withAQI: AQI)
-        
-        polluteLevel?.pollutionType
-            .bind(to: pollutionType)
-            .disposed(by: bag)
     }
+    
+    //Maybe put this and color function in a helper class
+    static func pollutionSeverity(withMinAQI minAQI: Int, andCurrentAQI currentAQI:Int) -> AirQualityLevel {
+        if currentAQI == -1 || minAQI == -1{
+            return .unknown
+        } else if ((currentAQI - minAQI) >= 0) {
+            return .bad
+        } else if ((currentAQI - minAQI) >= -5) {
+            return .moderate
+        }  else {
+            return .good
+        }
+    }
+ 
 }

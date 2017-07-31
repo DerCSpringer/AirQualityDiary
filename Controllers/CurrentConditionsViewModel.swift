@@ -110,6 +110,7 @@ class CurrentConditionsViewModel {
         
         //MARK: O3 for Tomorrow's Forecast
         
+        
         combineTitleAndPollutionTypeFor(tomorrowForecast, polluteName: .ozone)
             .bind(to: tomorrowO3)
             .disposed(by: bag)
@@ -140,10 +141,22 @@ class CurrentConditionsViewModel {
         .shareReplay(1)
         
         let aqi = pollute.map {
-            ($0.AQI == -1) ? "Unavailable" : String($0.AQI)
+            $0.AQI
         }
-        return Observable.combineLatest(aqi, pollute.flatMap{$0.pollutionType}){ AQI, pollutionType in
-            return AQIAndLevel(AQI, pollutionType)
+        let min: Observable<Int>
+        
+        if polluteName == .ozone {
+            min = self.diaryService.minO3Irritation()
+        } else if polluteName == .PM2_5 {
+            min = self.diaryService.minPM2_5Irritation()
+        } else {
+            return Observable.of(AQIAndLevel("Unavailable", .unknown))
+        }
+        
+        return Observable.combineLatest(aqi, min){ AQI, min in
+            let level = PollutionItem.pollutionSeverity(withMinAQI: min, andCurrentAQI: AQI)
+            let aqiString = (AQI == -1) ? "Unavailable" : String(AQI)
+            return AQIAndLevel(aqiString, level)
         }
     }
     private func clearUIForFetch() {

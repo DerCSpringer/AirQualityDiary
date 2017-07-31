@@ -16,7 +16,8 @@ enum AirQualityLevel {
     case unknown
 }
 
-class PollutionLevel {
+//TODO: Get rid of most of thist stuff.  Maybe I can keep the severity and color and just use those as helpers
+struct PollutionLevel {
     //output
     let pollutionType = BehaviorSubject<AirQualityLevel>(value: .unknown)
 
@@ -27,22 +28,22 @@ class PollutionLevel {
     init(pollutantName : PollutantName, withAQI AQI: Int) {
         if pollutantName == .ozone {
             self.minO3
-                .map{ [weak self] min in
-                    return (self?.pollutionSeverity(withMinAQI: min, andCurrentAQI: AQI))!
+                .map{ min in
+                    return (PollutionLevel.pollutionSeverity(withMinAQI: min, andCurrentAQI: AQI))
                 }
                 .bind(to: pollutionType)
                 .disposed(by: bag)
         } else if pollutantName == .PM2_5 {
             self.minpm25
-                .map{ [weak self] min in
-                    (self?.pollutionSeverity(withMinAQI: min, andCurrentAQI: AQI))!
+                .map{ min in
+                    (PollutionLevel.pollutionSeverity(withMinAQI: min, andCurrentAQI: AQI))
                 }
                 .bind(to: pollutionType)
                 .disposed(by: bag)
         }
     }
         
-    private func pollutionSeverity(withMinAQI minAQI: Int, andCurrentAQI currentAQI:Int) -> AirQualityLevel {
+    private static func pollutionSeverity(withMinAQI minAQI: Int, andCurrentAQI currentAQI:Int) -> AirQualityLevel {
         if currentAQI == -1 || minAQI == -1{
             return .unknown
         } else if ((currentAQI - minAQI) >= 0) {

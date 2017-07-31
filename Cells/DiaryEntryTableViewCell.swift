@@ -80,8 +80,6 @@ extension DiaryEntryTableViewCell {
     func initWithHeaderView() {
         self.o3AQI.text = "O3"
         self.PM25AQI.text = "PM 2.5"
-        //the date can be one or two lines even with the same number of characters.  Need to figure something out. 
-        //possible sol'n with monospaced font
         self.date.text = "Date of Observation"
         self.button.setTitle("Bad day?", for: .normal)
         self.button.titleLabel?.numberOfLines = 2

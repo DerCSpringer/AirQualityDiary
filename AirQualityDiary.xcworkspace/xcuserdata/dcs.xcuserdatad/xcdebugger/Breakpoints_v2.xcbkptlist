@@ -772,11 +772,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/AddDiaryEntryViewModel.swift"
-            timestampString = "522878943.145297"
+            timestampString = "523054787.796302"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
             landmarkName = "init(entry:coordinator:updateAction:cancelAction:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -788,11 +788,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/AddDiaryEntryViewModel.swift"
-            timestampString = "522878943.145297"
+            timestampString = "523054787.796302"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
             landmarkName = "init(entry:coordinator:updateAction:cancelAction:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -976,13 +976,77 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/AddDiaryEntryViewModel.swift"
-            timestampString = "522960590.957511"
+            timestampString = "523054787.796302"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "104"
-            endingLineNumber = "104"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
             landmarkName = "bindOutput()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Model/PolutionItem.swift"
+            timestampString = "523052036.520719"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "pollutionItemsFrom(diary:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Model/PolutionItem.swift"
+            timestampString = "523052036.520719"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "pollutionItemsFrom(diary:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static AirQualityDiary.PollutionItem.pollutionItemsFrom (diary : AirQualityDiary.DiaryEntry) -&gt; RxSwift.Observable&lt;Swift.Array&lt;AirQualityDiary.PollutionItem&gt;&gt;"
+                  moduleName = "AirQualityDiary"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dcs/Developer/Swift/AirQualityDiary/Model/PolutionItem.swift"
+                  timestampString = "522968705.048796"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "41"
+                  endingLineNumber = "41"
+                  offsetFromSymbolStart = "29">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static AirQualityDiary.PollutionItem.(pollutionItemsFrom (diary : AirQualityDiary.DiaryEntry) -&gt; RxSwift.Observable&lt;Swift.Array&lt;AirQualityDiary.PollutionItem&gt;&gt;).(closure #1)"
+                  moduleName = "AirQualityDiary"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dcs/Developer/Swift/AirQualityDiary/Model/PolutionItem.swift"
+                  timestampString = "522968705.05067"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "30">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

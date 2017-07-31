@@ -25,6 +25,8 @@ class AddDiaryEntryViewModel {
     let onCancel: CocoaAction!
 
     //TODO:
+    //Memory leak only happens when I try to add something and then click cancel or save
+    //It does does not happen when I open an already created diary item
     //Add later
     //We could add something at the bottom of the DiaryEntriesTV to display the minium amount that bothers someone.
     //this could be displayed on the forcast and so forth
@@ -114,17 +116,17 @@ class AddDiaryEntryViewModel {
             Observable.from(item)
         }
         
-        combineTitleAndPollutionTypeFor(fetchedResults, polluteName: .ozone)
-        .bind(to: self.o3TextAndCondition)
-        .disposed(by: bag)
-        
-        combineTitleAndPollutionTypeFor(fetchedResults, polluteName: .PM2_5)
-        .bind(to: self.pmTextAndCondition)
-        .disposed(by: bag)
-        
-        api.currentFetchIsRunning.asObservable()
-            .bind(to: isFetching)
-            .disposed(by: bag)
+//        combineTitleAndPollutionTypeFor(fetchedResults, polluteName: .ozone)
+//        .bind(to: self.o3TextAndCondition)
+//        .disposed(by: bag)
+//        
+//        combineTitleAndPollutionTypeFor(fetchedResults, polluteName: .PM2_5)
+//        .bind(to: self.pmTextAndCondition)
+//        .disposed(by: bag)
+//        
+//        api.currentFetchIsRunning.asObservable()
+//            .bind(to: isFetching)
+//            .disposed(by: bag)
     }
     
     //TODO: duplicated func from CurrentConditionsVM
@@ -135,10 +137,26 @@ class AddDiaryEntryViewModel {
             .shareReplay(1)
         
         let aqi = pollute.map {
-            ($0.AQI == -1) ? "Unavailable" : String($0.AQI)
+            $0.AQI
         }
-        return Observable.combineLatest(aqi, pollute.flatMap{$0.pollutionType}){AQI, pollutionType in
-            AQIAndLevel(AQI, pollutionType)
+        let min: Observable<Int>
+        
+        let diary = DiaryService()
+        
+        if polluteName == .ozone {
+            min = diary.minO3Irritation()
+        } else if polluteName == .PM2_5 {
+            min = diary.minPM2_5Irritation()
+        } else {
+            return Observable.of(AQIAndLevel("Unavailable", .unknown))
+        }
+        
+        return Observable.combineLatest(aqi, min){ AQI, min in
+            let level = PollutionItem.pollutionSeverity(withMinAQI: min, andCurrentAQI: AQI)
+            let aqiString = (AQI == -1) ? "Unavailable" : String(AQI)
+            return AQIAndLevel(aqiString, level)
         }
     }
+    
+
 }
