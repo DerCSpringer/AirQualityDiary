@@ -13,7 +13,6 @@ import Action
 import CoreLocation
 import Unbox
 
-
 class AddDiaryEntryViewModel {
     private let bag = DisposeBag()
     let o3TextAndCondition = Variable<AQIAndLevel>(defaultAQIAndLevel)
@@ -53,13 +52,11 @@ class AddDiaryEntryViewModel {
             .take(1)
             .flatMap { $0 }
             .subscribe(onNext: { [weak self] entry in
-                print("Diary entry in Add DiaryEntry VM \(entry)")
                 self?.onUpdate.execute(entry)
             })
             .disposed(by: bag)
         
         if (entry.added.timeIntervalSinceNow > -1) {//If DiaryEntry is being added and not edited
-            print(entry.added.timeIntervalSinceNow)
             bindOutput()
         } else {
             let pollutes = PollutionItem.pollutionItemsFrom(diary: entry)

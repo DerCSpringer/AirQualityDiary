@@ -78,14 +78,10 @@ struct AirNowAPICall {
     private let apiKey = "2758A15B-FD00-4191-AD80-11D2F8C73509"
 
      fileprivate func getForecastedAirQuality(latitude: Double, longitude: Double) -> Observable<JSONObject> {
-        
-        
-        print("Calling forecast API")
         let lat = String(latitude)
         let lon = String(longitude)
         let dateFormat = DateFormatter()
         dateFormat.dateFormat = "yyyy-MM-dd"
-        
         
         let url = URL(string: "https://www.airnowapi.org/aq/forecast/latLong/")!
         var request = URLRequest(url: url)
@@ -112,8 +108,6 @@ struct AirNowAPICall {
     }
     
     fileprivate func getCurrentAirQuality(latitude: Double, longitude: Double) -> Observable<[JSONObject]> {
-        print("Calling current API")
-        
         let lat = String(latitude)
         let lon = String(longitude)
         
@@ -138,5 +132,4 @@ struct AirNowAPICall {
             return []
         }
     }
-
 }

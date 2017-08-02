@@ -134,12 +134,6 @@ class CurrentConditionsViewModel {
     }
     
     private func clearUIForFetch() {
-        //TODO: Delete following
-        if Thread.isMainThread {
-            print("On main thread")
-        } else {
-            print("On background thread")
-        }
         currentO3.value = (defaultAQIAndLevel)
         currentPM.value = (defaultAQIAndLevel)
         tomorrowO3.value = (defaultAQIAndLevel)

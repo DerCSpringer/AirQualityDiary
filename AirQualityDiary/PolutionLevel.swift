@@ -75,4 +75,3 @@ extension PollutionLevel {
         }
     }
 }
-    //This will be created many times, but I don't want to pass in a million diary service structs

@@ -35,7 +35,6 @@ class DiaryEntriesViewController: UIViewController, BindableType, UITableViewDel
         configureDataSource()
 
         //This must be done before we bind observables
-        //It probably starts observing only elements at time X.  If we wait until later it maybe not see stuff already in teh database
     }
     
     func bindViewModel() {

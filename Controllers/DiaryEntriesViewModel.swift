@@ -37,7 +37,6 @@ struct DiaryEntriesViewModel {
     }
     func onUpdateEntry(entry: DiaryEntry) -> Action<DiaryType, Void> {
         return Action { diary in
-            print("Diary entry in onUpdateEntry in VM: \(diary)")
             return self.diaryService.update(entry: entry, diary: diary).map { _ in }
         }
     }
