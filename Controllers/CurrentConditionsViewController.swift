@@ -33,6 +33,7 @@ class CurrentConditionsViewController: UIViewController, BindableType {
     var viewModel: CurrentConditionsViewModel!
     
     func bindViewModel() {
+        //TODO: Think about making this able to display in landscape in the future.
         diaryEntries.rx.action = viewModel.onEntryButtonPress()
         
         //MARK: Current forecast O3 Label and Indicator
