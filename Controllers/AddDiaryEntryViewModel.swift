@@ -26,7 +26,7 @@ class AddDiaryEntryViewModel {
 
     //Add later
     //We could add something at the bottom of the DiaryEntriesTV to display the minium amount that bothers someone.
-    //this could be displayed on the forcast and so forth
+    //this could be displayed on the Forecast and so forth
 
     init(entry: DiaryEntry,
          coordinator: SceneCoordinatorType,

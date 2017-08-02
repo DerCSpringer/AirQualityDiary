@@ -13,8 +13,8 @@ import RxCocoa
 
 class CurrentConditionsViewController: UIViewController, BindableType {
     
-    @IBOutlet weak var currentForcastPM: UILabel!
-    @IBOutlet weak var currentForcastO3: UILabel!
+    @IBOutlet weak var currentForecastPM: UILabel!
+    @IBOutlet weak var currentForecastO3: UILabel!
     @IBOutlet weak var currentPM: UILabel!
     @IBOutlet weak var currentO3: UILabel!
     @IBOutlet weak var tomorrowO3: UILabel!
@@ -42,16 +42,16 @@ class CurrentConditionsViewController: UIViewController, BindableType {
         currentForecastO3
         .map{ return $0.AQI }
         .asDriver(onErrorJustReturn: "Unavailable")
-        .drive(self.currentForcastO3.rx.text)
+        .drive(self.currentForecastO3.rx.text)
         .addDisposableTo(bag)
         
         currentForecastO3.map { PollutionLevel.colorForPollutionLevel($0.level) }
         .asDriver(onErrorJustReturn: UIColor.blue)
-        .drive(self.currentForcastO3.rx.textColor)
+        .drive(self.currentForecastO3.rx.textColor)
         .addDisposableTo(bag)
         
         viewModel.forecastFetchIsFetching.asDriver()
-            .drive(currentForcastO3.rx.isHidden)
+            .drive(self.currentForecastO3.rx.isHidden)
             .addDisposableTo(bag)
         
         viewModel.forecastFetchIsFetching.asDriver()
@@ -60,17 +60,17 @@ class CurrentConditionsViewController: UIViewController, BindableType {
         
         //MARK: Current Forecast PM2.5 Label and Indicator
 
-        let currentForecastPM = viewModel.currentForcastPM.asObservable()
+        let currentForecastPM = viewModel.currentForecastPM.asObservable()
         
         currentForecastPM
             .map{ return $0.AQI }
             .asDriver(onErrorJustReturn: "Unavailable")
-            .drive(self.currentForcastPM.rx.text)
+            .drive(self.currentForecastPM.rx.text)
             .addDisposableTo(bag)
         
         currentForecastPM.map { PollutionLevel.colorForPollutionLevel($0.level) }
             .asDriver(onErrorJustReturn: UIColor.blue)
-            .drive(self.currentForcastPM.rx.textColor)
+            .drive(self.currentForecastPM.rx.textColor)
             .addDisposableTo(bag)
         
         viewModel.forecastFetchIsFetching.asDriver()
@@ -79,7 +79,7 @@ class CurrentConditionsViewController: UIViewController, BindableType {
         
         
         viewModel.forecastFetchIsFetching.asDriver()
-            .drive(currentForcastPM.rx.isHidden)
+            .drive(self.currentForecastPM.rx.isHidden)
         .addDisposableTo(bag)
         
         //MARK: Tomorrow's Forecast O3 Label and Indicator

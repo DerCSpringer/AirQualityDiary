@@ -20,7 +20,7 @@ class CurrentConditionsViewModel {
     let forecastFetchIsFetching = Variable<Bool>(true)
     let currentFetchIsFetching = Variable<Bool>(true)
     let currentForecastO3 = Variable<AQIAndLevel>(defaultAQIAndLevel)
-    let currentForcastPM = Variable<AQIAndLevel>(defaultAQIAndLevel)
+    let currentForecastPM = Variable<AQIAndLevel>(defaultAQIAndLevel)
     let tomorrowO3 = Variable<AQIAndLevel>(defaultAQIAndLevel)
     let currentO3 = Variable<AQIAndLevel>(defaultAQIAndLevel)
     let currentPM = Variable<AQIAndLevel>(defaultAQIAndLevel)
@@ -120,13 +120,13 @@ class CurrentConditionsViewModel {
             .bind(to: tomorrowPM)
             .disposed(by: bag)
         
-        //MARK: pm for Today's Forcast
+        //MARK: pm for Today's Forecast
         
         PollutionLevel.combineTitleAndPollutionTypeFor(todayForecast, polluteName: .PM2_5)
-            .bind(to: currentForcastPM)
+            .bind(to: currentForecastPM)
             .disposed(by: bag)
         
-        //MARK: o3 for Today's Forcast
+        //MARK: o3 for Today's Forecast
         
         PollutionLevel.combineTitleAndPollutionTypeFor(todayForecast, polluteName: .ozone)
         .bind(to: currentForecastO3)
@@ -145,6 +145,6 @@ class CurrentConditionsViewModel {
         tomorrowO3.value = (defaultAQIAndLevel)
         tomorrowPM.value = (defaultAQIAndLevel)
         currentForecastO3.value = (defaultAQIAndLevel)
-        currentForcastPM.value = (defaultAQIAndLevel)
+        currentForecastPM.value = (defaultAQIAndLevel)
     }
 }
