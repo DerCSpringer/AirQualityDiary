@@ -87,6 +87,7 @@ class CurrentConditionsViewController: UIViewController, BindableType {
         
         let o3Tomorrow = viewModel.tomorrowO3.asObservable()
         
+
         o3Tomorrow
             .map{ return $0.AQI }
             .asDriver(onErrorJustReturn: "Unavailable")
@@ -97,6 +98,8 @@ class CurrentConditionsViewController: UIViewController, BindableType {
             .asDriver(onErrorJustReturn: UIColor.blue)
             .drive(self.tomorrowO3.rx.textColor)
             .addDisposableTo(bag)
+        
+
         
         viewModel.forecastFetchIsFetching.asDriver()
             .drive(o3TomorrowForecastIndicator.rx.isAnimating)
