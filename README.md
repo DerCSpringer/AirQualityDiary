@@ -21,3 +21,7 @@ codes forecasted data to indicate if you might be affected by the pollution leve
 * basics of Auto Layout
 * outlets and the target-action pattern
 * REST api calls
+
+**Installation:**
+1. pod install
+2. open the workspace
