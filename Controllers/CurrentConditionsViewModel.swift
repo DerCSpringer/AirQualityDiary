@@ -41,6 +41,7 @@ class CurrentConditionsViewModel {
         forecastFetcher = api.forecastConditions.asObservable().skip(1)
             .subscribeOn(MainScheduler.instance)
             .observeOn(MainScheduler.instance)
+            .filter { $0.count > 0  }
             .flatMap {json -> Observable<PollutionItem> in
                 let pollutionItems : PollutionItem = try unbox(dictionary: json)
                 return Observable.of(pollutionItems)
@@ -50,6 +51,7 @@ class CurrentConditionsViewModel {
         currentFetcher = api.currentConditions.asObservable().skip(1)
             .observeOn(MainScheduler.instance)
             .subscribeOn(MainScheduler.instance)
+            .filter { $0.count > 0 }
             .flatMap {jsonArray -> Observable<[PollutionItem]> in
                 let pollutionItems : [PollutionItem] = try unbox(dictionaries: jsonArray)
                 return Observable.from(optional: pollutionItems)
@@ -64,7 +66,15 @@ class CurrentConditionsViewModel {
             .subscribeOn(MainScheduler.instance)
             .filter { $0 == true }
             .subscribe(onNext: { [weak self] _ in
-                self?.clearUIForFetch()
+                self?.clearForecastUIForFetch()
+            })
+            .disposed(by: bag)
+        
+        api.currentFetchIsRunning.asObservable()
+            .subscribeOn(MainScheduler.instance)
+            .filter { $0 == true }
+            .subscribe(onNext: { [weak self] _ in
+                self?.clearCurrentObservationUI()
             })
             .disposed(by: bag)
         
@@ -133,9 +143,12 @@ class CurrentConditionsViewModel {
         .disposed(by: bag)
     }
     
-    private func clearUIForFetch() {
+    
+    private func clearCurrentObservationUI() {
         currentO3.value = (defaultAQIAndLevel)
         currentPM.value = (defaultAQIAndLevel)
+    }
+    private func clearForecastUIForFetch() {
         tomorrowO3.value = (defaultAQIAndLevel)
         tomorrowPM.value = (defaultAQIAndLevel)
         currentForecastO3.value = (defaultAQIAndLevel)

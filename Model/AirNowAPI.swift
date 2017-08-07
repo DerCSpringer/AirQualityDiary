@@ -58,7 +58,6 @@ class AirNowAPI {
         forecastConditions.asObservable().map { _ in return false }
             .bind(to: forecastFetchIsRunning)
             .disposed(by: bag)
-
         
         reachabilityFetch
         .flatMap { api.getCurrentAirQuality(latitude: $0.latitude, longitude:$0.longitude) }
@@ -103,7 +102,11 @@ struct AirNowAPICall {
                 guard let response = response as? Array<JSONObject> else {
                     return Observable.never()
                 }
-                return Observable.from(response.map { $0 })
+                if response.count != 0 {
+                    return Observable.from(response.map { $0 })
+                } else {
+                    return Observable.just([:])
+                }
         }
     }
     
@@ -126,10 +129,13 @@ struct AirNowAPICall {
         request.httpMethod = "GET"
         
         return URLSession.shared.rx.json(request: request).map { json in
-            if let a = json as? [Any], let b = a as? [[String : Any]] {
-                return b
+            if let decodedJson = json as? [Any], let jsonObject = decodedJson as? [[String : Any]] {
+                if jsonObject.count != 0 {
+                    return jsonObject
+                }
             }
             return []
         }
+
     }
 }
