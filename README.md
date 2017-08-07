@@ -1,6 +1,8 @@
 # Air Quality Diary
 This app allows you to log high pollution levels.  When you select that a day is bad for your health the app reacts and color
-codes forecasted data to indicate if you might be affected by the pollution level.
+codes forecasted data to indicate if you might be affected by the pollution level. This app was published to the app store.
+
+**Only works in the USA**
 
 
 **Technologies used in the making of this app:**
