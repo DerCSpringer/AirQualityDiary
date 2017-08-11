@@ -40,6 +40,12 @@ class AirNowAPI {
             .filter { $0 != nil }
             .map { $0! }
             .throttle(15, scheduler: MainScheduler.instance)
+        
+        reachabilityFetch
+            .subscribe(onNext: {
+                print($0)
+            })
+            .disposed(by: bag)
 
         
         reachabilityFetch.map {_ in return true }
