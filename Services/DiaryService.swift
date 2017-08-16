@@ -13,23 +13,6 @@ import RxRealm
 
 struct DiaryService: DiaryServiceType {
     
-      init() {
-        // create a few default entries
-        do {
-          let realm = try Realm()
-          if realm.objects(DiaryEntry.self).count == 0 {
-            [DiaryType(25, 25, ""),
-             DiaryType(59, 75, ""),
-             DiaryType(120, 70, ""),
-             DiaryType(60, 15, ""),
-             DiaryType(12, 10, "")].forEach {
-              self.createEntry(entry: $0)
-            }
-          }
-        } catch _ {
-        }
-      }
-    
     fileprivate func withRealm<T>(_ operation: String, action: (Realm) throws -> T) -> T? {
         do {
             let realm = try Realm()
