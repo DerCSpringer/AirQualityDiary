@@ -92,5 +92,4 @@ extension DiaryEntryTableViewCell {
         self.contentView.backgroundColor = blueTransparentColor
         configureFontSizes()
     }
-
 }

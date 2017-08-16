@@ -143,7 +143,6 @@ class CurrentConditionsViewModel {
         .disposed(by: bag)
     }
     
-    
     private func clearCurrentObservationUI() {
         currentO3.value = (defaultAQIAndLevel)
         currentPM.value = (defaultAQIAndLevel)

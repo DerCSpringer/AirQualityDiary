@@ -194,7 +194,6 @@
 			children = (
 				0B1CC5D81F10495900661355 /* PolutionItem.swift */,
 				0B4B5D421EF45E5A00914880 /* DiaryEntry.swift */,
-				0B3F5B8D1EF85CF5008B6BBB /* AirNowAPI.swift */,
 				0B4B5D441EF4606300914880 /* BindableType.swift */,
 			);
 			name = Model;
@@ -203,6 +202,7 @@
 		0B4B5D4B1EF461A900914880 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				0B3F5B8D1EF85CF5008B6BBB /* AirNowAPI.swift */,
 				0B1684EF1F1419A6009F5900 /* GeoLocationService.swift */,
 				0B2BBF1D1F1988D80027A0B5 /* MinimumIrritationLevelsForPolutants.swift */,
 				0B2EBF7F1EFC7BEE00A3D244 /* DiaryService.swift */,

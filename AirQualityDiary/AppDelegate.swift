@@ -29,6 +29,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         sceneCoordinator.transition(to: firstScene, type: .root)
         return true
     }
-    
 }
-

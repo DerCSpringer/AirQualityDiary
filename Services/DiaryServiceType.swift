@@ -38,5 +38,4 @@ protocol DiaryServiceType {
     func minPM2_5Irritation() -> Observable<Int>
     
     func entries() -> Observable<Results<DiaryEntry>>
-
 }

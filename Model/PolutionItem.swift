@@ -90,6 +90,5 @@ extension PollutionItem: Unboxable {
         } else {
             self.forecastFor = .other
         }
-        
     }
 }
