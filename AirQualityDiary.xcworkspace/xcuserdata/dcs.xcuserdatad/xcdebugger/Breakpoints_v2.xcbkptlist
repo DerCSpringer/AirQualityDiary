@@ -324,13 +324,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Services/DiaryService.swift"
-            timestampString = "523478213.532421"
+            timestampString = "523829589.047199"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "15"
-            endingLineNumber = "15"
-            landmarkName = "DiaryService"
-            landmarkType = "14">
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "init()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -340,11 +340,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Services/DiaryService.swift"
-            timestampString = "523478213.532421"
+            timestampString = "523829589.047199"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
             landmarkName = "createEntry(entry:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -356,12 +356,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Services/DiaryService.swift"
-            timestampString = "523478213.532421"
+            timestampString = "523829589.047199"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
-            landmarkName = "update(entry:diary:)"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "delete(entry:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -372,29 +372,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Services/DiaryService.swift"
-            timestampString = "523478213.532421"
+            timestampString = "523829589.047199"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
-            landmarkName = "toggle(entry:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Services/DiaryService.swift"
-            timestampString = "523478213.532421"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "99"
-            endingLineNumber = "99"
-            landmarkName = "entries()"
-            landmarkType = "7">
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "DiaryService"
+            landmarkType = "14">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -436,12 +420,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Services/DiaryService.swift"
-            timestampString = "523478213.532421"
+            timestampString = "523829589.047199"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
-            landmarkName = "update(entry:diary:)"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "createEntry(entry:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -500,12 +484,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Services/DiaryService.swift"
-            timestampString = "523478213.532421"
+            timestampString = "523829589.047199"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
-            landmarkName = "toggle(entry:)"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
+            landmarkName = "delete(entry:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -928,11 +912,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Model/AirNowAPI.swift"
-            timestampString = "523234560.503952"
+            timestampString = "524602773.869036"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
             landmarkName = "init()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1008,11 +992,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Model/AirNowAPI.swift"
-            timestampString = "523828721.995219"
+            timestampString = "524602773.869036"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "110"
-            endingLineNumber = "110"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
             landmarkName = "getForecastedAirQuality(latitude:longitude:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1024,11 +1008,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Model/AirNowAPI.swift"
-            timestampString = "523828721.995219"
+            timestampString = "524602773.869036"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "115"
-            endingLineNumber = "115"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
             landmarkName = "getForecastedAirQuality(latitude:longitude:)"
             landmarkType = "7">
          </BreakpointContent>
