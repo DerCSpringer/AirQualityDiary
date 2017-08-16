@@ -66,7 +66,7 @@ struct DiaryService: DiaryServiceType {
     @discardableResult
     func toggle(entry: DiaryEntry) -> Observable<DiaryEntry> {
         let result = withRealm("toggling") { realm -> Observable<DiaryEntry> in
-            try realm.write { 
+            try realm.write {
                 if entry.checked == false {
                     entry.checked = true
                 } else {
@@ -91,9 +91,9 @@ struct DiaryService: DiaryServiceType {
         let result = withRealm("getting entries") { realm -> Observable<Results<DiaryEntry>> in
             let realm = try Realm()
             let entries = realm.objects(DiaryEntry.self).filter("(checked == true) AND (o3 != -1)").sorted(byKeyPath: "o3", ascending: true)
-
+            
             return Observable.collection(from: entries)
-        } ?? .empty()
+            } ?? .empty()
         let min = result
             .flatMap { results -> Observable<Int> in
                 if results.isEmpty {
@@ -101,7 +101,7 @@ struct DiaryService: DiaryServiceType {
                 }
                 return Observable.from(optional: results.first?.o3)
             }
-        .distinctUntilChanged()
+            .distinctUntilChanged()
         return min
     }
     
@@ -122,5 +122,5 @@ struct DiaryService: DiaryServiceType {
             .distinctUntilChanged()
         return min
     }
-
+    
 }
