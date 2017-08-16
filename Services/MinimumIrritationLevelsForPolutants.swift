@@ -18,7 +18,7 @@ class MinimumIrritationLevelsForPollutants {
     
     private let bag = DisposeBag()
     
-    init() {
+    private init() {
         let service = DiaryService()
         
         service.minPM2_5Irritation()

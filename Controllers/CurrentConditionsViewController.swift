@@ -100,7 +100,6 @@ class CurrentConditionsViewController: UIViewController, BindableType {
             .addDisposableTo(bag)
         
 
-        
         viewModel.forecastFetchIsFetching.asDriver()
             .drive(o3TomorrowForecastIndicator.rx.isAnimating)
             .addDisposableTo(bag)
@@ -177,6 +176,5 @@ class CurrentConditionsViewController: UIViewController, BindableType {
         viewModel.currentFetchIsFetching.asDriver()
             .drive(currentPM.rx.isHidden)
             .addDisposableTo(bag)
-
     }
 }

@@ -22,6 +22,8 @@ class AddDiaryEntryViewController: UIViewController, BindableType {
     var viewModel: AddDiaryEntryViewModel!
     private let bag = DisposeBag()
     
+    //TODO: Fix the way the keyboard shows and covers up text input.  Might need a table view
+    
     func bindViewModel() {
         note.font = UIFont.preferredFont(forTextStyle: .body)
                 

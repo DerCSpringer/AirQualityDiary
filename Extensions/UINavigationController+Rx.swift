@@ -43,4 +43,3 @@ extension Reactive where Base: UINavigationController {
         return RxNavigationControllerDelegateProxy.proxyForObject(base)
     }
 }
-

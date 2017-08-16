@@ -54,5 +54,4 @@ class GeolocationService {
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
     }
-    
 }

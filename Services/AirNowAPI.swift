@@ -40,7 +40,6 @@ class AirNowAPI {
             .filter { $0 != nil }
             .map { $0! }
             .throttle(15, scheduler: MainScheduler.instance)
-
         
         reachabilityFetch.map {_ in return true }
             .bind(to: forecastFetchIsRunning)
@@ -68,11 +67,9 @@ class AirNowAPI {
         .bind(to: currentFetchIsRunning)
         .disposed(by: bag)
     }
-
-    
 }
 
-struct AirNowAPICall {
+fileprivate struct AirNowAPICall {
     
     private let apiKey = "2758A15B-FD00-4191-AD80-11D2F8C73509"
 
@@ -136,6 +133,5 @@ struct AirNowAPICall {
             }
             return []
         }
-
     }
 }
